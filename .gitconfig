@@ -1,0 +1,9 @@
+# This is Git's per-user configuration file.
+[user]
+	name = Wizard28082006
+	email = basak.sb2006@gmail.com
+# Please adapt and uncomment the following lines:
+#	name = Sourajyoti Basak
+#	email = Wizard28082006@gmail.com
+[http]
+	postBuffer = 524288000
