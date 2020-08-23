@@ -1,0 +1,7 @@
+# Plugins
+source ~/.config/kak/plugins/plug.kak/rc/plug.kak
+source ~/.config/kak/plugs.kak
+# Settings
+source ~/.config/kak/settings/general.kak
+# Key bindings
+source ~/.config/kak/bindings/bindings.kak
