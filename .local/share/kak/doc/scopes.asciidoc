@@ -1,0 +1,90 @@
+= Scopes
+
+== Description
+
+Scopes are groups in which a particular Kakoune object can have different
+values depending on the group the value was declared in.
+
+These scoped objects are:
+
+- aliases (See <<commands#,`:doc commands`>>)
+- faces (See <<faces#,`:doc faces`>>)
+- highlighters (See <<highlighters#,`:doc highlighters`>>)
+- hooks (See <<hooks#,`:doc hooks`>>)
+- keymaps (See <<mapping#,`:doc mapping`>>)
+- options (See <<options#,`:doc options`>>)
+
+== Names and hierarchy
+
+Scopes are named as follows:
+
+*window*::
+    context linked to the window displaying a buffer.
+
+    In Kakoune, the concept of a *window* must not be confused with
+    the concept of a window at the OS level.
+    In other terms, a window is *not* a client (like a terminal or GUI)
+    but one of many 'views' into a buffer.
+
+    There is a N:1 relationship between windows and buffers; once a 
+    window is linked to a buffer, the window's buffer never changes.
+    Windows store a set of selections and the scroll position.
+
+*buffer*::
+    context linked directly to the buffer
+
+*global*::
+    global context linked to the instance of Kakoune
+
+The following order of priority applies to the above scopes:
+
+--------------------------
+window ]> buffer ]> global
+--------------------------
+
+The above priority line implies that objects can have individual values that
+will be resolved first in the *window* scope (highest priority), then in
+the *buffer* scope, and finally in the *global* scope (lowest priority).
+
+Normally, the *buffer* scope keyword means the scope associated with the
+currently active buffer, but it's possible to specify any existing buffer by
+adding an `=` and the value of `%val{buffile}` for that buffer
+(See <<expansions#value-expansions,`:doc expansions value-expansions`>>).
+For example, to set the `indentwidth` option for the `/etc/fstab` buffer::
+
+----
+set-option buffer=/etc/fstab indentwidth 8
+----
+
+The `set-option` and `unset-option` commands also accept *current* as 
+a valid scope name. It refers to the narrowest scope the option is set in.
+
+== Uses
+
+The scope paradigm is very useful as it allows the user to customize the
+behavior of the editor without modifying the configuration globally, as
+is the case with other editors who only have a single *global* scope by
+default.
+
+Examples:
+
+*filetype*::
+    A single buffer opened in two separate windows can have different
+    filetypes declared in the *window* scope with 'set-option'.
+    (See <<options#,`:doc options`>>)
+
+*status line*::
+    All the buffers of the current session can have the same information
+    displayed in the status line, except for a specific buffer (the
+    'modelinefmt' option can be declared in the *global* scope, and
+    customized in the *buffer* scope with 'set-option'.
+    (See <<options#,`:doc options`>>)
+
+== Execution context
+
+Some commands work in a specific context that might exclude one or
+several scopes altogether, consequently ignoring some values of a given
+object.
+
+Example: the *window* scope is never considered when resolving the
+values of options when writing a buffer (e.g. 'BOM', 'eolformat').
