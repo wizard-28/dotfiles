@@ -9,17 +9,16 @@ nnoremap <M-h>    :vertical resize -2<CR>
 nnoremap <M-l>    :vertical resize +2<CR>
 
 " I hate escape more than anything else
-inoremap ii <Esc>
-inoremap ii <Esc>
+inoremap <CAPS> <Esc>
 
 " Easy CAPS
 inoremap <c-u> <ESC>viwUi
 nnoremap <c-u> viwU<Esc>
 
 " TAB in general mode will move to text buffer
-nnoremap <TAB> :bnext<CR>
+nnoremap <TAB> :tabNext<CR>
 " SHIFT-TAB will go back
-nnoremap <S-TAB> :bprevious<CR>
+nnoremap <S-TAB> :tabprevious<CR>
 
 " Alternate way to save
 nnoremap <C-s> :w<CR>

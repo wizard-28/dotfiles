@@ -18,5 +18,3 @@ unset __conda_setup
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/home/wizard/.sdkman"
 [[ -s "/home/wizard/.sdkman/bin/sdkman-init.sh" ]] && source "/home/wizard/.sdkman/bin/sdkman-init.sh"
-
-source /home/wizard/.config/broot/launcher/bash/br

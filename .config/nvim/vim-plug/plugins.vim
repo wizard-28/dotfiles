@@ -20,5 +20,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     " Rust
     Plug 'rust-lang/rust.vim'
+    " Lightline
+    Plug 'itchyny/lightline.vim'    
 
 call plug#end()
