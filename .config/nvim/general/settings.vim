@@ -2,6 +2,9 @@
 let g:mapleader = "\<Space>"
 let g:python3_host_prog = expand("/usr/bin/python3.8") "
 
+set nocompatible                        " Its iMroved afterall
+
+
 syntax enable                           " Enables syntax highlighing
 set relativenumber                      " Relative Numbers 
 set hidden                              " Required to keep multiple buffers open multiple buffers
@@ -35,7 +38,23 @@ set updatetime=300                      " Faster completion
 set timeoutlen=500                      " By default timeoutlen is 1000 ms
 set formatoptions-=cro                  " Stop newline continution of comments
 set clipboard=unnamedplus               " Copy paste between vim and everything else
-"set autochdir                          " Your working directory will always be the same as your working directory
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"=> Convert text to UTF-8
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+setglobal termencoding=utf-8
+scriptencoding utf-8
+set encoding=utf-8
+
+autocmd BufNewFile,BufRead  *   try
+autocmd BufNewFile,BufRead  *   set encoding=utf-8
+autocmd BufNewFile,BufRead  *   endtry
+
+"Going over all of this would take too much time
+"This basically set everything in utf-8 in every circumtances
+
+set autochdir                          " Your working directory will always be the same as your working directory
 
 au! BufWritePost $MYVIMRC source %      " Auto source when writing to init.vm alternatively you can run :source $MYVIMRC
 "You can't stop me

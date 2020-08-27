@@ -22,5 +22,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'rust-lang/rust.vim'
     " Lightline
     Plug 'itchyny/lightline.vim'    
-
+    " Coloring
+    Plug 'ap/vim-css-color'    
 call plug#end()
