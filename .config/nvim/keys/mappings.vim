@@ -20,15 +20,11 @@ nnoremap <TAB> :tabNext<CR>
 " SHIFT-TAB will go back
 nnoremap <S-TAB> :tabprevious<CR>
 
-" Alternate way to save
-nnoremap <C-s> :w<CR>
-" Alternate way to quit
-nnoremap <C-Q> :wq!<CR>
-" Use control-c instead of escape
-nnoremap <C-c> <Esc>
 " <TAB>: completion.
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 
+"Better Substitute
+nnoremap S :%s//<Left><Left>
 " Better tabbing
 vnoremap < <gv
 vnoremap > >gv
