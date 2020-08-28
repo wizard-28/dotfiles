@@ -9,13 +9,13 @@ nnoremap <M-h>    :vertical resize -2<CR>
 nnoremap <M-l>    :vertical resize +2<CR>
 
 " I hate escape more than anything else
-inoremap <CAPS> <Esc>
+inoremap ii <Esc>
 
 " Easy CAPS
 inoremap <c-u> <ESC>viwUi
 nnoremap <c-u> viwU<Esc>
 
-" TAB in general mode will move to text buffer
+" TAB in normal mode will move to tabs 
 nnoremap <TAB> :tabNext<CR>
 " SHIFT-TAB will go back
 nnoremap <S-TAB> :tabprevious<CR>
@@ -37,3 +37,6 @@ nnoremap <C-l> <C-w>l
 
 nnoremap <Leader>o o<Esc>^Da
 nnoremap <Leader>O O<Esc>^Da
+
+"Open terminal inside of vim
+map <Leader>tt :vnew term://fish<CR> 
