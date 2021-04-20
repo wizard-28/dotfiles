@@ -12,10 +12,6 @@ error() {
     echo "\e[91m${1}\e[0m"
 }
 
-pass() {
-    echo "\e[92m${1}\e[0m"
-}
-
 process() {
     echo "\e[93m${1}\e[0m"
 }
@@ -26,7 +22,7 @@ checkpoint() {
 
 success() {
 	if [ $? -eq 0 ]; then
-		pass "${1} successfully!"
+		echo "\e[92m\e[0m${1} successfully!"
 		rm -f ./.log
 	else
 		cp ./.log "./error${noOfErrors}.txt"
@@ -42,7 +38,7 @@ checkpoint "Starting preconfigurations..."
 # Timezone and sources changes
 process "Changing the timezone to Asia/Kolkata..."
 sudo timedatectl set-timezone Asia/Kolkata
-pass "Successfully changed!"
+success "Timezone changed" "changing timezone"
 
 # Update apt-get sources
 process "Changing the apt-get sources to the fastest ones..."
@@ -52,7 +48,7 @@ deb mirror://mirrors.ubuntu.com/mirrors.txt focal-backports main restricted univ
 deb mirror://mirrors.ubuntu.com/mirrors.txt focal-security main restricted universe multiverse
 deb cdrom:[Pop_OS 20.04 _Focal Fossa_ - Release amd64 (20200702)]/ focal main restricted
 deb http://apt.pop-os.org/proprietary focal main" | sudo tee /etc/apt/sources.list > /dev/null 2>&1
-pass "Successfully changed!"
+success "Sources updated" "updating sources"
 
 # Update sources
 process "Updating apt-get sources..."
