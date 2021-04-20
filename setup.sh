@@ -131,9 +131,11 @@ ln -sf ~/dotfiles/.doom.d/packages.el ~/.doom.d/packages.el
 ~/.emacs.d/bin/doom sync | sudo tee ./.log > /dev/null 2>&1
 success "configuration files for doom emacs installed" "installing configuration files for doom emacs..."
 
-# Install programming utils
-process "Installing programming utils..."
+# Install programming and configure utils
+process "Installing and configuring programming utils..."
 sudo apt install shellcheck | sudo tee ./.log > /dev/null 2>&1
+git config --global user.name "Sourajyoti Basak"
+git config --global user.email "basak.sb2006@gmail.com"
 success "programming utils" "installing programming utils"
 
 
