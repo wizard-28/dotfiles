@@ -64,8 +64,8 @@ process "Updating apt..."
 sudo apt-get install apt -y | sudo tee ./.log > /dev/null 2>&1
 success "Apt updated" "updating apt"
 
-checkpoint "Proceeding with program installations..."
 
+checkpoint "Proceeding with browser installation..."
 # Install firefox
 if [ $DB = "firefox" ]; then
 	process "Installing firefox..."
@@ -95,14 +95,24 @@ if [ $DB = "brave" ]; then
 	sudo apt-get install brave-browser -y | sudo tee ./.log > /dev/null 2>&1
 	success "Brave installed" "installing brave"
 
-	if [ "$2" != "-p" ] && [ "$2" != "--preserve" ]; then
-		process "Purging firefox..."
-		sudo apt-get purge firefox -y | sudo tee ./.log > /dev/null 2>&1
-		success "Purged firefox" "purging firefox"
-	fi
-
 fi
 
+
+# Purge bloat
+checkpoint "Purging bloat..."
+if [ $DB = "brave" ]; then
+	# Purge firefox as brave is installed
+	process "Purging firefox..."
+	sudo apt purge firefox -y | sudo tee ./.log > /dev/null 2>&1
+	success "purged firefox" "purging firefox"
+fi
+# Purge libreoffice
+process "Purging libreoffice..."
+sudo apt purge libreoffice-common -y | sudo tee ./.log > /dev/null 2>&1
+success "purged libreoffice" "purging libreoffice"
+
+
+checkpoint "Proceeding with programming software installations..."
 # Install doom emacs
 # Install dependencies
 process "Installing doom emacs dependencies..."
@@ -130,6 +140,8 @@ process "Installing programming utils..."
 sudo apt install shellcheck | sudo tee ./.log > /dev/null 2>&1
 success "programming utils" "installing programming utils"
 
+
+checkpoint "Proceeding with video codecs installations..."
 # Install Codecs
 process "Installing codecs..."
 sudo apt-get install gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly -y | sudo tee ./.log > /dev/null 2>&1
