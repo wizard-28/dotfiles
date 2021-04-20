@@ -119,9 +119,9 @@ success "doom emacs installed" "installing doom emacs"
 
 # Install configuration files
 process "Installing configuraion files for doom emacs..."
-cp ~/dotfiles/.doom.d/config.el ~/.doom.d/config.el
-cp ~/dotfiles/.doom.d/init.el ~/.doom.d/init.el
-cp ~/dotfiles/.doom.d/packages.el ~/.doom.d/packages.el
+ln -sf ~/dotfiles/.doom.d/config.el ~/.doom.d/config.el
+ln -sf ~/dotfiles/.doom.d/init.el ~/.doom.d/init.el
+ln -sf ~/dotfiles/.doom.d/packages.el ~/.doom.d/packages.el
 ~/.emacs.d/bin/doom sync | sudo tee ./.log > /dev/null 2>&1
 success "configuration files for doom emacs installed" "installing configuration files for doom emacs..."
 
