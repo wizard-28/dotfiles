@@ -22,7 +22,7 @@ checkpoint() {
 
 success() {
 	if [ $? -eq 0 ]; then
-		echo "\e[92m\e[0m${1} successfully!"
+		echo "\e[92m{1}\e[0msuccessfully!"
 		rm -f ./.log
 	else
 		cp ./.log "./error${noOfErrors}.txt"
@@ -95,7 +95,7 @@ fi
 
 
 # Purge bloat
-checkpoint "Purging bloat..."
+checkpoint "Proceeding with bloat purge..."
 if [ $DB = "brave" ]; then
 	# Purge firefox as brave is installed
 	process "Purging firefox..."
@@ -119,7 +119,7 @@ success "Dependencies for doom emacs insatalled" "installing dependencies for do
 
 # Install doom emacs
 process "Installing doom emacs..."
-git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d | sudo tee ./.log > /dev/null 2>&1
+git clone --quiet --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d | sudo tee ./.log > /dev/null 2>&1
 ~/.emacs.d/bin/doom install
 success "doom emacs installed" "installing doom emacs"
 
