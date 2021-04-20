@@ -118,12 +118,17 @@ git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d | sudo tee
 success "doom emacs installed" "installing doom emacs"
 
 # Install configuration files
-process "Installing configuraion files for doom emacs..."
+process "Installing configuraion files for doom emacs"
 ln -sf ~/dotfiles/.doom.d/config.el ~/.doom.d/config.el
 ln -sf ~/dotfiles/.doom.d/init.el ~/.doom.d/init.el
 ln -sf ~/dotfiles/.doom.d/packages.el ~/.doom.d/packages.el
 ~/.emacs.d/bin/doom sync | sudo tee ./.log > /dev/null 2>&1
 success "configuration files for doom emacs installed" "installing configuration files for doom emacs..."
+
+# Install programming utils
+process "Installing programming utils..."
+sudo apt install shellcheck | sudo tee ./.log > /dev/null 2>&1
+success "programming utils" "installing programming utils"
 
 # Install Codecs
 process "Installing codecs..."
