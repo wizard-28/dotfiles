@@ -22,7 +22,7 @@ checkpoint() {
 
 success() {
 	if [ $? -eq 0 ]; then
-		echo "\e[92m{1}\e[0msuccessfully!"
+		echo "\e[92m${1}\e[0msuccessfully!"
 		rm -f ./.log
 	else
 		cp ./.log "./error${noOfErrors}.txt"
@@ -99,12 +99,12 @@ checkpoint "Proceeding with bloat purge..."
 if [ $DB = "brave" ]; then
 	# Purge firefox as brave is installed
 	process "Purging firefox..."
-	sudo apt purge firefox -y | sudo tee ./.log > /dev/null 2>&1
+	sudo apt-get purge firefox -y | sudo tee ./.log > /dev/null 2>&1
 	success "purged firefox" "purging firefox"
 fi
 # Purge libreoffice
 process "Purging libreoffice..."
-sudo apt purge libreoffice-common -y | sudo tee ./.log > /dev/null 2>&1
+sudo apt-get purge libreoffice-common -y | sudo tee ./.log > /dev/null 2>&1
 success "purged libreoffice" "purging libreoffice"
 
 
@@ -133,7 +133,7 @@ success "configuration files for doom emacs installed" "installing configuration
 
 # Install programming and configure utils
 process "Installing and configuring programming utils..."
-sudo apt install shellcheck | sudo tee ./.log > /dev/null 2>&1
+sudo apt-get install shellcheck | sudo tee ./.log > /dev/null 2>&1
 git config --global user.name "Sourajyoti Basak"
 git config --global user.email "basak.sb2006@gmail.com"
 success "programming utils" "installing programming utils"
