@@ -1,7 +1,7 @@
 colors:
   # Default colors
   primary:
-    background: '#333333'
+    background: '#222222'
     foreground: '#F2F2F2'
 
   # Normal colors
@@ -30,20 +30,20 @@ background_opacity: 1
 
 font:
   normal:
-    family: "Hack Nerd Font"
+    family: "Fira Mono"
     style: Regular
   bold:
-    family: "Hack Nerd Font"
+    family: "Fira Mono"
     style: Bold
   italic:
-    family: "Hack Nerd Font"
+    family: "Fira Mono"
     style: Italic
   bold_italic:
-    family: "Hack Nerd Font"
+    family: "Fira Mono"
     style: Bold Italic
 
   # Point size
-  size: 10.0
+  size: 12.0
 
   offset:
     x: 0
