@@ -3,9 +3,8 @@
 # Clear any residue log files
 rm -f ./.log
 
-# Values
-DB="brave" # Constant
-noOfErrors=1 # Variable
+defaultBrowser="brave"
+noOfErrors=1
 
 # Color functions
 error() {
@@ -22,7 +21,7 @@ checkpoint() {
 
 success() {
 	if [ $? -eq 0 ]; then
-		echo "\e[92m${1}\e[0msuccessfully!"
+		echo "\e[92m${1} successfully!\e[0m"
 		rm -f ./.log
 	else
 		cp ./.log "./error${noOfErrors}.txt"
@@ -34,7 +33,6 @@ success() {
 
 
 checkpoint "Starting preconfigurations..."
-
 # Timezone and sources changes
 process "Changing the timezone to Asia/Kolkata..."
 sudo timedatectl set-timezone Asia/Kolkata
@@ -63,14 +61,14 @@ success "Apt updated" "updating apt"
 
 checkpoint "Proceeding with browser installation..."
 # Install firefox
-if [ $DB = "firefox" ]; then
+if [ $defaultBrowser = "firefox" ]; then
 	process "Installing firefox..."
 	sudo apt-get install firefox -y | sudo tee ./.log > /dev/null 2>&1
 	success "Firefox installed" " installing firefox"
 fi
 
 # Install brave
-if [ $DB = "brave" ]; then
+if [ $defaultBrowser = "brave" ]; then
 	process "Installing dependencies for brave..."
 	sudo apt-get install apt-transport-https curl gnupg -y | sudo tee ./.log > /dev/null 2>&1
 	success "Dependencies for brave installed" "installing dependencies for brave"
@@ -96,7 +94,7 @@ fi
 
 # Purge bloat
 checkpoint "Proceeding with bloat purge..."
-if [ $DB = "brave" ]; then
+if [ $defaultBrowser = "brave" ]; then
 	# Purge firefox as brave is installed
 	process "Purging firefox..."
 	sudo apt-get purge firefox -y | sudo tee ./.log > /dev/null 2>&1
@@ -119,12 +117,12 @@ success "Dependencies for doom emacs insatalled" "installing dependencies for do
 
 # Install doom emacs
 process "Installing doom emacs..."
-git clone --quiet --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d | sudo tee ./.log > /dev/null 2>&1
+git clone --quiet --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
 ~/.emacs.d/bin/doom install
 success "doom emacs installed" "installing doom emacs"
 
 # Install configuration files
-process "Installing configuraion files for doom emacs"
+process "Installing configuraion files for doom emacs..."
 ln -sf ~/dotfiles/.doom.d/config.el ~/.doom.d/config.el
 ln -sf ~/dotfiles/.doom.d/init.el ~/.doom.d/init.el
 ln -sf ~/dotfiles/.doom.d/packages.el ~/.doom.d/packages.el
