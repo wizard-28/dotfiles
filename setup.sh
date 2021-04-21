@@ -98,17 +98,22 @@ if [ $defaultBrowser = "brave" ]; then
 	# Purge firefox as brave is installed
 	process "Purging firefox..."
 	sudo apt-get purge firefox -y | sudo tee ./.log > /dev/null 2>&1
-	success "purged firefox" "purging firefox"
+	success "Purged firefox" "purging firefox"
 fi
+
 # Purge libreoffice
 process "Purging libreoffice..."
 sudo apt-get purge libreoffice-common -y | sudo tee ./.log > /dev/null 2>&1
-success "purged libreoffice" "purging libreoffice"
+success "Purged libreoffice" "purging libreoffice"
+
+# Autoremove and purge
+process "Cleaning up..."
+sudo apt-get autoremove --purge -y | sudo tee ./.log > /dev/null 2>&1
+success "Cleaned up" "cleaning up"
 
 
 checkpoint "Proceeding with programming software installations..."
-# Install doom emacs
-# Install dependencies
+# Install doom emacs dependencies
 process "Installing doom emacs dependencies..."
 sudo add-apt-repository ppa:kelleyk/emacs -y | sudo tee ./.log > /dev/null 2>&1
 sudo apt-get update | sudo tee ./.log > /dev/null 2>&1
@@ -119,7 +124,7 @@ success "Dependencies for doom emacs insatalled" "installing dependencies for do
 process "Installing doom emacs..."
 git clone --quiet --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
 ~/.emacs.d/bin/doom install
-success "doom emacs installed" "installing doom emacs"
+success "Doom emacs installed" "installing doom emacs"
 
 # Install configuration files
 process "Installing configuraion files for doom emacs..."
@@ -127,20 +132,32 @@ ln -sf ~/dotfiles/.doom.d/config.el ~/.doom.d/config.el
 ln -sf ~/dotfiles/.doom.d/init.el ~/.doom.d/init.el
 ln -sf ~/dotfiles/.doom.d/packages.el ~/.doom.d/packages.el
 ~/.emacs.d/bin/doom sync | sudo tee ./.log > /dev/null 2>&1
-success "configuration files for doom emacs installed" "installing configuration files for doom emacs..."
+success "Configuration files for doom emacs installed" "installing configuration files for doom emacs..."
 
-# Install programming and configure utils
-process "Installing and configuring programming utils..."
-sudo apt-get install shellcheck | sudo tee ./.log > /dev/null 2>&1
+
+checkpoint "Proceeding with programming utility installation and configuring them..."
+# Install shellcheck
+process "Installing shellcheck..."
+sudo apt-get install shellcheck -y | sudo tee ./.log > /dev/null 2>&1
+success "Shellcheck installed" "installing shellcheck"
+
+# Install alacritty
+process "Installing and configuring alacritty..."
+sudo apt-get install alacritty -y | sudo tee ./.log > /dev/null 2>&1
+ln -sf ~/dotfiles/.config/alacritty/alacritty.yml ~/.config/alacritty.yml
+success "Alacritty installed and configured" "installing and configuring alacritty"
+
+# Configure git
+process "Configuring git..."
 git config --global user.name "Sourajyoti Basak"
 git config --global user.email "basak.sb2006@gmail.com"
-success "programming utils" "installing programming utils"
+success "Git configured" "installing programming utils"
 
 
 checkpoint "Proceeding with video codecs installations..."
 # Install Codecs
 process "Installing codecs..."
 sudo apt-get install gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly -y | sudo tee ./.log > /dev/null 2>&1
-success "codecs installed" "installing codecs"
+success "Codecs installed" "installing codecs"
 
 checkpoint "Setup complete. Enjoy your laptop now!"
