@@ -74,7 +74,7 @@ if [ $defaultBrowser = "brave" ]; then
 	success "Dependencies for brave installed" "installing dependencies for brave"
 	
 	process "Installing brave signing key..."
-	curl -s https://brave-browser-apt-release.s3.brave.com/brave-core.asc | sudo apt-key --keyring /etc/apt/trusted.gpg.d/brave-browser-release.gpg add -
+	curl -s https://brave-browser-apt-release.s3.brave.com/brave-core.asc | sudo apt-key --keyring /etc/apt/trusted.gpg.d/brave-browser-release.gpg add - > /dev/null 2>&1
 	success "Brave signing key installed" "installing brave signing key"
 
 	process "Adding brave repository..."
@@ -123,7 +123,7 @@ success "Dependencies for doom emacs insatalled" "installing dependencies for do
 # Install doom emacs
 process "Installing doom emacs..."
 git clone --quiet --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
-yes | ~/.emacs.d/bin/doom install | sudo tee ./.log > /dev/null 2>&1
+yes | ~/.emacs.d/bin/doom install > /dev/null 2>&1
 success "Doom emacs installed" "installing doom emacs"
 
 # Install configuration files
