@@ -24,8 +24,7 @@ colors:
     blue:    '#48B9C7'
     magenta: '#AD7FA8'
     cyan:    '#34E2E2'
-    white:   '#EEEEEC'
-    
+    white:   '#EEEEEC'    
 background_opacity: 1
 
 font:
