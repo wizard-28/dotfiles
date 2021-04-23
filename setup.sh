@@ -123,7 +123,7 @@ success "Dependencies for doom emacs insatalled" "installing dependencies for do
 # Install doom emacs
 process "Installing doom emacs..."
 git clone --quiet --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
-yes | ~/.emacs.d/bin/doom install > /dev/null 2>&1
+yes | ~/.emacs.d/bin/doom install > ./.log 2>&1
 success "Doom emacs installed" "installing doom emacs"
 
 # Install configuration files
