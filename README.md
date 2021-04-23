@@ -1,6 +1,6 @@
 # dotfiles
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/7231841f733848a3a13ed3f39f877cfa)](https://www.codacy.com/gl/wizard28/dotfiles/dashboard?utm_source=gitlab.com&amp;utm_medium=referral&amp;utm_content=wizard28/dotfiles&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/db1892fa376742e49cffd80ca59d6804)](https://www.codacy.com/gh/wizard-28/dotfiles/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=wizard-28/dotfiles&amp;utm_campaign=Badge_Grade)
 
 This is a backup repository of my dotfiles! 
 
