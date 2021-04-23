@@ -22,11 +22,8 @@ checkpoint() {
 success() {
 	if [ $? -eq 0 ]; then
 		echo "\e[92m${1} successfully!\e[0m"
-		rm -f ./.log
 	else
-		cp ./.log "./error${noOfErrors}.txt"
 		error "Error occurred while ${2}!"
-		error "Check out the log at ./error${noOfErrors}.txt"
 		noOfErrors=$((noOfErrors + 1))
 	fi
 }
@@ -50,12 +47,12 @@ success "Sources updated" "updating sources"
 
 # Update sources
 process "Updating apt-get sources..."
-sudo apt-get update | sudo tee ./.log > /dev/null 2>&1
+sudo apt-get update > /dev/null 2>&1
 success "Sources updated" "updating the sources"
 
 # Update apt
 process "Updating apt..."
-sudo apt-get install apt -y | sudo tee ./.log > /dev/null 2>&1
+sudo apt-get install apt -y > /dev/null 2>&1
 success "Apt updated" "updating apt"
 
 
@@ -63,14 +60,14 @@ checkpoint "Proceeding with browser installation..."
 # Install firefox
 if [ $defaultBrowser = "firefox" ]; then
 	process "Installing firefox..."
-	sudo apt-get install firefox -y | sudo tee ./.log > /dev/null 2>&1
+	sudo apt-get install firefox -y > /dev/null 2>&1
 	success "Firefox installed" " installing firefox"
 fi
 
 # Install brave
 if [ $defaultBrowser = "brave" ]; then
 	process "Installing dependencies for brave..."
-	sudo apt-get install apt-transport-https curl gnupg -y | sudo tee ./.log > /dev/null 2>&1
+	sudo apt-get install apt-transport-https curl gnupg -y > /dev/null 2>&1
 	success "Dependencies for brave installed" "installing dependencies for brave"
 	
 	process "Installing brave signing key..."
@@ -78,15 +75,15 @@ if [ $defaultBrowser = "brave" ]; then
 	success "Brave signing key installed" "installing brave signing key"
 
 	process "Adding brave repository..."
-	echo "deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main" | sudo tee /etc/apt/sources.list.d/brave-browser-release.list | sudo tee ./.log > /dev/null 2>&1
+	echo "deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main" | sudo tee /etc/apt/sources.list.d/brave-browser-release.list > /dev/null 2>&1
 	success "Brave repository added" "adding brave repository"
 	
 	process "Updating sources..."
-	sudo apt-get update | sudo tee ./.log > /dev/null 2>&1
+	sudo apt-get update > /dev/null 2>&1
 	success "Sources updated" "updating the sources"
 
 	process "Installing brave..."
-	sudo apt-get install brave-browser -y | sudo tee ./.log > /dev/null 2>&1
+	sudo apt-get install brave-browser -y > /dev/null 2>&1
 	success "Brave installed" "installing brave"
 
 fi
@@ -97,27 +94,27 @@ checkpoint "Proceeding with bloat purge..."
 if [ $defaultBrowser = "brave" ]; then
 	# Purge firefox as brave is installed
 	process "Purging firefox..."
-	sudo apt-get purge firefox -y | sudo tee ./.log > /dev/null 2>&1
+	sudo apt-get purge firefox -y > /dev/null 2>&1
 	success "Purged firefox" "purging firefox"
 fi
 
 # Purge libreoffice
 process "Purging libreoffice..."
-sudo apt-get purge libreoffice-common -y | sudo tee ./.log > /dev/null 2>&1
+sudo apt-get purge libreoffice-common -y > /dev/null 2>&1
 success "Purged libreoffice" "purging libreoffice"
 
 # Autoremove and purge
 process "Cleaning up..."
-sudo apt-get autoremove --purge -y | sudo tee ./.log > /dev/null 2>&1
+sudo apt-get autoremove --purge -y > /dev/null 2>&1
 success "Cleaned up" "cleaning up"
 
 
 checkpoint "Proceeding with programming software installations..."
 # Install doom emacs dependencies
 process "Installing doom emacs dependencies..."
-sudo add-apt-repository ppa:kelleyk/emacs -y | sudo tee ./.log > /dev/null 2>&1
-sudo apt-get update | sudo tee ./.log > /dev/null 2>&1
-sudo apt-get install emacs27 git ripgrep fd-find -y | sudo tee ./.log > /dev/null 2>&1
+sudo add-apt-repository ppa:kelleyk/emacs -y > /dev/null 2>&1
+sudo apt-get update > /dev/null 2>&1
+sudo apt-get install emacs27 git ripgrep fd-find -y > /dev/null 2>&1
 success "Dependencies for doom emacs insatalled" "installing dependencies for doom emacs"
 
 # Install doom emacs
@@ -131,19 +128,19 @@ process "Installing configuraion files for doom emacs..."
 ln -sf ~/dotfiles/.doom.d/config.el ~/.doom.d/config.el
 ln -sf ~/dotfiles/.doom.d/init.el ~/.doom.d/init.el
 ln -sf ~/dotfiles/.doom.d/packages.el ~/.doom.d/packages.el
-~/.emacs.d/bin/doom sync | sudo tee ./.log > /dev/null 2>&1
+~/.emacs.d/bin/doom sync > /dev/null 2>&1
 success "Configuration files for doom emacs installed" "installing configuration files for doom emacs..."
 
 
 checkpoint "Proceeding with programming utility installation and configuring them..."
 # Install shellcheck
 process "Installing shellcheck..."
-sudo apt-get install shellcheck -y | sudo tee ./.log > /dev/null 2>&1
+sudo apt-get install shellcheck -y > /dev/null 2>&1
 success "Shellcheck installed" "installing shellcheck"
 
 # Install alacritty
 process "Installing and configuring alacritty..."
-sudo apt-get install alacritty -y | sudo tee ./.log > /dev/null 2>&1
+sudo apt-get install alacritty -y > /dev/null 2>&1
 ln -sf ~/dotfiles/.config/alacritty/alacritty.yml ~/.config/alacritty.yml
 success "Alacritty installed and configured" "installing and configuring alacritty"
 
@@ -157,7 +154,7 @@ success "Git configured" "installing programming utils"
 checkpoint "Proceeding with video codecs installations..."
 # Install Codecs
 process "Installing codecs..."
-sudo apt-get install gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly -y | sudo tee ./.log > /dev/null 2>&1
+sudo apt-get install gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly -y > /dev/null 2>&1
 success "Codecs installed" "installing codecs"
 
 checkpoint "Setup complete. Enjoy your laptop now!"
