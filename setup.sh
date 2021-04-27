@@ -103,6 +103,22 @@ process "Cleaning up..."
 sudo apt-get autoremove --purge -y > /dev/null
 success "Cleaned up" "cleaning up"
 
+checkpoint "Proceeding with window manager installation and configuring them"
+# Install swaywm
+process "Installing swaywm..."
+sudo apt-get install sway swaylock swayidle -y > /dev/null
+success "Swaywm installed" "installing swaywm"
+# Install waybar
+process "Installing waybar..."
+sudo add-apt-repository ppa:nschloe/waybar -y > /dev/null
+sudo apt-get update > /dev/null
+sudo apt-get install waybar -y > /dev/null
+success "Waybar installed" "installing waybar"
+# Install configuration files
+process "Installing configuration files for swaywm and waybar..."
+ln -sf ~/dotfiles/.config/sway/config ~/.config/sway/config
+ln -sf ~/dotfiles/.config/waybar/config ~/.config/waybar/config
+success "Configuration files for swaywm and waybar installed" "installing configuration files for swaywm and waybar"
 
 checkpoint "Proceeding with programming software installations..."
 # Install doom emacs dependencies
@@ -124,7 +140,7 @@ ln -sf ~/dotfiles/.doom.d/config.el ~/.doom.d/config.el
 ln -sf ~/dotfiles/.doom.d/init.el ~/.doom.d/init.el
 ln -sf ~/dotfiles/.doom.d/packages.el ~/.doom.d/packages.el
 ~/.emacs.d/bin/doom sync > /dev/null
-success "Configuration files for doom emacs installed" "installing configuration files for doom emacs..."
+success "Configuration files for doom emacs installed" "installing configuration files for doom emacs"
 
 
 checkpoint "Proceeding with programming utility installation and configuring them..."
