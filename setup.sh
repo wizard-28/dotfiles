@@ -114,6 +114,11 @@ sudo add-apt-repository ppa:nschloe/waybar -y > /dev/null
 sudo apt-get update > /dev/null
 sudo apt-get install waybar -y > /dev/null
 success "Waybar installed" "installing waybar"
+# Install fonts
+process "Installing fonts for waybar..."
+sudo apt install fonts-font-awesome -y > /dev/null
+fc-cache -f -v > /dev/null
+success "Fonts installed for waybar" "installing fonts for waybar"
 # Install configuration files
 process "Installing configuration files for swaywm and waybar..."
 ln -sf ~/dotfiles/.config/sway/config ~/.config/sway/config
