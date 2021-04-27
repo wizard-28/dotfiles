@@ -197,7 +197,8 @@ bindsym $mod+r mode "resize"
 #
 # Hotkeys
 #
-bindsym $mod+m exec emacs ~/dotfiles/.config/sway/config
+bindsym $mod+Shift+s exec emacs ~/dotfiles/.config/sway/config
+bindsym $mod+Shift+w exec emacs ~/dotfiles/.config/waybar/config
 
 #
 # Status Bar:
