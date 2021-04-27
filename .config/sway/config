@@ -197,8 +197,11 @@ bindsym $mod+r mode "resize"
 #
 # Hotkeys
 #
+# Configuration hotkeys
 bindsym $mod+Shift+s exec emacs ~/dotfiles/.config/sway/config
 bindsym $mod+Shift+w exec emacs ~/dotfiles/.config/waybar/config
+# Application hotkeys
+bindsym $mod+Shift+b exec brave-browser --enable-features=UseOzonePlatform --ozone-platform=wayland
 
 #
 # Status Bar:
