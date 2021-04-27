@@ -195,6 +195,11 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 #
+# Hotkeys
+#
+bindsym $mod+m exec emacs ~/dotfiles/.config/sway/config
+
+#
 # Status Bar:
 #
 # Read `man 5 sway-bar` for more information about this section.
@@ -203,6 +208,10 @@ bar {
 }
 # Disable the title bar
 default_border none
+# Gaps
+gaps inner 5
+gaps outer 3
+
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl -- set-sink-volume 0 +5% #increase sound volume
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl -- set-sink-volume 0 -5% #decrease sound volume
