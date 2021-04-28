@@ -1,1 +1,158 @@
-/home/pop-os/dotfiles/.config/waybar/config
+{
+    "modules-left": [
+        "sway/workspaces",
+        "custom/right-arrow-dark"
+    ],
+    "modules-center": [
+        "custom/left-arrow-dark",
+        "clock#1",
+        "custom/left-arrow-light",
+        "custom/left-arrow-dark",
+        "idle_inhibitor",
+        "network",
+        "custom/right-arrow-dark",
+        "custom/right-arrow-light",
+        "clock#2",
+        "custom/right-arrow-dark"
+    ],
+    "modules-right": [
+        "custom/left-arrow-dark",
+        "pulseaudio",
+        "custom/left-arrow-light",
+        "custom/left-arrow-dark",
+        "memory",
+        "custom/left-arrow-light",
+        "custom/left-arrow-dark",
+        "cpu",
+        "custom/left-arrow-light",
+        "custom/left-arrow-dark",
+        "temperature",
+        "custom/left-arrow-light",
+        "custom/left-arrow-dark",
+        "battery",
+        "custom/left-arrow-light",
+        "custom/left-arrow-dark",
+        "tray"
+    ],
+    "custom/left-arrow-dark": {
+        "format": "",
+        "tooltip": false
+    },
+    "custom/left-arrow-light": {
+        "format": "",
+        "tooltip": false
+    },
+    "custom/right-arrow-dark": {
+        "format": "",
+        "tooltip": false
+    },
+    "custom/right-arrow-light": {
+        "format": "",
+        "tooltip": false
+    },
+    "clock#1": {
+        "format": "{:%a %e}",
+        "tooltip": false
+    },
+    "clock#2": {
+        "format": "{:%I:%M}",
+        "tooltip": false
+    },
+    "sway/mode": {
+        "format": "<span style=\"italic\">{}</span>"
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
+    "tray": {
+        // "icon-size": 21,
+        "spacing": 10
+    },
+    "clock": {
+        // "timezone": "America/New_York",
+        "interval": 1,
+        "format": "{:%a %e %r}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    },
+    "cpu": {
+        "interval": 5,
+        "format": "{usage}% ",
+        "tooltip": false
+    },
+    "memory": {
+        "interval": 5,
+        "format": "{}% "
+    },
+    "temperature": {
+        "thermal-zone": 4,
+        "critical-threshold": 90,
+        "interval": 5,
+        "format": "{icon} {temperatureC}°C",
+        "format-icons": [
+          "", // Icon: temperature-empty
+          "", // Icon: temperature-quarter
+          "", // Icon: temperature-half
+          "", // Icon: temperature-three-quarters
+          ""  // Icon: temperature-full
+      ],
+      "tooltip": true
+
+    },
+    "backlight": {
+        // "device": "acpi_video1",
+        "format": "{percent}% {icon}",
+        "format-icons": ["", ""]
+    },
+    "battery": {
+        "interval": 30,
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format-charging": " {icon} {capacity}%", // Icon: bolt
+        "format": "{icon} {capacity}%",
+        "format-icons": [
+            "", // Icon: battery-empty
+            "", // Icon: battery-quarter
+            "", // Icon: battery-half
+            "", // Icon: battery-three-quarters
+            ""  // Icon: battery-full
+        ],
+        "tooltip": true
+    },
+    "network": {
+        "interval": 1,
+        "format": "{icon}",
+        "format-alt": "{ipaddr}/{cidr} {icon}",
+        "format-alt-click": "click-right",
+        "format-icons": {
+            "wifi": ["", "" ,""],
+            "ethernet": [""],
+            "disconnected": [""]
+        },
+        "on-click": "x-terminal-emulator -e nmtui",
+    "tooltip": false
+    },
+    "pulseaudio": {
+        "format": "{volume}% {icon} {format_source}",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": " {format_source}",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    }
+}
