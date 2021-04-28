@@ -1,4 +1,4 @@
-# Default config for sway
+# a Default config for sway
 #
 # Copy this to ~/.config/sway/config and edit it to your liking.
 #
@@ -201,7 +201,7 @@ bindsym $mod+r mode "resize"
 bindsym $mod+Shift+s exec emacs ~/dotfiles/.config/sway/config
 bindsym $mod+Shift+w exec emacs ~/dotfiles/.config/waybar/config
 # Application hotkeys
-bindsym $mod+Shift+b exec brave-browser --enable-features=UseOzonePlatform --ozone-platform=wayland
+bindsym Mod1+b exec brave-browser --enable-features=UseOzonePlatform --ozone-platform=wayland
 
 #
 # Status Bar:
