@@ -9,6 +9,7 @@
         "custom/left-arrow-light",
         "custom/left-arrow-dark",
         "idle_inhibitor",
+        "custom/weather",
         "network",
         "custom/right-arrow-dark",
         "custom/right-arrow-light",
@@ -53,6 +54,13 @@
     "clock#1": {
         "format": "{:%a %e}",
         "tooltip": false
+    },
+    "custom/weather": {
+        "format": "{}",
+        "tooltip": true,
+        "interval": 3600,
+        "exec": "python3 ~/.config/waybar/modules/waybar-wttr.py",
+        "return-type": "json"
     },
     "clock#2": {
         "format": "{:%I:%M}",
