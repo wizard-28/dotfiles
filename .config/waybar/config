@@ -1,7 +1,8 @@
 {
     "modules-left": [
         "sway/workspaces",
-        "custom/right-arrow-dark"
+        "custom/right-arrow-dark",
+        "sway/mode"
     ],
     "modules-center": [
         "custom/left-arrow-dark",

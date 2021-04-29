@@ -104,9 +104,13 @@ sudo apt-get autoremove --purge -y > /dev/null
 success "Cleaned up" "cleaning up"
 
 checkpoint "Proceeding with window manager installation and configuring them"
+# Install dependencies for swaywm
+process "Installing dependencies for swaywm"
+sudo apt-get install light grim slurp wl-clipboard mako-notifier xwayland libgdk-pixbuf2.0-common libgdk-pixbuf2.0-bin gir1.2-gdkpixbuf-2.0 -y > /dev/null
+success "Installed dependencies for swaywm" "installing dependencies for swaywm"
 # Install swaywm
 process "Installing swaywm..."
-sudo apt-get install sway light swaylock swayidle -y > /dev/null
+sudo apt-get install sway swaylock swayidle sway-backgrounds -y > /dev/null
 success "Swaywm installed" "installing swaywm"
 # Install waybar
 process "Installing waybar..."
@@ -123,8 +127,9 @@ success "Fonts installed for waybar" "installing fonts for waybar"
 # Install configuration files
 process "Installing configuration files for swaywm and waybar..."
 # Make the directories
-mkdir ~/.config/sway/ ~/.config/waybar/ ~/.config/waybar/modules
+mkdir ~/.config/sway/ ~/.config/waybar/ ~/.config/waybar/modules ~/.config/sway/scripts
 ln -sf ~/dotfiles/.config/sway/config ~/.config/sway/config
+ln -sf ~/dotfiles/.config/sway/scripts/fibonacci.py ~/.config/sway/scripts/fibonacci.py
 ln -sf ~/dotfiles/.config/waybar/config ~/.config/waybar/config
 ln -sf ~/dotfiles/.config/waybar/style.css ~/.config/waybar/style.css
 ln -sf ~/dotfiles/.config/waybar/modules/waybar-wttr.py ~/.config/waybar/modules/waybar-wttr.py

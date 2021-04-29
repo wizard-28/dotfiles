@@ -121,6 +121,9 @@ exec swayidle -w \
     bindsym $mod+w layout tabbed
     bindsym $mod+e layout toggle split
 
+    # Fibbonacci layout
+    exec --no-startup-id ~/.config/sway/scripts/fibonacci.py
+
     # Make the current focus fullscreen
     bindsym $mod+f fullscreen
 
