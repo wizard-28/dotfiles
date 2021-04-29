@@ -123,7 +123,7 @@ success "Fonts installed for waybar" "installing fonts for waybar"
 # Install configuration files
 process "Installing configuration files for swaywm and waybar..."
 # Make the directories
-mkdir ~/.config/sway/ ~/.config/waybar/
+mkdir ~/.config/sway/ ~/.config/waybar/ ~/.config/waybar/modules
 ln -sf ~/dotfiles/.config/sway/config ~/.config/sway/config
 ln -sf ~/dotfiles/.config/waybar/config ~/.config/waybar/config
 ln -sf ~/dotfiles/.config/waybar/style.css ~/.config/waybar/style.css
