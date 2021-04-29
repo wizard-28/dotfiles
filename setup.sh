@@ -106,6 +106,8 @@ success "Cleaned up" "cleaning up"
 checkpoint "Proceeding with window manager installation and configuring them"
 # Install dependencies for swaywm
 process "Installing dependencies for swaywm"
+sudo add-apt-repository ppa:nschloe/sway-backports -y > /dev/null
+sudo apt-get update > /dev/null
 sudo apt-get install light grim slurp wl-clipboard mako-notifier xwayland libgdk-pixbuf2.0-common libgdk-pixbuf2.0-bin gir1.2-gdkpixbuf-2.0 -y > /dev/null
 success "Installed dependencies for swaywm" "installing dependencies for swaywm"
 # Install swaywm
