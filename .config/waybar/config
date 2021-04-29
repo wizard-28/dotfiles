@@ -60,7 +60,7 @@
         "format": "{}",
         "tooltip": true,
         "interval": 3600,
-        "exec": "python3 ~/.config/waybar/modules/waybar-wttr.py",
+        "exec": "~/.config/waybar/modules/waybar-wttr.py",
         "return-type": "json"
     },
     "clock#2": {
