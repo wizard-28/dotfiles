@@ -90,11 +90,12 @@
     "cpu": {
         "interval": 5,
         "format": "{usage}% ",
-        "tooltip": false
+        "on-click": "exec alacritty -e htop"
     },
     "memory": {
         "interval": 5,
-        "format": "{}% "
+        "format": "{}% ",
+        "on-click": "exec alacritty -e htop"
     },
     "temperature": {
         "thermal-zone": 4,
