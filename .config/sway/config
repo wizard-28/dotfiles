@@ -204,4 +204,10 @@ bindsym $mod+Shift+Print exec slurp | grim -g - - | curl --form 'file=@-' http:/
 #Brightness
 bindsym --locked XF86MonBrightnessUp exec sudo light -S "$(light -G | awk '{ print int(($1 + .72) * 1.4) }')"
 bindsym --locked XF86MonBrightnessDown exec sudo light -S "$(light -G | awk '{ print int($1 / 1.4) }')"
+
+### Startup commands
+exec GDK_BACKEND=wayland
+exec CLUTTER_BACKEND=wayland
+exec mako
+
 include /etc/sway/config.d/*
