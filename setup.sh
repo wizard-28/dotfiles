@@ -178,6 +178,7 @@ checkpoint "Proceeding with git configuration..."
 process "Configuring git..."
 git config --global user.name "Sourajyoti Basak"
 git config --global user.email "basak.sb2006@gmail.com"
+git config --global commit.gpgsign true
 success "Git configured" "installing programming utils"
 
 # Add SSH and GPG Keys
