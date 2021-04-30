@@ -123,7 +123,6 @@ sudo apt-get install waybar -y > /dev/null
 success "Waybar installed" "installing waybar"
 # Install fonts
 process "Installing fonts for waybar..."
-# TODO: Install losevka
 sudo apt-get install fonts-font-awesome -y > /dev/null
 fc-cache -f -v > /dev/null
 success "Fonts installed for waybar" "installing fonts for waybar"
