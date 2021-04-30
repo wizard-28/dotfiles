@@ -172,11 +172,25 @@ sudo apt-get install alacritty -y > /dev/null
 ln -sf ~/dotfiles/.config/alacritty/alacritty.yml ~/.config/alacritty.yml
 success "Alacritty installed and configured" "installing and configuring alacritty"
 
+
+checkpoint "Proceeding with git configuration..."
 # Configure git
 process "Configuring git..."
 git config --global user.name "Sourajyoti Basak"
 git config --global user.email "basak.sb2006@gmail.com"
 success "Git configured" "installing programming utils"
+
+# Add SSH and GPG Keys
+process "Adding SSH and GPG keys..."
+sudo cp -r /media/pop-os/S\ BASAK/.ssh/ ~/.ssh/ 
+sudo cp /media/pop-os/S BASAK/github.asc ~/github.asc
+sudo chown $USER:$USER ~/.ssh/id_ed25519*
+chmod 600 ~/.ssh/id_ed25519
+chmod 644 ~/.ssh/id_ed25519.pub
+exec ssh-agent bash
+ssh-add ~/.ssh/id_ed25519
+gpg --import github.asc
+success "SSH and GPG keys added" "adding SSH and GPG Keys"
 
 
 checkpoint "Proceeding with video codecs installations..."
