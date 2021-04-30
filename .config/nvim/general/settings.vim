@@ -1,9 +1,11 @@
 "set leader key
 let g:mapleader = "\<Space>"
 let g:python3_host_prog = expand("/usr/bin/python3.8") "
+let g:doom_one_terminal_colors = 1
 
 set nocompatible                        " Its iMroved afterall
-
+set termguicolors
+colorscheme doom-one
 
 syntax enable                           " Enables syntax highlighing
 set relativenumber                      " Relative Numbers 
@@ -29,7 +31,6 @@ set autoindent                          " Good auto indent
 set laststatus=2                        " Always display the status line
 set number                              " Line numbers
 set cursorline                          " Enable highlighting of the current line
-set background=dark                     " tell vim what the background color looks like
 set showtabline=2                       " Always show tabs
 set noshowmode                          " We don't need to see things like -- INSERT -- anymore
 set nobackup                            " This is recommended by coc
@@ -57,5 +58,3 @@ autocmd BufNewFile,BufRead  *   endtry
 set autochdir                          " Your working directory will always be the same as your working directory
 
 au! BufWritePost $MYVIMRC source %      " Auto source when writing to init.vm alternatively you can run :source $MYVIMRC
-"You can't stop me
-cmap w!! w !sudo tee %

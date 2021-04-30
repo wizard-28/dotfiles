@@ -103,6 +103,39 @@ process "Cleaning up..."
 sudo apt-get autoremove --purge -y > /dev/null
 success "Cleaned up" "cleaning up"
 
+checkpoint "Proceeding with window manager installation and configuring them"
+# Install dependencies for swaywm
+process "Installing dependencies for swaywm"
+sudo add-apt-repository ppa:nschloe/sway-backports -y > /dev/null
+sudo apt-get update > /dev/null
+sudo apt-get install light grim slurp htop wl-clipboard mako-notifier xwayland libgdk-pixbuf2.0-common libgdk-pixbuf2.0-bin gir1.2-gdkpixbuf-2.0 python3-pip -y > /dev/null
+pip3 install autotiling > /dev/null
+success "Installed dependencies for swaywm" "installing dependencies for swaywm"
+# Install swaywm
+process "Installing swaywm..."
+sudo apt-get install sway swaylock swayidle sway-backgrounds -y > /dev/null
+success "Swaywm installed" "installing swaywm"
+# Install waybar
+process "Installing waybar..."
+sudo add-apt-repository ppa:nschloe/waybar -y > /dev/null
+sudo apt-get update > /dev/null
+sudo apt-get install waybar -y > /dev/null
+success "Waybar installed" "installing waybar"
+# Install fonts
+process "Installing fonts for waybar..."
+sudo apt-get install fonts-font-awesome -y > /dev/null
+fc-cache -f -v > /dev/null
+success "Fonts installed for waybar" "installing fonts for waybar"
+# Install configuration files
+process "Installing configuration files for swaywm and waybar..."
+# Make the directories
+mkdir ~/.config/sway/ ~/.config/waybar/ ~/.config/waybar/modules ~/.config/sway/scripts
+ln -sf ~/dotfiles/.config/sway/config ~/.config/sway/config
+ln -sf ~/dotfiles/.config/sway/scripts/fibonacci.py ~/.config/sway/scripts/fibonacci.py
+ln -sf ~/dotfiles/.config/waybar/config ~/.config/waybar/config
+ln -sf ~/dotfiles/.config/waybar/style.css ~/.config/waybar/style.css
+ln -sf ~/dotfiles/.config/waybar/modules/waybar-wttr.py ~/.config/waybar/modules/waybar-wttr.py
+success "Configuration files for swaywm and waybar installed" "installing configuration files for swaywm and waybar"
 
 checkpoint "Proceeding with programming software installations..."
 # Install doom emacs dependencies
@@ -124,7 +157,7 @@ ln -sf ~/dotfiles/.doom.d/config.el ~/.doom.d/config.el
 ln -sf ~/dotfiles/.doom.d/init.el ~/.doom.d/init.el
 ln -sf ~/dotfiles/.doom.d/packages.el ~/.doom.d/packages.el
 ~/.emacs.d/bin/doom sync > /dev/null
-success "Configuration files for doom emacs installed" "installing configuration files for doom emacs..."
+success "Configuration files for doom emacs installed" "installing configuration files for doom emacs"
 
 
 checkpoint "Proceeding with programming utility installation and configuring them..."
@@ -139,11 +172,27 @@ sudo apt-get install alacritty -y > /dev/null
 ln -sf ~/dotfiles/.config/alacritty/alacritty.yml ~/.config/alacritty.yml
 success "Alacritty installed and configured" "installing and configuring alacritty"
 
+
+checkpoint "Proceeding with git configuration..."
+# Add SSH and GPG Keys
+process "Adding SSH and GPG keys..."
+sudo cp -r /media/pop-os/S\ BASAK/.ssh/ ~/.ssh/ 
+sudo cp /media/pop-os/S BASAK/github.asc ~/github.asc
+sudo chown "$USER":"$USER" ~/.ssh/id_ed25519*
+chmod 600 ~/.ssh/id_ed25519
+chmod 644 ~/.ssh/id_ed25519.pub
+ssh-agent bash
+ssh-add ~/.ssh/id_ed25519
+gpg --import github.asc
+success "SSH and GPG keys added" "adding SSH and GPG Keys"
+
 # Configure git
 process "Configuring git..."
 git config --global user.name "Sourajyoti Basak"
 git config --global user.email "basak.sb2006@gmail.com"
-success "Git configured" "installing programming utils"
+git config --global user.signingkey CFF8C32DEBE58AB4
+git config --global commit.gpgsign true
+success "Git configured" "configuring git"
 
 
 checkpoint "Proceeding with video codecs installations..."

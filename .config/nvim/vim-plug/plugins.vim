@@ -15,11 +15,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Auto pairs for '(' '[' '{'
     Plug 'jiangmiao/auto-pairs'
     " Theme
-    Plug 'joshdick/onedark.vim'
+    Plug 'romgrk/doom-one.vim'
     " Intellisense
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    " Rust
-    Plug 'rust-lang/rust.vim'
     " Lightline
     Plug 'itchyny/lightline.vim'    
 call plug#end()
