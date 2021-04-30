@@ -66,7 +66,7 @@ def format_time(time):
 
 
 def format_temp(temp):
-    return (hour['FeelsLikeC']+"°").ljust(3)
+    return (hour['FeelsLikeC'] + "°").ljust(3)
 
 
 def format_chances(hour):
@@ -84,7 +84,7 @@ def format_chances(hour):
     conditions = []
     for event in list(chances.keys()):
         if int(hour[event]) > 0:
-            conditions.append(chances[event]+" "+hour[event]+"%")
+            conditions.append(chances[event] + " " + hour[event] + "%")
     return ", ".join(conditions)
 
 
@@ -105,7 +105,7 @@ for i, day in enumerate(weather['weather']):
     data['tooltip'] += f"🌅 {day['astronomy'][0]['sunrise']} 🌇 {day['astronomy'][0]['sunset']}\n"
     for hour in day['hourly']:
         if i == 0:
-            if int(format_time(hour['time'])) < datetime.now().hour-2:
+            if int(format_time(hour['time'])) < datetime.now().hour - 2:
                 continue
         data['tooltip'] += f"{format_time(hour['time'])} {WEATHER_CODES[hour['weatherCode']]} {format_temp(hour['FeelsLikeC'])} {hour['weatherDesc'][0]['value']}, {format_chances(hour)}\n"
 
