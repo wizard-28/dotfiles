@@ -174,14 +174,6 @@ success "Alacritty installed and configured" "installing and configuring alacrit
 
 
 checkpoint "Proceeding with git configuration..."
-# Configure git
-process "Configuring git..."
-git config --global user.name "Sourajyoti Basak"
-git config --global user.email "basak.sb2006@gmail.com"
-git config --global user.signingkey CFF8C32DEBE58AB4
-git config --global commit.gpgsign true
-success "Git configured" "installing programming utils"
-
 # Add SSH and GPG Keys
 process "Adding SSH and GPG keys..."
 sudo cp -r /media/pop-os/S\ BASAK/.ssh/ ~/.ssh/ 
@@ -193,6 +185,14 @@ exec ssh-agent bash
 ssh-add ~/.ssh/id_ed25519
 gpg --import github.asc
 success "SSH and GPG keys added" "adding SSH and GPG Keys"
+
+# Configure git
+process "Configuring git..."
+git config --global user.name "Sourajyoti Basak"
+git config --global user.email "basak.sb2006@gmail.com"
+git config --global user.signingkey CFF8C32DEBE58AB4
+git config --global commit.gpgsign true
+success "Git configured" "configuring git"
 
 
 checkpoint "Proceeding with video codecs installations..."
