@@ -129,35 +129,14 @@ success "Fonts installed for waybar" "installing fonts for waybar"
 # Install configuration files
 process "Installing configuration files for swaywm and waybar..."
 # Make the directories
-mkdir ~/.config/sway/ ~/.config/waybar/ ~/.config/waybar/modules ~/.config/sway/scripts
+mkdir ~/.config/sway/ ~/.config/swaylock/ ~/.config/waybar/ ~/.config/waybar/modules ~/.config/sway/scripts
 ln -sf ~/dotfiles/.config/sway/config ~/.config/sway/config
+ln -sf ~/dotfiles/.config/swaylock/config ~/.config/swaylock/config
 ln -sf ~/dotfiles/.config/sway/scripts/fibonacci.py ~/.config/sway/scripts/fibonacci.py
 ln -sf ~/dotfiles/.config/waybar/config ~/.config/waybar/config
 ln -sf ~/dotfiles/.config/waybar/style.css ~/.config/waybar/style.css
 ln -sf ~/dotfiles/.config/waybar/modules/waybar-wttr.py ~/.config/waybar/modules/waybar-wttr.py
 success "Configuration files for swaywm and waybar installed" "installing configuration files for swaywm and waybar"
-
-checkpoint "Proceeding with programming software installations..."
-# Install doom emacs dependencies
-process "Installing doom emacs dependencies..."
-sudo add-apt-repository ppa:kelleyk/emacs -y > /dev/null
-sudo apt-get update > /dev/null
-sudo apt-get install emacs27 git ripgrep fd-find -y > /dev/null
-success "Dependencies for doom emacs insatalled" "installing dependencies for doom emacs"
-
-# Install doom emacs
-process "Installing doom emacs..."
-git clone --quiet --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
-yes | ~/.emacs.d/bin/doom install > /dev/null
-success "Doom emacs installed" "installing doom emacs"
-
-# Install configuration files
-process "Installing configuraion files for doom emacs..."
-ln -sf ~/dotfiles/.doom.d/config.el ~/.doom.d/config.el
-ln -sf ~/dotfiles/.doom.d/init.el ~/.doom.d/init.el
-ln -sf ~/dotfiles/.doom.d/packages.el ~/.doom.d/packages.el
-~/.emacs.d/bin/doom sync > /dev/null
-success "Configuration files for doom emacs installed" "installing configuration files for doom emacs"
 
 
 checkpoint "Proceeding with programming utility installation and configuring them..."
@@ -177,7 +156,7 @@ checkpoint "Proceeding with git configuration..."
 # Add SSH and GPG Keys
 process "Adding SSH and GPG keys..."
 sudo cp -r /media/pop-os/S\ BASAK/.ssh/ ~/.ssh/ 
-sudo cp /media/pop-os/S BASAK/github.asc ~/github.asc
+sudo cp /media/pop-os/S\ BASAK/github.asc ~/github.asc
 sudo chown "$USER":"$USER" ~/.ssh/id_ed25519*
 chmod 600 ~/.ssh/id_ed25519
 chmod 644 ~/.ssh/id_ed25519.pub
@@ -200,5 +179,6 @@ checkpoint "Proceeding with video codecs installations..."
 process "Installing codecs..."
 sudo apt-get install gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly -y > /dev/null
 success "Codecs installed" "installing codecs"
+
 
 checkpoint "Setup complete. Enjoy your laptop now!"
