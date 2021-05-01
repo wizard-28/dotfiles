@@ -172,4 +172,5 @@ smart_gaps on
 exec GDK_BACKEND=wayland
 exec CLUTTER_BACKEND=wayland
 exec mako
-xwayland disable
+exec_always gsettings set $gnome-schema font-name 'Ubuntu'
+
