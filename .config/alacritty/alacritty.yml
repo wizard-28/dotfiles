@@ -29,16 +29,16 @@ background_opacity: 0.8
 
 font:
   normal:
-    family: "Fira Mono"
+    family: "monospace"
     style: Regular
   bold:
-    family: "Fira Mono"
+    family: "monospace"
     style: Bold
   italic:
-    family: "Fira Mono"
+    family: "monospace"
     style: Italic
   bold_italic:
-    family: "Fira Mono"
+    family: "monospace"
     style: Bold Italic
 
   # Point size
