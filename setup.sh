@@ -172,7 +172,7 @@ git config --global user.email "basak.sb2006@gmail.com"
 git config --global user.signingkey CFF8C32DEBE58AB4
 git config --global commit.gpgsign true
 # Setup SSH
-sudo touch .ssh/known_hosts
+sudo touch ~/.ssh/known_hosts
 cd dotfiles
 git remote set-url origin git@github.com:wizard-28/dotfiles.git
 cd ..
