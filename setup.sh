@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 defaultBrowser="brave"
 
@@ -111,10 +111,18 @@ sudo apt-get update > /dev/null
 sudo apt-get install light grim slurp htop wl-clipboard mako-notifier xwayland libgdk-pixbuf2.0-common libgdk-pixbuf2.0-bin gir1.2-gdkpixbuf-2.0 python3-pip -y > /dev/null
 pip3 install autotiling > /dev/null
 success "Installed dependencies for swaywm" "installing dependencies for swaywm"
+
 # Install swaywm
 process "Installing swaywm..."
-sudo apt-get install sway swaylock swayidle sway-backgrounds -y > /dev/null
+sudo apt-get install sway swayidle sway-backgrounds -y > /dev/null
 success "Swaywm installed" "installing swaywm"
+
+# Install swaylock-effects
+process "Installing swaylock-effects..."
+sudo cp /media/pop-os/S\ BASAK/swaylock /usr/local/bin/
+sudo chmod a+x+s /usr/local/bin/swaylock
+success "Installed swaylock-effects" "installing swaylock-effects"
+
 # Install waybar
 process "Installing waybar..."
 sudo add-apt-repository ppa:nschloe/waybar -y > /dev/null
@@ -155,7 +163,7 @@ success "Alacritty installed and configured" "installing and configuring alacrit
 checkpoint "Proceeding with git configuration..."
 # Add SSH and GPG Keys
 process "Adding SSH and GPG keys..."
-sudo cp -r /media/pop-os/S\ BASAK/.ssh/ ~/.ssh/ 
+sudo cp -r /media/pop-os/S\ BASAK/.ssh/ ~/.ssh/
 sudo cp /media/pop-os/S\ BASAK/github.asc ~/github.asc
 sudo chown "$USER":"$USER" ~/.ssh/id_ed25519*
 chmod 600 ~/.ssh/id_ed25519
