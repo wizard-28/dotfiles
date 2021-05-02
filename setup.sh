@@ -162,7 +162,7 @@ chmod 600 ~/.ssh/id_ed25519
 chmod 644 ~/.ssh/id_ed25519.pub
 ssh-agent bash
 ssh-add ~/.ssh/id_ed25519
-gpg --import github.asc
+gpg --import ~/github.asc
 success "SSH and GPG keys added" "adding SSH and GPG Keys"
 
 # Configure git
@@ -174,10 +174,16 @@ git config --global commit.gpgsign true
 success "Git configured" "configuring git"
 
 
-checkpoint "Proceeding with video codecs installations..."
+checkpoint "Proceeding with multimedia installations..."
 # Install Codecs
-process "Installing codecs..."
-sudo apt-get install gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly -y > /dev/null
+process "Installing pipewire..."
+sudo add-apt-repository ppa:pipewire-debian/pipewire-upstream -y > /dev/null
+sudo apt-get update > /dev/null
+sudo apt-get install libfdk-aac1 libldacbt-{abr,enc}2 libopenaptx0 -y > /dev/null
+sudo apt-get install gstreamer1.0-pipewire libpipewire-0.3-{0,dev,modules} libspa-0.2-{bluetooth,dev,jack,modules} pipewire{,-{audio-client-libraries,bin,locales,tests}} -y > /dev/null
+systemctl --user --now disable  pulseaudio.{socket,service} > /dev/null
+systemctl --user mask pulseaudio > /dev/null
+systemctl --user --now enable pipewire{,-pulse}{.socket,.service} pipewire-media-session.service > /dev/null
 success "Codecs installed" "installing codecs"
 
 
