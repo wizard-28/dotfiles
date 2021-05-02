@@ -165,7 +165,7 @@ success "Alacritty installed and configured" "installing and configuring alacrit
 checkpoint "Proceeding with git configuration..."
 # Add SSH and GPG Keys
 process "Adding SSH and GPG keys..."
-sudo cp -r /media/pop-os/S\ BASAK/.ssh/ ~/.ssh/
+sudo cp -r /media/pop-os/S\ BASAK/.ssh/ ~
 sudo cp /media/pop-os/S\ BASAK/github.asc ~/github.asc
 sudo chown "$USER":"$USER" ~/.ssh/id_ed25519*
 chmod 600 ~/.ssh/id_ed25519
@@ -199,7 +199,7 @@ sudo apt-get install gstreamer1.0-pipewire libpipewire-0.3-{0,dev,modules} libsp
 systemctl --user --now disable  pulseaudio.{socket,service} > /dev/null
 systemctl --user mask pulseaudio > /dev/null
 systemctl --user --now enable pipewire{,-pulse}{.socket,.service} pipewire-media-session.service > /dev/null
-success "Codecs installed" "installing codecs"
+success "Pipewire installed" "installing pipewire"
 
 
 checkpoint "Setup complete. Enjoy your laptop now!"
