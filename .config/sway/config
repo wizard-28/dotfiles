@@ -27,7 +27,7 @@ bindsym --locked XF86MonBrightnessDown exec sudo light -S "$(light -G | awk '{ p
 
 
 
-output * bg ~/Downloads/nick-nazzaro-ice-cave.jpg fill
+output * bg ~/.config/sway/nick-nazzaro-ice-cave.jpg fill
 
 exec swayidle -w \
          timeout 300 'swaylock' \

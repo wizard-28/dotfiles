@@ -141,6 +141,8 @@ mkdir ~/.config/sway/ ~/.config/swaylock/ ~/.config/waybar/ ~/.config/waybar/mod
 ln -sf ~/dotfiles/.config/sway/config ~/.config/sway/config
 ln -sf ~/dotfiles/.config/swaylock/config ~/.config/swaylock/config
 ln -sf ~/dotfiles/.config/sway/scripts/fibonacci.py ~/.config/sway/scripts/fibonacci.py
+ln -sf ~/dotfiles/.config/sway/nick-nazzaro-ice-cave.jpg ~/.config/sway/nick-nazzaro-ice-cave.jpg
+
 ln -sf ~/dotfiles/.config/waybar/config ~/.config/waybar/config
 ln -sf ~/dotfiles/.config/waybar/style.css ~/.config/waybar/style.css
 ln -sf ~/dotfiles/.config/waybar/modules/waybar-wttr.py ~/.config/waybar/modules/waybar-wttr.py
