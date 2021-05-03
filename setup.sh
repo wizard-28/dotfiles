@@ -168,6 +168,15 @@ sudo apt-get install alacritty -y > /dev/null
 ln -sf ~/dotfiles/.config/alacritty/alacritty.yml ~/.config/alacritty.yml
 success "Alacritty installed and configured" "installing and configuring alacritty"
 
+# Install fish
+process "Installing and configuring fish..."
+sudo apt-add-repository ppa:fish-shell/release-3 -y > /dev/null
+sudo apt-get update -y > /dev/null
+sudo apt-get install fish -y > /dev/null
+ln -sf dotfiles/.config/fish/config.fish .config/fish/config.fish
+ln -sf dotfiles/.config/fish/fish_variables .config/fish/fish_variables
+success "Installed and configured fish" "installing and configuring fish
+
 # Install neofetch
 process "Installing neofetch..."
 sudo apt-get install neofetch -y > /dev/null
