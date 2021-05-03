@@ -28,6 +28,10 @@ bindsym --locked XF86MonBrightnessDown exec sudo light -S "$(light -G | awk '{ p
 
 output * bg ~/.config/sway/nick-nazzaro-ice-cave.jpg fill
 
+set $laptop eDP-1
+bindswitch --reload --locked lid:on output $laptop disable
+bindswitch --reload --locked lid:off output $laptop enable
+
 exec swayidle -w \
          timeout 300 'swaylock' \
          timeout 600 'swaymsg "output * dpms off"' \
