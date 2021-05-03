@@ -203,10 +203,7 @@ git config --global user.signingkey CFF8C32DEBE58AB4
 git config --global commit.gpgsign true
 # Setup SSH
 sudo touch ~/.ssh/known_hosts
-(
-cd dotfiles || exit
 git remote set-url origin git@github.com:wizard-28/dotfiles.git
-)
 success "Git configured" "configuring git"
 
 
