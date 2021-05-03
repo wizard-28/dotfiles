@@ -3,21 +3,21 @@
 defaultBrowser="brave"
 
 # Color functions
-error() {
-  echo "\e[91m${1}\e[0m"
+function error() {
+  echo -e "\e[91m${1}\e[0m"
 }
 
-process() {
-  echo "\e[93m${1}\e[0m"
+function process() {
+  echo -e "\e[93m${1}\e[0m"
 }
 
-checkpoint() {
-  echo "\e[42m\e[97m${1}\e[0m"
+function checkpoint() {
+  echo -e "\e[42m\e[97m${1}\e[0m"
 }
 
-success() {
+function success() {
 	if [ $? -eq 0 ]; then
-		echo "\e[92m${1} successfully!\e[0m"
+		echo -e "\e[92m${1} successfully! \e[0m"
 	else
 		error "Error occurred while ${2}!"
 	fi
@@ -175,7 +175,7 @@ sudo apt-get update -y > /dev/null
 sudo apt-get install fish -y > /dev/null
 ln -sf dotfiles/.config/fish/config.fish .config/fish/config.fish
 ln -sf dotfiles/.config/fish/fish_variables .config/fish/fish_variables
-success "Installed and configured fish" "installing and configuring fish
+success "Installed and configured fish" "installing and configuring fish"
 
 # Install neofetch
 process "Installing neofetch..."
@@ -203,9 +203,10 @@ git config --global user.signingkey CFF8C32DEBE58AB4
 git config --global commit.gpgsign true
 # Setup SSH
 sudo touch ~/.ssh/known_hosts
-cd dotfiles
+(
+cd dotfiles || exit
 git remote set-url origin git@github.com:wizard-28/dotfiles.git
-cd ..
+)
 success "Git configured" "configuring git"
 
 
@@ -222,4 +223,4 @@ systemctl --user --now enable pipewire{,-pulse}{.socket,.service} pipewire-media
 success "Pipewire installed" "installing pipewire"
 
 
-checkpoint "Setup complete. Enjoy your laptop now!"
+checkpoint "Setup complete. Enjoy your laptop now! "
