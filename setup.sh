@@ -153,7 +153,10 @@ success "Shellcheck installed" "installing shellcheck"
 process "Installing alacritty..."
 sudo apt-get install alacritty -y > /dev/null
 success "Alacritty installed" "installing alacritty"
-
+# Install fonts for alacritty
+process "Installing JetBrains NL Mono Nerd Font for alacritty..."
+sudo curl -sfLo "/usr/share/fonts/truetype/JetBrainsMono Nerd Font Complete.ttf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/JetBrainsMono/NoLigatures/Regular/complete/JetBrains%20Mono%20NL%20Regular%20Nerd%20Font%20Complete%20Mono.ttf
+success "Installed JetBrains NL Mono Nerd Font for alacritty" "installing JetBrains NL Mono Nerd Font for alacritty"
 # Install fish
 process "Installing fish..."
 sudo apt-add-repository ppa:fish-shell/release-3 -y > /dev/null
