@@ -50,6 +50,13 @@ process "Updating apt..."
 sudo apt-get install apt -y > /dev/null
 success "Apt updated" "updating apt"
 
+# Install lndir
+process "Install lndir and install all configuration files"
+sudo apt-get install xutils-dev -y > /dev/null
+lndir -silent ~/dotfiles/.config/ ~/.config/
+lndir -silent ~/dotfiles/.doom.d/ ~/.doom.d/
+ln -sf ~/dotfiles/.bashrc ~/.bashrc
+success "Installed lndir and all configuration files" "installing lndir and all configuration files"
 
 checkpoint "Proceeding with browser installation..."
 # Install firefox
@@ -136,46 +143,30 @@ fc-cache -f -v > /dev/null
 success "Fonts installed for waybar" "installing fonts for waybar"
 
 
-# Install configuration files
-process "Installing configuration..."
-# Make the directories
-mkdir ~/.config/sway/ ~/.config/swaylock/ ~/.config/waybar/ ~/.config/waybar/modules ~/.config/sway/scripts
-# sway
-ln -sf ~/dotfiles/.config/sway/config ~/.config/sway/config
-ln -sf ~/dotfiles/.config/swaylock/config ~/.config/swaylock/config
-ln -sf ~/dotfiles/.config/sway/scripts/fibonacci.py ~/.config/sway/scripts/fibonacci.py
-ln -sf ~/dotfiles/.config/sway/nick-nazzaro-ice-cave.jpg ~/.config/sway/nick-nazzaro-ice-cave.jpg
-
-# waybar
-ln -sf ~/dotfiles/.config/waybar/config ~/.config/waybar/config
-ln -sf ~/dotfiles/.config/waybar/style.css ~/.config/waybar/style.css
-ln -sf ~/dotfiles/.config/waybar/modules/waybar-wttr.py ~/.config/waybar/modules/waybar-wttr.py
-
-# bashrc
-ln -sf ~/dotfiles/.bashrc ~/.bashrc
-success "Configuration files installed" "installing configuration files"
-
-
-checkpoint "Proceeding with programming utility installation and configuring them..."
+checkpoint "Proceeding with programming utility installation..."
 # Install shellcheck
 process "Installing shellcheck..."
 sudo apt-get install shellcheck -y > /dev/null
 success "Shellcheck installed" "installing shellcheck"
 
 # Install alacritty
-process "Installing and configuring alacritty..."
+process "Installing alacritty..."
 sudo apt-get install alacritty -y > /dev/null
-ln -sf ~/dotfiles/.config/alacritty/alacritty.yml ~/.config/alacritty.yml
-success "Alacritty installed and configured" "installing and configuring alacritty"
+success "Alacritty installed" "installing alacritty"
 
 # Install fish
-process "Installing and configuring fish..."
+process "Installing fish..."
 sudo apt-add-repository ppa:fish-shell/release-3 -y > /dev/null
 sudo apt-get update -y > /dev/null
 sudo apt-get install fish -y > /dev/null
-ln -sf dotfiles/.config/fish/config.fish .config/fish/config.fish
-ln -sf dotfiles/.config/fish/fish_variables .config/fish/fish_variables
-success "Installed and configured fish" "installing and configuring fish"
+success "Installed fish" "installing fish"
+
+# Install neovim
+process "Installing neovim..."
+sudo add-apt-repository ppa:neovim-ppa/stable -y > /dev/null
+sudo apt-get update -y > /dev/null
+sudo apt-get install neovim -y > /dev/null
+success "Installed neovim" "installing neovim"
 
 # Install neofetch
 process "Installing neofetch..."
