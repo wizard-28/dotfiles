@@ -26,13 +26,13 @@ bindsym --locked XF86MonBrightnessUp exec sudo light -S "$(light -G | awk '{ pri
 bindsym --locked XF86MonBrightnessDown exec sudo light -S "$(light -G | awk '{ print int($1 / 1.4) }')"
 
 
-
 output * bg ~/.config/sway/nick-nazzaro-ice-cave.jpg fill
 
 exec swayidle -w \
          timeout 300 'swaylock' \
          timeout 600 'swaymsg "output * dpms off"' \
               resume 'swaymsg "output * dpms on"' \
+         timeout 610 'systemctl suspend' \
          before-sleep 'swaylock'
 
 
