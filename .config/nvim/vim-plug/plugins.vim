@@ -20,4 +20,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     " Lightline
     Plug 'itchyny/lightline.vim'    
-call plug#end()
+    " Git
+    Plug 'tpope/vim-fugitive'
+    call plug#end()
