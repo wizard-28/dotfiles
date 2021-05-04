@@ -195,6 +195,8 @@ git config --global user.name "Sourajyoti Basak"
 git config --global user.email "basak.sb2006@gmail.com"
 git config --global user.signingkey CFF8C32DEBE58AB4
 git config --global commit.gpgsign true
+# Aliases
+git config --global alias.logline "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 # Setup SSH
 sudo touch ~/.ssh/known_hosts
 git remote set-url origin git@github.com:wizard-28/dotfiles.git
