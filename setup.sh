@@ -56,6 +56,7 @@ sudo apt-get install xutils-dev -y > /dev/null
 lndir -silent ~/dotfiles/.config/ ~/.config/
 lndir -silent ~/dotfiles/.doom.d/ ~/.doom.d/
 ln -sf ~/dotfiles/.bashrc ~/.bashrc
+ln -sf dotfiles/.bash_aliases .bash_aliases
 success "Installed lndir and all configuration files" "installing lndir and all configuration files"
 
 checkpoint "Proceeding with browser installation..."
@@ -175,6 +176,21 @@ success "Installed neovim" "installing neovim"
 process "Installing neofetch..."
 sudo apt-get install neofetch -y > /dev/null
 success "Neofetch installed" "installing neofetch..."
+
+# Install exa
+process "Installing exa..."
+(
+mkdir exa/
+cd exa/
+curl -s https://api.github.com/repos/ogham/exa/releases/latest | grep "browser_download_url" | grep "exa-linux-x86_64-v" | cut -d '"' -f 4 | wget -qi -
+unzip -q exa*
+sudo mv bin/exa /usr/local/bin
+sudo mv man/exa.1 /usr/share/man/man1/
+sudo mv completions/exa.fish /usr/share/fish/vendor_completions.d/
+sudo mv completions/exa.bash /etc/bash_completion.d/
+)
+rm -r exa/
+success "Installed exa" "installing exa"
 
 checkpoint "Proceeding with git configuration..."
 # Add SSH and GPG Keys
