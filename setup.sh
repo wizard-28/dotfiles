@@ -165,6 +165,11 @@ sudo apt-get update -y > /dev/null
 sudo apt-get install fish -y > /dev/null
 success "Installed fish" "installing fish"
 
+# Install starship
+process "Installing starship..."
+yes y | sudo sh -c "$(curl -fsSL https://starship.rs/install.sh)"
+success "Installed starship" "installing starship"
+
 # Install neovim
 process "Installing neovim..."
 sudo add-apt-repository ppa:neovim-ppa/stable -y > /dev/null
@@ -175,7 +180,7 @@ success "Installed neovim" "installing neovim"
 # Install neofetch
 process "Installing neofetch..."
 sudo apt-get install neofetch -y > /dev/null
-success "Neofetch installed" "installing neofetch..."
+success "Neofetch installed" "installing neofetch"
 
 # Install exa
 process "Installing exa..."
