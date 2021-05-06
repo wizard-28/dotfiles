@@ -56,7 +56,8 @@ sudo apt-get install xutils-dev -y > /dev/null
 lndir -silent ~/dotfiles/.config/ ~/.config/
 lndir -silent ~/dotfiles/.doom.d/ ~/.doom.d/
 ln -sf ~/dotfiles/.bashrc ~/.bashrc
-ln -sf dotfiles/.bash_aliases .bash_aliases
+ln -sf ~/dotfiles/.bash_aliases .bash_aliases
+ln -sf ~/dotfiles/.config/starship/starship.toml ~/.config/starship.toml
 success "Installed lndir and all configuration files" "installing lndir and all configuration files"
 
 checkpoint "Proceeding with browser installation..."
