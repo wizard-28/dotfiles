@@ -178,10 +178,24 @@ sudo apt-get update -y > /dev/null
 sudo apt-get install neovim -y > /dev/null
 success "Installed neovim" "installing neovim"
 
+# Install pacstall
+process "Installing pacstall..."
+sudo bash -c "$(curl -fsSL https://git.io/JfHDM)" > /dev/null
+success "Installed pacstall" "installing pacstall"
+
 # Install neofetch
 process "Installing neofetch..."
-sudo apt-get install neofetch -y > /dev/null
-success "Neofetch installed" "installing neofetch"
+sudo pacstall -P -I neofetch > /dev/null
+success "Installed neofetch" "installing neofetch"
+
+# Install bemenu
+process "Installing bemenu..."
+yes 2 | sudo pacstall -P -I bemenu-git > /dev/null
+success "Installed bemenu" "installing bemenu"
+# Purge dmenu
+process "Purging dmenu..."
+sudo apt-get purge suckless-tools -y > /dev/null
+success "Purged dmenu" "purging dmenu"
 
 # Install exa
 process "Installing exa..."
@@ -206,7 +220,7 @@ sudo cp /media/pop-os/S\ BASAK/github.asc ~/github.asc
 sudo chown "$USER":"$USER" ~/.ssh/id_ed25519*
 chmod 600 ~/.ssh/id_ed25519
 chmod 644 ~/.ssh/id_ed25519.pub
-ssh-agent bash
+eval "$(ssh-agent)"
 ssh-add ~/.ssh/id_ed25519
 gpg --import ~/github.asc
 success "SSH and GPG keys added" "adding SSH and GPG Keys"

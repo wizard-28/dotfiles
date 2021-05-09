@@ -63,3 +63,6 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+
+
+(add-to-list 'auto-mode-alist '("\\.pacscript\\'" . sh-mode))
