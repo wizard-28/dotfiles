@@ -234,7 +234,6 @@ git config --global commit.gpgsign true
 # Aliases
 git config --global alias.logline "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 # Setup SSH
-sudo touch ~/.ssh/known_hosts
 git remote set-url origin git@github.com:wizard-28/dotfiles.git
 success "Git configured" "configuring git"
 
