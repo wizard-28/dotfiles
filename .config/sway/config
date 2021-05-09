@@ -5,7 +5,7 @@ set $down j
 set $up k
 set $right l
 set $term x-terminal-emulator
-set $menu dmenu_path | dmenu | xargs swaymsg exec --
+set $menu LD_LIBRARY_PATH=/usr/local/lib/ bemenu-run -H 25 | xargs swaymsg exec --
 
 # Pulse Audio controls
 bindsym --locked XF86AudioRaiseVolume exec --no-startup-id pactl -- set-sink-volume 0 +5% #increase sound volume
@@ -113,7 +113,7 @@ input "2:7:SynPS/2_Synaptics_TouchPad" {
     bindsym $mod+e layout toggle split
 
     # Fibbonacci layout
-    exec --no-startup-id ~/.local/bin/autotiling
+    exec_always --no-startup-id ~/.local/bin/autotiling
 
     bindsym $mod+f fullscreen
 
@@ -177,4 +177,3 @@ exec GDK_BACKEND=wayland
 exec CLUTTER_BACKEND=wayland
 exec mako
 exec_always gsettings set $gnome-schema font-name 'Ubuntu'
-
