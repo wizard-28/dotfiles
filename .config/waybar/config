@@ -58,7 +58,7 @@
     },
     "custom/weather": {
         "format": "{}",
-        "interval": 3600,
+        "restart-interval": 3600,
         "exec": "~/.config/waybar/modules/waybar-wttr.py",
         "return-type": "json"
     },
