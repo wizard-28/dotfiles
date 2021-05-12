@@ -157,7 +157,7 @@ bindsym $mod+Shift+s exec emacs ~/dotfiles/.config/sway/config
 bindsym $mod+Shift+w exec emacs ~/dotfiles/.config/waybar/config
 
 # Application hotkeys
-bindsym Mod1+b exec sensible-browser
+bindsym Mod1+b exec brave-browser --enable-features=UseOzonePlatform --ozone-platform=wayland
 
 # Status Bar:
 bar {
@@ -175,6 +175,5 @@ smart_gaps on
 ### Startup commands
 exec GDK_BACKEND=wayland
 exec CLUTTER_BACKEND=wayland
-exec MOZ_ENABLE_WAYLAND=1
 exec mako
 exec_always gsettings set $gnome-schema font-name 'Ubuntu'
