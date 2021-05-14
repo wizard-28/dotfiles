@@ -2,9 +2,15 @@
     "modules-left": [
         "sway/workspaces",
         "custom/right-arrow-dark",
-        "sway/mode"
+        "sway/mode",
+        "custom/right-arrow-light",
+        "network#1",
+        "custom/right-arrow-dark"
     ],
     "modules-center": [
+        "custom/left-arrow-dark",
+        "network#2",
+        "custom/left-arrow-light",
         "custom/left-arrow-dark",
         "clock#1",
         "custom/left-arrow-light",
@@ -52,6 +58,11 @@
         "format": "",
         "tooltip": false
     },
+    "network#1": {
+        "format": "{bandwidthUpOctets}",
+        "interval": 1,
+        "tooltip": false
+    },
     "clock#1": {
         "format": "{:%a %e}",
         "tooltip": false
@@ -64,6 +75,11 @@
     },
     "clock#2": {
         "format": "{:%I:%M}",
+        "tooltip": false
+    },
+    "network#2": {
+        "format": "{bandwidthDownOctets}",
+        "interval": 1,
         "tooltip": false
     },
     "sway/mode": {
