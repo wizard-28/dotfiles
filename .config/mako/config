@@ -1,0 +1,5 @@
+default-timeout=3000
+
+[urgency=high]
+ignore-timeout=1
+

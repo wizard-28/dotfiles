@@ -18,8 +18,13 @@ bindsym --locked XF86AudioNext exec playerctl next
 bindsym --locked XF86AudioPrev exec playerctl previous
 
 # Screenshot
-bindsym --locked Print exec grim ~/Pictures/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png
-bindsym --locked $mod+Shift+Print exec slurp | grim -g - - | curl --form 'file=@-' http://0x0.st | wl-copy && swaynag -m "screenshot uploaded and url copied to clipboard"
+bindsym --locked $mod+Shift+Print exec slurp | grim -g - - | curl --form 'file=@-' http://0x0.st | wl-copy && notify-send "screenshot uploaded and url copied to clipboard"
+set $grimshot ~/.local/bin/grimshot
+
+bindsym Print exec $grimshot --notify save screen
+bindsym Ctrl+Print exec $grimshot --notify copy screen
+bindsym Shift+Print exec $grimshot --notify save area
+bindsym Ctrl+Shift+Print exec $grimshot --notify copy area
 
 #Brightness
 bindsym --locked XF86MonBrightnessUp exec sudo light -S "$(light -G | awk '{ print int(($1 + .72) * 1.4) }')"
