@@ -11,6 +11,8 @@ set $menu LD_LIBRARY_PATH=/usr/local/lib/ bemenu-run -H 25 | xargs swaymsg exec 
 bindsym --locked XF86AudioRaiseVolume exec --no-startup-id pactl -- set-sink-volume 0 +5% #increase sound volume
 bindsym --locked XF86AudioLowerVolume exec --no-startup-id pactl -- set-sink-volume 0 -5% #decrease sound volume
 bindsym --locked XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+bindsym --locked Ctrl+7 exec --no-startup-id amixer set Capture 5%+
+bindsym --locked Ctrl+6 exec --no-startup-id amixer set Capture 5%-
 
 # Playerctl controls
 bindsym --locked XF86AudioPlay exec playerctl play-pause
