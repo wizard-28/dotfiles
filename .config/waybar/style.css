@@ -71,7 +71,6 @@ window#waybar {
   color: #859900;
 }
 
-#idle_inhibitor,
 #pulseaudio,
 #memory,
 #cpu,
@@ -80,5 +79,12 @@ window#waybar {
 #battery,
 #disk {
   padding: 0 10px;
+}
+
+#clock.1,
+#idle_inhibitor,
+#custom-weather,
+#clock.2 {
+  padding: 0 5px;
 }
 
