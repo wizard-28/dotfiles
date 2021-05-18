@@ -51,12 +51,41 @@ window#waybar {
   text-shadow: inherit;
 }
 
+@keyframes cblink {
+  to {
+      background-color:#f53c3c;
+      color: #ffffff;
+    }
+}
+@keyframes wblink {
+  to {
+    color: #ffffff
+  }
+}
+
 #pulseaudio {
   color: #268bd2;
 }
 
 #memory {
   color: #2aa198;
+}
+
+#memory.warning {
+    animation-name: wblink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#memory.critical {
+    color: #f53c3c;
+    animation-name: cblink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
 }
 
 #cpu {
@@ -71,16 +100,9 @@ window#waybar {
   color: #859900;
 }
 
-@keyframes blink {
-    to {
-        background-color:#f53c3c;
-        color: #ffffff;
-    }
-}
-
 #battery.critical:not(.charging) {
     color: #f53c3c;
-    animation-name: blink;
+    animation-name: cblink;
     animation-duration: 0.5s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;

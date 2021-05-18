@@ -109,6 +109,10 @@
     "memory": {
         "interval": 5,
         "format": "{}% ",
+        "states": {
+            "warning": 90,
+            "critical": 95
+        },
         "on-click": "exec alacritty -e htop"
     },
     "temperature": {
