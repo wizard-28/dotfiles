@@ -71,6 +71,22 @@ window#waybar {
   color: #859900;
 }
 
+@keyframes blink {
+    to {
+        background-color:#f53c3c;
+        color: #ffffff;
+    }
+}
+
+#battery.critical:not(.charging) {
+    color: #f53c3c;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
 #pulseaudio,
 #memory,
 #cpu,
