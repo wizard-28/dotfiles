@@ -92,6 +92,23 @@ window#waybar {
   color: #6c71c4;
 }
 
+#cpu.warning {
+    animation-name: wblink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#cpu.critical {
+    color: #f53c3c;
+    animation-name: cblink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
 #temperature {
   color: #ffa500;
 }

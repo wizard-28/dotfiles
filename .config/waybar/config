@@ -104,6 +104,10 @@
     "cpu": {
         "interval": 5,
         "format": "{usage}% ",
+        "states": {
+            "warning" : 80,
+            "critical": 95
+        },
         "on-click": "exec alacritty -e htop"
     },
     "memory": {
