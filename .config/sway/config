@@ -28,12 +28,18 @@ bindsym Ctrl+Print exec $grimshot --notify copy screen
 bindsym Shift+Print exec $grimshot --notify save area
 bindsym Ctrl+Shift+Print exec $grimshot --notify copy area
 
+# Clipboard
+bindsym Ctrl+H exec clipman pick -t bemenu
+bindsym Ctrl+Shift+H exec clipman clear --all
+bindsym Ctrl+$mod+H exec clipman clear -t bemenu
+
 #Brightness
 bindsym --locked XF86MonBrightnessUp exec sudo light -S "$(light -G | awk '{ print int(($1 + .72) * 1.4) }')"
 bindsym --locked XF86MonBrightnessDown exec sudo light -S "$(light -G | awk '{ print int($1 / 1.4) }')"
 
 
 output * bg ~/.config/sway/nick-nazzaro-ice-cave.jpg fill
+
 
 set $laptop eDP-1
 bindswitch --reload --locked lid:on output $laptop disable
@@ -183,5 +189,6 @@ smart_gaps on
 exec GDK_BACKEND=wayland
 exec CLUTTER_BACKEND=wayland
 exec mako
-exec_always nm-applet
-exec_always gsettings set $gnome-schema font-name 'Ubuntu'
+exec wl-paste -t text --watch clipman store 1>> /home/pop-os/log.clipman 2>&1 &
+exec clipman restore
+exec nm-applet

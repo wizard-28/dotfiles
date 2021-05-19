@@ -212,6 +212,12 @@ sudo mv completions/exa.bash /etc/bash_completion.d/
 rm -r exa/
 success "Installed exa" "installing exa"
 
+# Install clipman
+process "Installing clipman..."
+sudo cp /media/pop-os/S BASAK/clipman /bin/
+sudo chmod 775 /bin/clipman
+success "Installed clipman" "installing clipman"
+
 checkpoint "Proceeding with git configuration..."
 # Add SSH and GPG Keys
 process "Adding SSH and GPG keys..."
