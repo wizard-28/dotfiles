@@ -63,18 +63,14 @@ input "2:7:SynPS/2_Synaptics_TouchPad" {
     bindsym $mod+Return exec $term
     bindsym $mod+q kill
     bindsym $mod+d exec $menu
-    bindsym $mod+Mod1+l exec swaylock
+    bindsym $mod+l exec swaylock
+    bindsym $mod+Mod1+l exec systemctl suspend
     floating_modifier $mod normal
     bindsym $mod+Shift+c reload
     bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
 #
 # Moving around:
 #
-    bindsym $mod+$left focus left
-    bindsym $mod+$down focus down
-    bindsym $mod+$up focus up
-    bindsym $mod+$right focus right
-
     bindsym $mod+Left focus left
     bindsym $mod+Down focus down
     bindsym $mod+Up focus up
