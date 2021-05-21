@@ -4,13 +4,10 @@
         "custom/right-arrow-dark",
         "sway/mode",
         "custom/right-arrow-light",
-        "network#1",
+        "network",
         "custom/right-arrow-dark"
     ],
     "modules-center": [
-        "custom/left-arrow-dark",
-        "network#2",
-        "custom/left-arrow-light",
         "custom/left-arrow-dark",
         "clock#1",
         "custom/left-arrow-light",
@@ -57,8 +54,8 @@
         "format": "",
         "tooltip": false
     },
-    "network#1": {
-        "format": "{bandwidthUpOctets}",
+    "network": {
+        "format": "{bandwidthUpOctets} {bandwidthDownOctets}",
         "interval": 1,
         "tooltip": false
     },
@@ -74,11 +71,6 @@
     },
     "clock#2": {
         "format": "{:%I:%M}",
-        "tooltip": false
-    },
-    "network#2": {
-        "format": "{bandwidthDownOctets}",
-        "interval": 1,
         "tooltip": false
     },
     "sway/mode": {
@@ -132,11 +124,6 @@
           ""  // Icon: temperature-full
       ]
     },
-    "backlight": {
-        // "device": "acpi_video1",
-        "format": "{percent}% {icon}",
-        "format-icons": ["", ""]
-    },
     "battery": {
         "interval": 30,
         "states": {
@@ -152,19 +139,6 @@
             "", // Icon: battery-three-quarters
             ""  // Icon: battery-full
         ]
-    },
-    "network": {
-        "interval": 1,
-        "format": "{icon}",
-        "format-alt": "{ipaddr}/{cidr} {icon}",
-        "format-alt-click": "click-right",
-        "format-icons": {
-            "wifi": [""],
-            "ethernet": [""],
-            "disconnected": ["⚠"]
-        },
-        "tooltip-format": "Signal strength: {signalStrength}",
-        "on-click": "x-terminal-emulator -e nmtui"
     },
     "pulseaudio": {
         "format": "{volume}% {icon} {format_source}",
