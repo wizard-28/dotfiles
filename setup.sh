@@ -234,7 +234,7 @@ success "SSH and GPG keys added" "adding SSH and GPG Keys"
 # Configure git
 process "Configuring git..."
 git config --global user.name "Sourajyoti Basak"
-git config --global user.email "basak.sb2006@gmail.com"
+git config --global user.email "wiz28@protonmail.com"
 git config --global user.signingkey CFF8C32DEBE58AB4
 git config --global commit.gpgsign true
 # Aliases
