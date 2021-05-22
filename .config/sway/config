@@ -38,7 +38,7 @@ bindsym --locked XF86MonBrightnessUp exec sudo light -S "$(light -G | awk '{ pri
 bindsym --locked XF86MonBrightnessDown exec sudo light -S "$(light -G | awk '{ print int($1 / 1.4) }')"
 
 
-output * bg ~/.config/sway/nick-nazzaro-ice-cave.jpg fill
+output * bg /usr/share/backgrounds/pop/benjamin-voros-250200.jpg fill
 
 
 set $laptop eDP-1
