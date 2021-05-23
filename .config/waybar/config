@@ -55,7 +55,7 @@
         "tooltip": false
     },
     "network": {
-        "format": "{bandwidthUpOctets} {bandwidthDownOctets}",
+        "format": "{bandwidthUpBits} {bandwidthDownBits}",
         "interval": 1,
         "tooltip": false
     },
