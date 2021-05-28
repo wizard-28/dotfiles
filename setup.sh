@@ -214,7 +214,7 @@ success "Installed exa" "installing exa"
 
 # Install clipman
 process "Installing clipman..."
-sudo cp /media/pop-os/S BASAK/clipman /bin/
+sudo cp /media/pop-os/S\ BASAK/clipman /bin/
 sudo chmod 775 /bin/clipman
 success "Installed clipman" "installing clipman"
 
