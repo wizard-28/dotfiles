@@ -235,7 +235,7 @@ success "SSH and GPG keys added" "adding SSH and GPG Keys"
 process "Configuring git..."
 git config --global user.name "Sourajyoti Basak"
 git config --global user.email "wiz28@protonmail.com"
-git config --global user.signingkey CFF8C32DEBE58AB4
+git config --global user.signingkey BB60A61ECF3DCDDB
 git config --global commit.gpgsign true
 # Aliases
 git config --global alias.logline "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
