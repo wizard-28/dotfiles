@@ -1,6 +1,6 @@
 #!/bin/bash
 
-defaultBrowser="brave"
+defaultBrowser="firefox"
 
 # Color functions
 function error() {
