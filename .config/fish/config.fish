@@ -1,4 +1,4 @@
-neofetch --ascii_colors 4 15  --colors 4 4 4 4 4 15 --ascii_distro popos
+fastfetch
 
 # Aliases
 alias l="exa --icons -F"
