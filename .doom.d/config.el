@@ -47,6 +47,10 @@
 ;; It respects `all-the-icons-color-icons'.
 (setq doom-modeline-major-mode-color-icon t)
 
+(setq doom-font (font-spec :family "JetBrainsMonoNL Nerd Font Mono" :size 15)
+      doom-variable-pitch-font (font-spec :family "Ubuntu" :size 15)
+      doom-big-font (font-spec :family "JetBrainsMonoNL Nerd Font Mono" :size 22))
+
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one
