@@ -188,4 +188,3 @@ exec mako
 exec wl-paste -t text --watch clipman store 1>> /home/pop-os/log.clipman 2>&1 &
 exec clipman restore
 exec nm-applet
-xwayland disable
