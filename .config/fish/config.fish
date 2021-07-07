@@ -1,4 +1,4 @@
-fastfetch
+#fastfetch
 
 # Aliases
 alias l="exa --icons -F"
