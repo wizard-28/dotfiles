@@ -167,8 +167,7 @@ bindsym $mod+Shift+s exec emacs ~/dotfiles/.config/sway/config
 bindsym $mod+Shift+w exec emacs ~/dotfiles/.config/waybar/config
 
 # Application hotkeys
-bindsym Mod1+b exec brave-browser --enable-features=UseOzonePlatform --ozone-platform=wayland
-
+bindsym Mod1+b exec firefox
 # Status Bar:
 bar {
     swaybar_command waybar
