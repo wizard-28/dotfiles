@@ -10,7 +10,7 @@
 [options]
 	bootstrap_before = 'config#before'
 	bootstrap_after = 'config#after'
-	colorscheme = 'doom-one'
+	colorscheme = 'gruvbox'
 	colorscheme_bg = 'dark'
 
 	enable_guicolors = true
@@ -47,10 +47,6 @@
 
 [[layers]]
 	name = 'fzf'
-
-[[custom_plugins]]
-	repo = 'https://github.com/romgrk/doom-one.vim'
-	merged = false
 
 [[custom_plugins]]
 	repo = 'https://github.com/junegunn/fzf.vim'
