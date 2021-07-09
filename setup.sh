@@ -259,5 +259,4 @@ systemctl --user mask pulseaudio > /dev/null
 systemctl --user --now enable pipewire{,-pulse}{.socket,.service} pipewire-media-session.service > /dev/null
 success "Pipewire installed" "installing pipewire"
 
-
 checkpoint "Setup complete. Enjoy your laptop now! "

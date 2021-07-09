@@ -6,10 +6,10 @@ function! config#before() abort
 	"=============================================================================
 	highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
 	autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
-	autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+	" match trailing whitespace, except when typing at the end of a line
 	autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+	" Show trailing whitespace
 	autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-	autocmd BufWinLeave * call clearmatches()
 	"=============================================================================
 endfunction
 
