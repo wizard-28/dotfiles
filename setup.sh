@@ -204,7 +204,7 @@ success "Purged dmenu" "purging dmenu"
 process "Installing exa..."
 (
 mkdir exa/
-cd exa/
+cd exa/ || exit
 curl -s https://api.github.com/repos/ogham/exa/releases/latest | grep "browser_download_url" | grep "exa-linux-x86_64-v" | cut -d '"' -f 4 | wget -qi -
 unzip -q exa*
 sudo mv bin/exa /usr/local/bin
