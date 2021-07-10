@@ -19,3 +19,21 @@ map('n', '<leader>ff', '<cmd>Telescope find_files<CR>')
 map('n', '<leader>fg', '<cmd>Telescope live_grep<CR>')
 map('n', '<leader>fb', '<cmd>Telescope buffers<CR>')
 map('n', '<leader>fh', '<cmd>Telescope help_tags<CR>')
+-- =============================================================================
+-- Settings
+-- =============================================================================
+require('telescope').setup {
+	defaults = {
+		vimgrep_arguments = {
+			'rg',
+			'--hidden',
+			'--color=never',
+			'--no-heading',
+			'--with-filename',
+			'--line-number',
+			'--column',
+			'--smart-case' 
+		}
+	}
+}
+
