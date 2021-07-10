@@ -51,3 +51,7 @@
 [[custom_plugins]]
 	repo = 'https://github.com/junegunn/fzf.vim'
 	merged = false
+
+[[custom_plugins]]
+	repo = 'https://github.com/justinmk/vim-sneak'
+	merged = false
