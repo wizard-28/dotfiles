@@ -115,6 +115,17 @@ process "Cleaning up..."
 sudo apt-get autoremove --purge -y > /dev/null
 success "Cleaned up" "cleaning up"
 
+# Install QOL programs
+process "Installing QOL programs..."
+sudo apt-get install bat ripgrep fzf zram-config zram-tools gnome-tweaks -y > /dev/null
+sudo swapoff -a > /dev/null
+sudo zramctl /dev/zram0 --size 750M > /dev/null
+sudo zramctl /dev/zram1 --size 750M > /dev/null
+sudo zramctl /dev/zram2 --size 750M > /dev/null
+sudo zramctl /dev/zram3 --size 750M > /dev/null
+success "Installed QOL programs" "installing QOL programs"
+
+
 checkpoint "Proceeding with window manager installation and configuring them"
 # Install dependencies for swaywm
 process "Installing dependencies for swaywm"
