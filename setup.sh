@@ -23,7 +23,6 @@ function success() {
 	fi
 }
 
-
 checkpoint "Starting preconfigurations..."
 # Timezone and sources changes
 process "Changing the timezone to Asia/Kolkata..."
