@@ -14,11 +14,11 @@ set runtimepath+=/home/pop-os/.cache/nvim/dein/repos/github.com/Shougo/dein.vim
 call dein#begin('/home/pop-os/.cache/nvim/dein')
 call dein#add('/home/pop-os/.cache/nvim/dein/repos/github.com/Shougo/dein.vim')
 
-call dein#add('wsdjeg/dein-ui.vim', { 'on_cmd': 'DeinUp' })			" Dein-UI
+call dein#add('wsdjeg/dein-ui.vim', { 'on_cmd': 'DeinUpdate' })			" Dein-UI
 call dein#add('morhetz/gruvbox')						" Gruvbox baby
 call dein#add('mhinz/vim-startify')						" Startify
-call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0})	" FZF
-call dein#add('junegunn/fzf.vim', { 'depends': 'fzf'})				" FZF.vim
+call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })	" FZF
+call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })				" FZF.vim
 
 call dein#end()
 "=============================================================================
