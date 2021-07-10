@@ -21,13 +21,9 @@ g.mapleader = ' '		-- Map leader to <Space>
 -- =============================================================================
 -- Settings
 -- =============================================================================
-cmd 'filetype plugin indent on'
-
 cmd 'colorscheme gruvbox'	-- Gruvbox baby
 opt.termguicolors = true	-- Needed by gruvbox.lua
-opt.background = 'dark'		-- Theme
 
-opt.compatible = false		-- Be iMproved
 opt.relativenumber = true	-- Relative numbers
 opt.mouse = 'a'			-- Mouse support
 opt.wrap = false		-- No line wrapping
