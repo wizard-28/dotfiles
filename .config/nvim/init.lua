@@ -14,3 +14,4 @@
 
 require('general')
 require('plugin')
+require('ftplugin')
