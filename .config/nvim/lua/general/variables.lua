@@ -5,12 +5,14 @@
 --  \        //       \/   --   \
 --   \__/\  / \_______ \______  /
 --        \/          \/      \/
--- init.lua --- Initialization file for Vim
+-- variables.lua --- Variable declarations
 -- Copyright (c) 2021 Sourajyoti Basak
 -- Author: Sourajyoti Basak < wiz28@protonmail.com >
 -- URL: https://github.com/wizard-28/dotfiles/
 -- License: MIT
 -- =============================================================================
 
-require('general')
-require('plugin')
+cmd = vim.cmd 	-- alias for executing Vim commands
+fn = vim.fn	-- alias for calling Vim functions
+g = vim.g	-- alias to access global variables
+opt = vim.opt	-- alias to set options
