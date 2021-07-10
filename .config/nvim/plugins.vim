@@ -19,8 +19,8 @@ call dein#add('morhetz/gruvbox')						" Gruvbox baby
 call dein#add('mhinz/vim-startify')						" Startify
 call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })	" FZF
 call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })				" FZF.vim
-call dein#add('liuchengxu/vim-which-key')
-call dein#add('neoclide/coc.nvim', { 'merged': 0 })
+call dein#add('liuchengxu/vim-which-key')					" Key guide
+call dein#add('neoclide/coc.nvim', { 'merged': 0 })				" Autocompletion
 
 call dein#end()
 "=============================================================================
