@@ -7,9 +7,9 @@
 "        \/          \/      \/  License: MIT
 "=============================================================================
 
+let $PLUGIN_CONF_DIR=expand('~/.config/nvim/plugins.conf')
 source $HOME/.config/nvim/plugins.vim
 source $HOME/.config/nvim/settings.vim
 
-for config in split(glob('$HOME/.config/nvim/plugins.conf/*.vim'), '\n')
-	exe 'source' config
-endfor
+source $PLUGIN_CONF_DIR/vim-which-key.vim
+source $PLUGIN_CONF_DIR/fzf.vim

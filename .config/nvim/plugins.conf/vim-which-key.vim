@@ -8,31 +8,14 @@
 "=============================================================================
 
 "=============================================================================
-" Options
+" Settings
 "=============================================================================
-let $FZF_DEFAULT_OPTS = '--layout=reverse --info=inline'
-let $FZF_DEFAULT_COMMAND="rg --files --hidden"
-let g:which_key_map.f = { 'name': '+fzf' }
+set timeoutlen=500		" Reduce timeout (for vim-which-key)
+let g:which_key_map = {}
+call which_key#register('<Space>', "g:which_key_map")
 "=============================================================================
 
 "=============================================================================
 " Mappings
 "=============================================================================
-nnoremap <leader>ff :Files<CR>
-let g:which_key_map.f.f = 'search-files'
-
-nnoremap <leader>fg :GFiles<CR>
-let g:which_key_map.f.g = 'search-git-files'
-
-nnoremap <leader>fb :BLines<CR>
-let g:which_key_map.f.b = 'search-current-buffer-lines'
-
-nnoremap <leader>fl :Lines<CR>
-let g:which_key_map.f.l = 'search-all-buffer-files'
-
-nnoremap <leader>fr :Rg<CR>
-let g:which_key_map.f.r = 'search-every-line'
-
-nnoremap <leader>fh :History<CR>
-let g:which_key_map.f.h = 'search-history'
-"=============================================================================
+nnoremap <silent> <leader> :WhichKey '<leader>'<CR>
