@@ -29,6 +29,7 @@ opt.mouse = 'a'			-- Mouse support
 opt.wrap = false		-- No line wrapping
 opt.clipboard = 'unnamedplus'	-- Universal clipboard
 opt.splitbelow = true		-- Horizontal splits will be below
-opt.splitright = true		-- Vertical splits will be right 
+opt.splitright = true		-- Vertical splits will be right
 opt.cursorline = true		-- Highlight cursor horizontally
+opt.spell = true		-- Enable spell checking
 -- =============================================================================
