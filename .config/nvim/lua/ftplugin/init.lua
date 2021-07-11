@@ -13,4 +13,3 @@
 -- =============================================================================
 require('ftplugin.lsp')
 require('ftplugin.compe')
-require('ftplugin.bash')
