@@ -24,9 +24,11 @@ return require('packer').startup(function()
 		'nvim-telescope/telescope.nvim',
 		requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
 	}	-- Telescope
+
 	use 'neovim/nvim-lspconfig'		-- LSP
 	use 'kabouzeid/nvim-lspinstall'		-- LSP installation helper
 	use 'hrsh7th/nvim-compe'		-- Completion
+	use 'mfussenegger/nvim-lint'		-- LSP Linter
 
 	use 'kyazdani42/nvim-web-devicons'	-- Icons
 end)
