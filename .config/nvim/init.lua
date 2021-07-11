@@ -12,6 +12,6 @@
 -- License: MIT
 -- =============================================================================
 
-require('general')
-require('plugin')
-require('ftplugin')
+require('general') 	-- Bootstrap general stuff and helper functions
+require('plugin')	-- Plugins
+require('ftplugin')	-- LSPs

@@ -1,7 +1,21 @@
+--- =============================================================================
+--  __      __________   ______
+-- /  \    /  \_____  \ /  __  \
+-- \   \/\/   //  ____/ >      <
+--  \        //       \/   --   \
+--   \__/\  / \_______ \______  /
+--        \/          \/      \/
+-- plugins.lua --- List of plugins
+-- Copyright (c) 2021 Sourajyoti Basak
+-- Author: Sourajyoti Basak < wiz28@protonmail.com >
+-- URL: https://github.com/wizard-28/dotfiles/
+-- License: MIT
+-- =============================================================================
+
 cmd 'packadd packer.nvim'
 
 return require('packer').startup(function()
-	use 'wbthomason/packer.nvim'
+	use 'wbthomason/packer.nvim'		-- Packer itself
 	use {
 		"npxbr/gruvbox.nvim",
 		requires = {"rktjmp/lush.nvim"}
