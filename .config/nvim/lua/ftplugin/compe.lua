@@ -76,7 +76,12 @@ _G.s_tab_complete = function()
   end
 end
 
+-- Map tab to the above tab complete functions
 api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
 api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
 api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
+
+-- Map compe confirm and complete functions
+api.nvim_set_keymap('i', '<cr>', 'compe#confirm("<cr>")', { expr = true })
+api.nvim_set_keymap('i', '<c-space>', 'compe#complete()', { expr = true })
