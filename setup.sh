@@ -186,7 +186,7 @@ success "Installed starship" "installing starship"
 
 # Install neovim
 process "Installing neovim..."
-sudo add-apt-repository ppa:neovim-ppa/stable -y > /dev/null
+sudo add-apt-repository ppa:neovim-ppa/unstable -y > /dev/null
 sudo apt-get update -y > /dev/null
 sudo apt-get install neovim -y > /dev/null
 success "Installed neovim" "installing neovim"
