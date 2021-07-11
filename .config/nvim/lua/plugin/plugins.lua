@@ -31,6 +31,10 @@ return require('packer').startup(function()
 	use 'glepnir/lspsaga.nvim'		-- LSP Bling
 	use 'hrsh7th/nvim-compe'		-- Completion
 	use 'mfussenegger/nvim-lint'		-- LSP Linter
+	use {
+		'nvim-treesitter/nvim-treesitter',
+		run = ':TSUpdate'
+	}	-- Treesitter
 
 	use {
 		'beauwilliams/statusline.lua',
