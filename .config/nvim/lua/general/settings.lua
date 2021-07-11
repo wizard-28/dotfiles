@@ -24,6 +24,7 @@ g.mapleader = ' '		-- Map leader to <Space>
 cmd 'colorscheme gruvbox'	-- Gruvbox baby
 opt.termguicolors = true	-- Needed by gruvbox.lua
 
+opt.timeoutlen = 500		-- Timeout
 opt.relativenumber = true	-- Relative numbers
 opt.mouse = 'a'			-- Mouse support
 opt.wrap = false		-- No line wrapping

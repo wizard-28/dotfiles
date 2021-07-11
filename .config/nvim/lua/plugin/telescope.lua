@@ -18,7 +18,7 @@
 map('n', '<leader>ff', '<cmd>Telescope find_files<CR>')
 map('n', '<leader>fg', '<cmd>Telescope git_files<CR>')
 map('n', '<leader>fr', '<cmd>Telescope live_grep<CR>')
-map('n', '<leader>fb', '<cmd>Telescope buffers<CR>')
+map('n', '<leader>fb', '<cmd>Telescope current_buffer_fuzzy_find<CR>')
 map('n', '<leader>fh', '<cmd>Telescope help_tags<CR>')
 -- =============================================================================
 -- Settings
@@ -33,7 +33,8 @@ require('telescope').setup {
 			'--with-filename',
 			'--line-number',
 			'--column',
-			'--smart-case' 
+			'--smart-case'
 		}
 	}
 }
+require('lspsaga').init_lsp_saga()

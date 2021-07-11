@@ -11,6 +11,7 @@
 -- URL: https://github.com/wizard-28/dotfiles/
 -- License: MIT
 -- =============================================================================
+require('ftplugin.lspsaga')
 require('ftplugin.lsp')
 require('ftplugin.compe')
 require('ftplugin.lint')
