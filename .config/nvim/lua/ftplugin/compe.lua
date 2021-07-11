@@ -11,7 +11,6 @@
 -- URL: https://github.com/wizard-28/dotfiles/
 -- License: MIT
 -- =============================================================================
-
 require'compe'.setup {
   enabled = true;
   autocomplete = true;
@@ -76,3 +75,8 @@ _G.s_tab_complete = function()
     return t "<S-Tab>"
   end
 end
+
+api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
+api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
+api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
+api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
