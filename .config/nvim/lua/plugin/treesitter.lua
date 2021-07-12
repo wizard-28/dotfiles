@@ -7,5 +7,8 @@ ts.setup {
 	},
 	indent = {
 		enable = true
+	},
+	incremental_selection = {
+		enable = true
 	}
 }

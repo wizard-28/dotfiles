@@ -36,12 +36,11 @@ require'compe'.setup {
 		path = true;
 		buffer = true;
 		calc = true;
-		vsnip = true;
 		nvim_lsp = true;
 		nvim_lua = true;
 		spell = true;
 		tags = true;
-		snippets_nvim = true;
+		luasnip = true;
 		treesitter = true;
 	};
 }
@@ -64,8 +63,8 @@ end
 _G.tab_complete = function()
 	if fn.pumvisible() == 1 then
 		return t "<C-n>"
-	elseif fn.call("vsnip#available", {1}) == 1 then
-		return t "<Plug>(vsnip-expand-or-jump)"
+	elseif require'luasnip'.expand_or_jumpable() then
+		return t "<cmd> lua require'luasnip'.jump(1)<cr>"
 	elseif check_back_space() then
 		return t "<Tab>"
 	else
@@ -75,8 +74,8 @@ end
 _G.s_tab_complete = function()
 	if fn.pumvisible() == 1 then
 		return t "<C-p>"
-	elseif fn.call("vsnip#jumpable", {-1}) == 1 then
-		return t "<Plug>(vsnip-jump-prev)"
+	  elseif require'luasnip'.jumpable(-1) then
+		return t "<cmd> lua require'luasnip'.jump(-1)<cr>"
 	else
 		-- If <S-Tab> is not working in your terminal, change it to <C-h>
 		return t "<S-Tab>"

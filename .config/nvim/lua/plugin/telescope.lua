@@ -1,4 +1,4 @@
--- =d============================================================================
+-- =============================================================================
 --  __      __________   ______
 -- /  \    /  \_____  \ /  __  \
 -- \   \/\/   //  ____/ >      <
@@ -23,7 +23,7 @@ wk.register({
 	['<leader>fb'] = { '<cmd>Telescope current_buffer_fuzzy_find<cr>', 'Grep every line in current buffer' },
 	['<leader>fh'] = { '<cmd>Telescope help_tags<cr>', 'Help tags' },
 
-	['<leader>fv'] = { '<cmd>lua require("plugin.telescope").search_dotfiles()<cr>', 'Help tags' }
+	['<leader>fv'] = { '<cmd>lua require("plugin.telescope").search_dotfiles()<cr>', 'Browse vim configuration' }
 })
 -- =============================================================================
 

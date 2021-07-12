@@ -42,6 +42,7 @@ return require('packer').startup(function()
 	use 'kabouzeid/nvim-lspinstall'		-- LSP installation helper
 	use 'glepnir/lspsaga.nvim'		-- LSP Bling
 	use 'hrsh7th/nvim-compe'		-- Completion
+	use 'L3MON4D3/LuaSnip'			-- Snippets
 	use 'mfussenegger/nvim-lint'		-- LSP Linter
 	-- =============================================================================
 
