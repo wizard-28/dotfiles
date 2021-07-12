@@ -17,3 +17,5 @@ fn = vim.fn	-- alias for calling vim functions
 g = vim.g	-- alias to access global variables
 opt = vim.opt	-- alias to set options
 api = vim.api	-- alias to access the vim API
+
+wk = require('which-key')

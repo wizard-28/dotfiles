@@ -15,16 +15,24 @@
 -- =============================================================================
 -- Key maps
 -- =============================================================================
-map('n', '<leader>ff', '<cmd>Telescope find_files<CR>')
-map('n', '<leader>fg', '<cmd>Telescope git_files<CR>')
-map('n', '<leader>fr', '<cmd>Telescope live_grep<CR>')
-map('n', '<leader>fb', '<cmd>Telescope current_buffer_fuzzy_find<CR>')
-map('n', '<leader>fh', '<cmd>Telescope help_tags<CR>')
+wk.register({
+	['<leader>f'] = { name = '+Fuzzy Find' },
+	['<leader>ff'] = { '<cmd>Telescope find_files<cr>', 'Find file' },
+	['<leader>fg'] = { '<cmd>Telescope git_files<cr>', 'Find git file' },
+	['<leader>fr'] = { '<cmd>Telescope live_grep<cr>', 'Grep every line in current directory' },
+	['<leader>fb'] = { '<cmd>Telescope current_buffer_fuzzy_find<cr>', 'Grep every line in current buffer' },
+	['<leader>fh'] = { '<cmd>Telescope help_tags<cr>', 'Help tags' },
+
+	['<leader>fv'] = { '<cmd>lua require("plugin.telescope").search_dotfiles()<cr>', 'Help tags' }
+})
+-- =============================================================================
+
 -- =============================================================================
 -- Settings
 -- =============================================================================
 require('telescope').setup {
 	defaults = {
+		file_sorter = require('telescope.sorters').get_fzy_sorter,
 		vimgrep_arguments = {
 			'rg',
 			'--hidden',
@@ -34,7 +42,29 @@ require('telescope').setup {
 			'--line-number',
 			'--column',
 			'--smart-case'
+		},
+		file_ignore_patterns = {
+			'.git/*'
+		}
+	},
+	extentions = {
+		fzf = {
+			fuzzy = true,                    -- false will only do exact matching
+			override_generic_sorter = false, -- override the generic sorter
+			override_file_sorter = true,     -- override the file sorter
 		}
 	}
 }
-require('lspsaga').init_lsp_saga()
+
+require('telescope').load_extension('fzf')
+
+local M = {}
+M.search_dotfiles = function()
+	require('telescope.builtin').find_files({
+	prompt_title = 'Vim Configuration',
+	cwd = '~/dotfiles/.config/nvim/',
+	hidden = true
+})
+end
+
+return M
