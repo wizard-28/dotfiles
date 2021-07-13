@@ -20,6 +20,7 @@ g.gruvbox_material_enable_italic = true
 g.gruvbox_material_enable_bold = true
 g.gruvbox_material_better_performance = true
 g.gruvbox_material_palette = 'original'
+g.suda_smart_edit = true
 -- =============================================================================
 
 -- =============================================================================

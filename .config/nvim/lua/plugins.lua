@@ -31,6 +31,7 @@ return require('packer').startup(function(use)
 		as = 'hop',
 		config = [[require('plugin.hop')]]
 	}
+	use { 'lambdalisue/suda.vim', setup = function() g.suda_smart_edit = true end }
 
 	-- Git
 	use {
