@@ -13,5 +13,4 @@
 -- =============================================================================
 require('ftplugin.lspsaga')
 require('ftplugin.lsp')
-require('ftplugin.compe')
-require('ftplugin.lint')
+--require('ftplugin.compe')

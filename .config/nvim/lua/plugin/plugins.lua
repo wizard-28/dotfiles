@@ -1,4 +1,3 @@
----@diagnostic disable: undefined-global
 --- =============================================================================
 --  __      __________   ______
 -- /  \    /  \_____  \ /  __  \
@@ -15,24 +14,21 @@
 
 cmd 'packadd packer.nvim'
 
-return require('packer').startup(function()
+return require('packer').startup(function(use)
 	use 'wbthomason/packer.nvim'		-- Packer itself
 	-- =============================================================================
 	-- General
-	use {
-		"npxbr/gruvbox.nvim",
-		requires = {"rktjmp/lush.nvim"}
-	}	-- Gurvbox baby
+	-- =============================================================================
+	-- Colorscheme
+	use { "npxbr/gruvbox.nvim", requires = { "rktjmp/lush.nvim" }}
+
 	use {
 		'nvim-telescope/telescope.nvim',
 		requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}, {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }}
 	}	-- Telescope
-	use {
-		"folke/which-key.nvim",
-		config = function()
-			require("which-key").setup {}
-		end
-	}
+
+	-- Which key
+	use { "folke/which-key.nvim", config = function() require("which-key").setup {} end }
 	-- =============================================================================
 
 	-- =============================================================================
@@ -41,23 +37,21 @@ return require('packer').startup(function()
 	use 'neovim/nvim-lspconfig'		-- LSP
 	use 'kabouzeid/nvim-lspinstall'		-- LSP installation helper
 	use 'glepnir/lspsaga.nvim'		-- LSP Bling
-	use 'hrsh7th/nvim-compe'		-- Completion
-	use 'L3MON4D3/LuaSnip'			-- Snippets
-	use 'mfussenegger/nvim-lint'		-- LSP Linter
+	-- Completions
+	use { 'hrsh7th/nvim-compe', config = [[require('ftplugin.compe')]], event = 'InsertEnter *' }
+	-- Snippets
+	use 'L3MON4D3/LuaSnip'
+	-- Supplementary linting
+	use { 'mfussenegger/nvim-lint', ft = { 'sh' }, config = [[require('ftplugin.lint')]] }
 	-- =============================================================================
 
 	-- =============================================================================
 	-- Style
 	-- =============================================================================
-	use {
-		'nvim-treesitter/nvim-treesitter',
-		run = ':TSUpdate'
-	}	-- Treesitter
-
-	use {
-		'beauwilliams/statusline.lua',
-		requires = {'kosayoda/nvim-lightbulb'}
-	}	-- Statusline
+	-- Treesitter
+	use { 'nvim-treesitter/nvim-treesitter', ft = { 'sh', 'lua' }, config = [[require('plugin.treesitter')]], run = ':TSUpdate' }
+	-- Statusline
+	use { 'beauwilliams/statusline.lua', requires = { 'kosayoda/nvim-lightbulb' }}
 	use 'kyazdani42/nvim-web-devicons'	-- Icons
 	-- =============================================================================
 end)
