@@ -36,6 +36,8 @@ return require('packer').startup(function(use)
 		end
 	}
 
+	use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
+
 	use { "folke/which-key.nvim", config = function() require("which-key").setup {} end }
 	-- =============================================================================
 	-- =============================================================================
