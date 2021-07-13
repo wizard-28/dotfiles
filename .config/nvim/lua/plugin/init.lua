@@ -14,4 +14,3 @@
 
 require('plugin.plugins')	-- Plugin list
 require('plugin.telescope')	-- Telescope
---require('plugin.treesitter')
