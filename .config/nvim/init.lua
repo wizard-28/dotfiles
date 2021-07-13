@@ -13,5 +13,4 @@
 -- =============================================================================
 
 require('general') 	-- Bootstrap general stuff and helper functions
-require('plugin')	-- Plugins
-require('ftplugin')	-- LSPs
+require('plugins')
