@@ -16,12 +16,16 @@
 -- Global variables
 -- =============================================================================
 g.mapleader = ' '		-- Map leader to <Space>
+g.gruvbox_material_enable_italic = true
+g.gruvbox_material_enable_bold = true
+g.gruvbox_material_better_performance = true
+g.gruvbox_material_palette = 'original'
 -- =============================================================================
 
 -- =============================================================================
 -- Settings
 -- =============================================================================
-cmd 'colorscheme gruvbox'		-- Gruvbox baby
+cmd 'colorscheme gruvbox-material'	-- Gruvbox baby
 opt.termguicolors = true		-- Needed by gruvbox.lua
 opt.completeopt = 'menuone,noselect'	-- Needed by nvim-compe
 

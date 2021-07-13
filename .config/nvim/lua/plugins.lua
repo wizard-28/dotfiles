@@ -18,7 +18,7 @@ return require('packer').startup(function(use)
 	use 'wbthomason/packer.nvim'		-- Packer itself
 
 	-- General
-	use { "npxbr/gruvbox.nvim", requires = { "rktjmp/lush.nvim" }}
+	use 'sainnhe/gruvbox-material'
 	use {
 		'nvim-telescope/telescope.nvim',
 		config = [[require('plugin.telescope')]],
