@@ -39,7 +39,7 @@ return require('packer').startup(function(use)
 		requires = { 'nvim-lua/plenary.nvim' },
 		config = [[require('plugin.gitsigns')]]
 	}
-	use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
+	use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim', config = function() require('neogit').setup {} end }
 
 	-- LSP
 	use { 'neovim/nvim-lspconfig', config = [[require('plugin.lsp')]] }
