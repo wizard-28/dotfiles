@@ -91,7 +91,6 @@ if [ $defaultBrowser = "brave" ]; then
 	process "Installing brave..."
 	sudo apt-get install brave-browser -y > /dev/null
 	success "Brave installed" "installing brave"
-
 fi
 
 

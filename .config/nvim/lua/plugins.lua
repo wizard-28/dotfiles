@@ -32,6 +32,7 @@ return require('packer').startup(function(use)
 		config = [[require('plugin.hop')]]
 	}
 	use { 'lambdalisue/suda.vim', setup = function() g.suda_smart_edit = true end }
+	use { 'lukas-reineke/indent-blankline.nvim', event = 'BufReadPre', setup = [[require('plugin.blankline')]] }
 
 	-- Git
 	use {
