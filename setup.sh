@@ -122,6 +122,7 @@ sudo zramctl /dev/zram0 --size 750M > /dev/null
 sudo zramctl /dev/zram1 --size 750M > /dev/null
 sudo zramctl /dev/zram2 --size 750M > /dev/null
 sudo zramctl /dev/zram3 --size 750M > /dev/null
+sudo sysctl -w kernel.sysrq=1
 success "Installed QOL programs" "installing QOL programs"
 
 
