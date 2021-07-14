@@ -20,6 +20,9 @@ font:
     family: JetBrainsMonoNL Nerd Font Mono
     style: Regular
 
+  italic:
+    family: JetBrainsMonoNL Nerd Font Mono
+    style: Italic
 
   # Point size
   size: 12.0
