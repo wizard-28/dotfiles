@@ -21,16 +21,36 @@ return require('packer').startup(function(use)
 	use 'sainnhe/gruvbox-material'
 	use {
 		'nvim-telescope/telescope.nvim',
+		setup = function()
+			-- Register it here, as we are lazy loading it
+			wk.register({
+				['<leader>f'] = { name = '+Fuzzy Find' }
+			})
+		end,
 		config = function()
 			require('plugin.telescope')
 		end,
-		cmd = { 'Telescope' },
-		keys = { '<leader>f' },
-		requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'},
-			{'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }}
+		cmd = 'Telescope',
+		keys = '<leader>f',
+		requires = {
+			{
+				'nvim-lua/popup.nvim',
+				opt = true
+			},
+			{
+				'nvim-lua/plenary.nvim',
+				opt = true
+			},
+			{
+				'nvim-telescope/telescope-fzf-native.nvim',
+				opt = true,
+				run = 'make'
+			}
+		}
 	}
 	use {
 		"folke/which-key.nvim",
+		event = 'BufReadPost',
 		config = function()
 			require("which-key").setup {}
 		end
@@ -47,7 +67,7 @@ return require('packer').startup(function(use)
 	}
 	use {
 		'lukas-reineke/indent-blankline.nvim',
-		event = 'BufReadPre',
+		event = 'BufWinEnter',
 		setup = function()
 			require('plugin.blankline')
 		end
@@ -63,7 +83,7 @@ return require('packer').startup(function(use)
 	-- Git
 	use {
 		'lewis6991/gitsigns.nvim',
-		event = 'BufReadPre',
+		event = 'BufReadPost',
 		requires = 'nvim-lua/plenary.nvim',
 		config = function()
 			require('plugin.gitsigns')
@@ -83,9 +103,11 @@ return require('packer').startup(function(use)
 		'neovim/nvim-lspconfig',
 		event = 'BufReadPre',
 		requires = {{
-			'kabouzeid/nvim-lspinstall'
+			'kabouzeid/nvim-lspinstall',
+			cmd = 'LspInstall'
 		}, {
 				'glepnir/lspsaga.nvim',
+				event = 'BufReadPost',
 				config = function()
 					require('plugin.lspsaga')
 				end
@@ -101,7 +123,10 @@ return require('packer').startup(function(use)
 			require('plugin.compe')
 		end
 	}
-	use 'L3MON4D3/LuaSnip'
+	use {
+		'L3MON4D3/LuaSnip',
+		event = 'InsertEnter',
+	}
 	use {
 		'mfussenegger/nvim-lint',
 		ft = 'sh',
@@ -111,7 +136,7 @@ return require('packer').startup(function(use)
 	}
 	use {
 		'nvim-treesitter/nvim-treesitter',
-		ft = { 'sh', 'lua' },
+		event = 'BufReadPost',
 		run = ':TSUpdate',
 		config = function()
 			require('plugin.treesitter')

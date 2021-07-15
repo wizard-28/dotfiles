@@ -16,7 +16,6 @@
 -- Key maps
 -- =============================================================================
 wk.register({
-	['<leader>f'] = { name = '+Fuzzy Find' },
 	['<leader>ff'] = { '<cmd>Telescope find_files<cr>', 'Find file' },
 	['<leader>fg'] = { '<cmd>Telescope git_files<cr>', 'Find git file' },
 	['<leader>fr'] = { '<cmd>Telescope live_grep<cr>', 'Grep every line in current directory' },
@@ -55,8 +54,6 @@ require('telescope').setup {
 		}
 	}
 }
-
-require('telescope').load_extension('fzf')
 
 local M = {}
 M.search_dotfiles = function()
