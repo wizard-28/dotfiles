@@ -11,35 +11,27 @@
 -- URL: https://github.com/wizard-28/dotfiles/
 -- License: MIT
 -- =============================================================================
-
-cmd 'packadd packer.nvim'
-
 return require('packer').startup(function(use)
-	use { 'wbthomason/packer.nvim', opt = true }		-- Packer itself
+	use { 'wbthomason/packer.nvim' }
 
 	-- General
 	use 'sainnhe/gruvbox-material'
 	use {
 		'nvim-telescope/telescope.nvim',
-		setup = function()
-			-- Register it here, as we are lazy loading it
-			wk.register({
-				['<leader>f'] = { name = '+Fuzzy Find' }
-			})
-		end,
 		config = function()
 			require('plugin.telescope')
 		end,
 		cmd = 'Telescope',
+		module = { 'telescope', 'telescope.builtin' },
 		keys = '<leader>f',
 		requires = {
 			{
 				'nvim-lua/popup.nvim',
-				opt = true
+				module = 'popup',
 			},
 			{
 				'nvim-lua/plenary.nvim',
-				opt = true
+				module = 'plenary',
 			},
 			{
 				'nvim-telescope/telescope-fzf-native.nvim',
@@ -50,9 +42,9 @@ return require('packer').startup(function(use)
 	}
 	use {
 		"folke/which-key.nvim",
-		event = 'BufReadPost',
+		event = 'BufReadPre',
 		config = function()
-			require("which-key").setup {}
+			require('bindings.init')
 		end
 	}
 	use {
@@ -104,7 +96,6 @@ return require('packer').startup(function(use)
 		event = 'BufReadPre',
 		requires = {{
 			'kabouzeid/nvim-lspinstall',
-			cmd = 'LspInstall'
 		}, {
 				'glepnir/lspsaga.nvim',
 				event = 'BufReadPost',

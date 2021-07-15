@@ -5,31 +5,7 @@ local on_attach = function(client, bufnr)
 
 	buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-	-- Mappings.
-	local opts = { noremap=true, silent=true }
-	buf_set_keymap('n', 'gh', '<Cmd>Lspsaga lsp_finder<CR>', opts)
-	buf_set_keymap('n', 'gd', '<Cmd>Lspsaga preview_definition<CR>', opts)
-
-	buf_set_keymap('n', '<leader>ca', '<Cmd>Lspsaga code_action<CR>', opts)
-
-	buf_set_keymap('n', 'K', '<Cmd>Lspsaga hover_doc<CR>', opts)
-	buf_set_keymap('n', '<C-f>', '<Cmd>lua require(\'lspsaga.action\').smart_scroll_with_saga(1)<CR>', opts)
-	buf_set_keymap('n', '<C-b>', '<Cmd>lua require(\'lspsaga.action\').smart_scroll_with_saga(-1)<CR>', opts)
-
-	buf_set_keymap('n', 'gs', '<cmd>Lspsaga signature_help<CR>', opts)
-	buf_set_keymap('n', 'gr', '<cmd>Lspsaga rename<CR>', opts)
-
-	buf_set_keymap('n', '<leader>cd', '<cmd>Lspsaga show_line_diagnostics<CR>', opts)
-
-	buf_set_keymap('n', '[e', '<cmd>Lspsaga diagnostic_jump_prev<CR>', opts)
-	buf_set_keymap('n', ']e', '<cmd>Lspsaga diagnostic_jump_next<CR>', opts)
-
-	-- Set some keybinds conditional on server capabilities
-	if client.resolved_capabilities.document_formatting then
-		buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-	elseif client.resolved_capabilities.document_range_formatting then
-		buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
-	end
+	require('bindings.lsp').Set_Keymaps(client)
 
 	-- Set autocommands conditional on server_capabilities
 	if client.resolved_capabilities.document_highlight then
@@ -90,10 +66,6 @@ local function setup_servers()
 
 	-- get all installed servers
 	local servers = require'lspinstall'.installed_servers()
-	-- ... and add manually installed servers
-	table.insert(servers, "clangd")
-	table.insert(servers, "sourcekit")
-
 	for _, server in pairs(servers) do
 		local config = make_config()
 
@@ -101,13 +73,6 @@ local function setup_servers()
 		if server == "lua" then
 			config.settings = lua_settings
 		end
-		if server == "sourcekit" then
-			config.filetypes = {"swift", "objective-c", "objective-cpp"}; -- we don't want c and cpp!
-		end
-		if server == "clangd" then
-			config.filetypes = {"c", "cpp"}; -- we don't want objective-c and objective-cpp!
-		end
-
 		require'lspconfig'[server].setup(config)
 	end
 end
