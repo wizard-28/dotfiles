@@ -116,7 +116,7 @@ success "Cleaned up" "cleaning up"
 # Install QOL programs
 process "Installing QOL programs..."
 # HACK: work-around for https://github.com/sharkdp/bat/issues/938
-sudo apt-get install -o Dpkg::Options::="--force-overwrite" bat ripgrep fzf zram-config zram-tools gnome-tweaks -y > /dev/null
+sudo apt-get install -o Dpkg::Options::="--force-overwrite" bat ripgrep fzf zram-config zram-tools gnome-tweaks gstreamer1.0-plugins-bad -y > /dev/null
 sudo swapoff -a > /dev/null
 sudo zramctl /dev/zram0 --size 750M > /dev/null
 sudo zramctl /dev/zram1 --size 750M > /dev/null
@@ -131,7 +131,7 @@ checkpoint "Proceeding with window manager installation and configuring them"
 process "Installing dependencies for swaywm"
 sudo add-apt-repository ppa:nschloe/sway-backports -y > /dev/null
 sudo apt-get update > /dev/null
-sudo apt-get install light grim slurp htop wl-clipboard mako-notifier xwayland libgdk-pixbuf2.0-common libgdk-pixbuf2.0-bin gir1.2-gdkpixbuf-2.0 python3-pip -y > /dev/null
+sudo apt-get install light grim slurp playerctl htop wl-clipboard mako-notifier xwayland libgdk-pixbuf2.0-common libgdk-pixbuf2.0-bin gir1.2-gdkpixbuf-2.0 python3-pip -y > /dev/null
 pip3 install autotiling > /dev/null
 sudo echo -e 'EDITOR="nvim"\nMOZ_ENABLE_WAYLAND=1' | sudo tee -a /etc/environment > /dev/null
 success "Installed dependencies for swaywm" "installing dependencies for swaywm"
