@@ -26,11 +26,7 @@ return require('packer').startup(function(use)
 			{'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }}
 	}
 	use { "folke/which-key.nvim", config = function() require("which-key").setup {} end }
-	use {
-		'phaazon/hop.nvim',
-		as = 'hop',
-		config = [[require('plugin.hop')]]
-	}
+	use 'ggandor/lightspeed.nvim'
 	use { 'lambdalisue/suda.vim', setup = function() g.suda_smart_edit = true end }
 	use { 'lukas-reineke/indent-blankline.nvim', event = 'BufReadPre', setup = [[require('plugin.blankline')]] }
 
