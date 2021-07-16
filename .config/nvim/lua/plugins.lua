@@ -127,10 +127,12 @@ return require('packer').startup(function(use)
 	}
 	use {
 		'nvim-treesitter/nvim-treesitter',
-		event = 'BufReadPost',
 		run = ':TSUpdate',
 		config = function()
 			require('plugin.treesitter')
-		end
+		end,
+		requires = {
+			'nvim-treesitter/nvim-treesitter-textobjects',
+		}
 	}
 end)
