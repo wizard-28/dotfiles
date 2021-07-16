@@ -112,11 +112,17 @@ return require('packer').startup(function(use)
 		event = 'InsertEnter',
 		config = function()
 			require('plugin.compe')
-		end
-	}
-	use {
-		'L3MON4D3/LuaSnip',
-		event = 'InsertEnter',
+		end,
+		requires = {
+			'L3MON4D3/LuaSnip',
+			'rafamadriz/friendly-snippets',
+			{
+				'windwp/nvim-autopairs',
+				config = {
+					require('nvim-autopairs').setup {}
+				}
+			}
+		}
 	}
 	use {
 		'mfussenegger/nvim-lint',
