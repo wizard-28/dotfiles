@@ -22,7 +22,7 @@ return require('packer').startup(function(use)
 			require('plugin.telescope')
 		end,
 		cmd = 'Telescope',
-		module = { 'telescope', 'telescope.builtin' },
+		module = { 'telescope', 'plugin.telescope' },
 		keys = '<leader>f',
 		requires = {
 			{
