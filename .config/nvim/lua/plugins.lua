@@ -100,7 +100,7 @@ return require('packer').startup(function(use)
 				'glepnir/lspsaga.nvim',
 				event = 'BufReadPost',
 				config = function()
-					require('plugin.lspsaga')
+					require('lspsaga').init_lsp_saga()
 				end
 			}},
 		config = function()
