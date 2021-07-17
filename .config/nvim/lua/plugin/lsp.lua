@@ -48,7 +48,9 @@ local function setup_servers()
 
 		-- language specific config
 		if server == "lua" then
-			config = require("lua-dev").setup({})
+			config = require("lua-dev").setup({
+				lspconfig = make_config()
+			})
 		end
 		require'lspconfig'[server].setup(config)
 	end
