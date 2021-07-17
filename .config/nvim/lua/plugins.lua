@@ -131,15 +131,21 @@ return require('packer').startup(function(use)
 	use {
 		'neovim/nvim-lspconfig',
 		event = 'BufReadPre',
-		requires = {{
+		requires = {
 			'kabouzeid/nvim-lspinstall',
-		}, {
+			{
 				'glepnir/lspsaga.nvim',
 				event = 'BufReadPost',
 				config = function()
 					require('lspsaga').init_lsp_saga()
 				end
-			}},
+			},
+			{
+				'folke/lua-dev.nvim',
+				module = 'lua-dev',
+				ft = 'lua'
+			}
+		},
 		config = function()
 			require('plugin.lsp')
 		end
