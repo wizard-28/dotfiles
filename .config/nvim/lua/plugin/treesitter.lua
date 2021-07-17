@@ -53,5 +53,8 @@ ts.setup {
 				["[]"] = "@class.outer",
 			},
 		},
+	},
+	matchup = {
+		enable = true
 	}
 }

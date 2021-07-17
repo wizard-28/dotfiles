@@ -95,6 +95,13 @@ return require('packer').startup(function(use)
 		end
 	}
 	use {
+		'andymass/vim-matchup',
+		event = 'CursorMoved',
+		setup = function()
+			g.loaded_matchit = 1
+		end
+	}
+	use {
 		'beauwilliams/statusline.lua',
 		requires = {
 			'kosayoda/nvim-lightbulb',
