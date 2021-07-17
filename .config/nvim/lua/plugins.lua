@@ -11,6 +11,18 @@
 -- URL: https://github.com/wizard-28/dotfiles/
 -- License: MIT
 -- =============================================================================
+
+-- =============================================================================
+-- Bootstrap packer
+-- =============================================================================
+local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+
+if fn.empty(fn.glob(install_path)) > 0 then
+  fn.system({'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path})
+  cmd 'packadd packer.nvim'
+end
+-- =============================================================================
+
 return require('packer').startup(function(use)
 	use { 'wbthomason/packer.nvim' }
 
