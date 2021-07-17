@@ -116,7 +116,7 @@ success "Cleaned up" "cleaning up"
 # Install QOL programs
 process "Installing QOL programs..."
 # HACK: work-around for https://github.com/sharkdp/bat/issues/938
-sudo apt-get install -o Dpkg::Options::="--force-overwrite" lua5.3 bat ripgrep fzf zram-config zram-tools gnome-tweaks gstreamer1.0-plugins-bad -y > /dev/null
+sudo apt-get install -o Dpkg::Options::="--force-overwrite" lua5.3 bat ripgrep fd-find fzf zram-config zram-tools gnome-tweaks gstreamer1.0-plugins-bad -y > /dev/null
 sudo swapoff -a > /dev/null
 sudo zramctl /dev/zram0 --size 750M > /dev/null
 sudo zramctl /dev/zram1 --size 750M > /dev/null
