@@ -115,7 +115,7 @@ return require('packer').startup(function(use)
 		event = 'BufReadPost',
 		requires = 'nvim-lua/plenary.nvim',
 		config = function()
-			require('plugin.gitsigns')
+			require('gitsigns').setup()
 		end
 	}
 	use {
