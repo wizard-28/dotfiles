@@ -81,6 +81,13 @@ return require('packer').startup(function(use)
 		end
 	}
 	use {
+		'mbbill/undotree',
+		cmd = 'UndotreeToggle',
+		setup = function()
+			g.undotree_WindowLayout = 4
+		end
+	}
+	use {
 		'lukas-reineke/indent-blankline.nvim',
 		event = 'BufWinEnter',
 		setup = function()
