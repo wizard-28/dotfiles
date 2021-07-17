@@ -3,4 +3,5 @@ wk.setup {}
 
 require('bindings.telescope')
 require('bindings.undotree')
-require("bindings.gitsigns")
+require('bindings.gitsigns')
+require('bindings.dashboard')

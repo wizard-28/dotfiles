@@ -65,7 +65,7 @@ return require('packer').startup(function(use)
 	}
 	use {
 		"folke/which-key.nvim",
-		event = 'BufReadPre',
+		event = 'VimEnter',
 		config = function()
 			require('bindings.init')
 		end
@@ -99,6 +99,12 @@ return require('packer').startup(function(use)
 		event = 'CursorMoved',
 		setup = function()
 			g.loaded_matchit = 1
+		end
+	}
+	use {
+		'glepnir/dashboard-nvim',
+		setup = function()
+			require('plugin.dashboard')
 		end
 	}
 	use {
