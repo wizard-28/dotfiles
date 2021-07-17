@@ -204,7 +204,7 @@ success "Installed pacstall" "installing pacstall"
 
 # Install neofetch
 process "Installing neofetch..."
-sudo pacstall -P -I neofetch > /dev/null
+sudo pacstall -P -I fastfetch-git > /dev/null
 success "Installed neofetch" "installing neofetch"
 
 # Install bemenu
