@@ -27,7 +27,18 @@ return require('packer').startup(function(use)
 	use { 'wbthomason/packer.nvim' }
 
 	-- General
-	use 'sainnhe/gruvbox-material'
+	use {
+		'sainnhe/gruvbox-material',
+		setup = function()
+			g.gruvbox_material_enable_italic = true
+			g.gruvbox_material_enable_bold = true
+			g.gruvbox_material_better_performance = true
+			g.gruvbox_material_palette = 'original'
+		end,
+		config = function()
+			cmd 'colorscheme gruvbox-material'
+		end
+	}
 	use {
 		'nvim-telescope/telescope.nvim',
 		config = function()
