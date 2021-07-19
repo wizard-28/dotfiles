@@ -21,5 +21,5 @@ require('lint').linters_by_ft = {
 -- =============================================================================
 -- Set autocmd
 -- =============================================================================
-cmd 'au BufEnter,TextChanged,TextChangedI *.sh lua require(\'lint\').try_lint()'
+cmd 'au BufEnter,TextChanged,TextChangedI * lua require(\'lint\').try_lint()'
 -- =============================================================================

@@ -114,7 +114,6 @@ return require('packer').startup(function(use)
 			'kyazdani42/nvim-web-devicons'
 		}
 	}
-
 	-- Git
 	use {
 		'lewis6991/gitsigns.nvim',
@@ -127,9 +126,13 @@ return require('packer').startup(function(use)
 	use {
 		'TimUntersberger/neogit',
 		cmd = 'Neogit',
-		requires = 'nvim-lua/plenary.nvim',
+		requires = { 'nvim-lua/plenary.nvim', 'sindrets/diffview.nvim' },
 		config = function()
-			require('neogit').setup {}
+			require('neogit').setup {
+				integrations = {
+					diffview = true
+				}
+			}
 		end
 	}
 
