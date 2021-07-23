@@ -1,5 +1,7 @@
 #fastfetch
 
+fish_vi_cursor
+
 # Aliases
 alias l="exa --icons -F"
 alias la="exa --icons -aF"
