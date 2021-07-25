@@ -1,32 +1,46 @@
-#!/bin/env osh
+#!/bin/env oil
 
 var defaultBrowser = 'firefox'
 
 # Color functions
 proc error(msg) {
-  echo -e "\e[91m$msg\e[0m"
+	tput setaf 1
+	write -- $msg
+	tput sgr 0
 }
 
 proc process(msg) {
-  echo -e "\e[93m$msg\e[0m"
+	tput setaf 3
+	write -- $msg
+	tput sgr 0
 }
 
 proc checkpoint(msg) {
-  echo -e "\e[42m\e[97m$msg\e[0m"
+	tput setab 2
+	tput setaf 7
+	write -- $msg
+	tput sgr 0
 }
 
-proc success(smsg, emsg) {
-	if [ $? -eq 0 ]; then
-		echo -e "\e[92m$smsg successfully! \e[0m"
+proc success(msg) {
+	tput setaf 2
+	write -- $msg
+	tput sgr 0
+}
+
+# Status function
+proc status(smsg, emsg) {
+	if [[ $? -eq 0 ]]; then
+		success "$smsg successfully!"
 	else
-		error "Error occurred while $emsg!"
+		error 'Error occurred while $emsg!'
 	fi
 }
 
 checkpoint "Starting preconfigurations..."
 # Timezone and sources changes
 process "Changing the timezone to Asia/Kolkata..."
-sudo timedatectl set-timezone Asia/Kolkata
-success "Timezone changed" "changing timezone"
+fork { sudo timedatectl set-timezone Asia/Kolkata }
+status "Timezone changed" "changing timezone"
 
 # vim:set ft=sh
