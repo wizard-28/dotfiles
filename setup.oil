@@ -1,7 +1,5 @@
 #!/bin/env oil
 
-const defaultBrowser = 'firefox'
-
 # Color functions
 proc error(msg) {
 	tput setaf 1
@@ -31,7 +29,7 @@ proc success(msg) {
 # Status function
 proc status(smsg, emsg) {
 	if [[ $? -eq 0 ]]; then
-		success "$smsg successfully!"
+		success "$smsg statusfully!"
 	else
 		error 'Error occurred while $emsg!'
 	fi
@@ -45,8 +43,8 @@ fork {
 	status "Timezone changed" "changing timezone"
 }
 
-# Update apt-get sources
-process "Changing the apt-get sources to the fastest ones..."
+# Update apt sources
+process "Changing the apt sources to the fastest ones..."
 sudo echo "deb mirror://mirrors.ubuntu.com/mirrors.txt focal main restricted universe multiverse
 deb mirror://mirrors.ubuntu.com/mirrors.txt focal-updates main restricted universe multiverse
 deb mirror://mirrors.ubuntu.com/mirrors.txt focal-backports main restricted universe multiverse
@@ -56,18 +54,27 @@ deb http://apt.pop-os.org/proprietary focal main" | sudo tee /etc/apt/sources.li
 status "Sources updated" "updating sources"
 
 # Update sources
-process "Updating apt-get sources..."
-sudo apt-get update > /dev/null
+process "Updating apt sources..."
+sudo apt update > /dev/null
 status "Sources updated" "updating the sources"
 
 # Update apt
-process "Updating apt..."
-sudo apt-get install apt -y > /dev/null
-status "Apt updated" "updating apt"
+process "Installing apt-fast..."
+#sudo add-apt-repository ppa:apt-fast/stable -y > /dev/null
+sudo apt install apt-fast -y > /dev/null
+status "Apt-fast installed" "installing apt-fast"
+
+# Install all softwares
+process "Installing all softwares..."
+#sudo add-apt-repository ppa:nschloe/sway-backports -y > /dev/null
+#sudo add-apt-repository ppa:nschloe/waybar -y > /dev/null
+#sudo apt-add-repository ppa:fish-shell/release-3 -y > /dev/null
+#sudo add-apt-repository ppa:neovim-ppa/unstable -y > /dev/null
+# HACK: work-around for https://github.com/sharkdp/bat/issues/938
+sudo apt-fast install -o Dpkg::Options::="--force-overwrite" apt xutils-dev firefox lua5.3 bat ripgrep fd-find fzf zram-config zram-tools gnome-tweaks gstreamer1.0-plugins-bad light grim slurp playerctl htop wl-clipboard mako-notifier xwayland libgdk-pixbuf2.0-common libgdk-pixbuf2.0-bin gir1.2-gdkpixbuf-2.0 python3-pip sway swayidle waybar fonts-font-awesome shellcheck alacritty fish neovim
 
 # Link the dotfiles
 process "Install lndir and install all configuration files"
-sudo apt-get install xutils-dev -y > /dev/null
 fork {
 	mkdir -p ~/.doom.d ~/.weechat ~/.SpaceVim.d 
 	lndir -silent ~/dotfiles/.config/ ~/.config/
@@ -80,41 +87,174 @@ fork { ln -sf ~/dotfiles/.bash_aliases ~/.bash_aliases }
 fork { ln -sf ~/dotfiles/.config/starship/starship.toml ~/.config/starship.toml }
 status "Installed lndir and all configuration files" "installing lndir and all configuration files"
 
+# Purge bloat
 fork {
-	checkpoint "Proceeding with browser installation..."
-	# Install firefox
-	if [[ $defaultBrowser = "firefox" ]]; then
-		process "Installing firefox..."
-		sudo apt-get install firefox -y > /dev/null
-		status "Firefox installed" " installing firefox"
-	fi
+	checkpoint "Proceeding with bloat purge..."
+	# Purge libreoffice
+	process "Purging libreoffice..."
+	sudo apt purge libreoffice-common -y > /dev/null
+	status "Purged libreoffice" "purging libreoffice"
 
-	# Install brave
-	if [[ $defaultBrowser = "brave" ]]; then
-		fork {
-			process "Installing dependencies for brave..."
-			sudo apt-get install apt-transport-https curl gnupg -y > /dev/null
-			status "Dependencies for brave installed" "installing dependencies for brave"
-		}
-
-		fork {
-			process "Installing brave signing key..."
-			curl -s https://brave-browser-apt-release.s3.brave.com/brave-core.asc | sudo apt-key --keyring /etc/apt/trusted.gpg.d/brave-browser-release.gpg add - > /dev/null
-			status "Brave signing key installed" "installing brave signing key"
-		}
-
-		fork {
-			process "Adding brave repository..."
-			echo "deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main" | sudo tee /etc/apt/sources.list.d/brave-browser-release.list > /dev/null
-		}	status "Brave repository added" "adding brave repository"
-
-		wait
-		process "Installing brave..."
-		sudo apt-get update > /dev/null
-		sudo apt-get install brave-browser -y > /dev/null
-		status "Brave installed" "installing brave"
-	fi
+	# Autoremove and purge
+	process "Cleaning up..."
+	sudo apt autoremove --purge -y > /dev/null
+	status "Cleaned up" "cleaning up"
 }
+
+# Install QOL programs
+fork {
+	process "Installing QOL programs..."
+	sudo swapoff -a > /dev/null
+	sudo zramctl /dev/zram0 --size 750M > /dev/null
+	sudo zramctl /dev/zram1 --size 750M > /dev/null
+	sudo zramctl /dev/zram2 --size 750M > /dev/null
+	sudo zramctl /dev/zram3 --size 750M > /dev/null
+	sudo zramswap start > /dev/null
+}
+fork { sudo sysctl -w kernel.sysrq=1 }
+fork {
+	sudo curl -sfLo "/bin/z" https://raw.githubusercontent.com/skywind3000/z.lua/master/z.lua 
+	sudo chmod +x /bin/z
+	status "Installed QOL programs" "installing QOL programs"
+}
+
+fork {
+	checkpoint "Proceeding with window manager installation and configuring them"
+	# Install dependencies for swaywm
+	process "Installing dependencies for swaywm"
+	pip3 install autotiling > /dev/null
+	# fork { sudo echo -e 'EDITOR="nvim"\nMOZ_ENABLE_WAYLAND=1' | sudo tee -a /etc/environment > /dev/null }
+	status "Installed dependencies for swaywm" "installing dependencies for swaywm"
+}
+
+# Install swaylock-effects
+fork {
+	process "Installing swaylock-effects..."
+	sudo cp /media/pop-os/S\ BASAK/swaylock /usr/local/bin/
+	sudo chmod a+x+s /usr/local/bin/swaylock
+	status "Installed swaylock-effects" "installing swaylock-effects"
+}
+
+# Install fonts
+fork {
+	process "Installing fonts for waybar..."
+	fc-cache -f -v > /dev/null
+	status "Fonts installed for waybar" "installing fonts for waybar"
+}
+
+checkpoint "Proceeding with programming utility installation..."
+
+# Install fonts for alacritty
+fork {
+	process "Installing JetBrains NL Mono Nerd Font for alacritty..."
+	fork { sudo curl -sfLo "/usr/share/fonts/truetype/JetBrains Mono NL Regular Nerd Font Complete Mono.ttf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/JetBrainsMono/NoLigatures/Regular/complete/JetBrains%20Mono%20NL%20Regular%20Nerd%20Font%20Complete%20Mono.ttf }
+	fork { sudo curl -sfLo "/usr/share/fonts/truetype/JetBrains Mono NL Italic Nerd Font Complete Mono.ttf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/JetBrainsMono/NoLigatures/Italic/complete/JetBrains%20Mono%20NL%20Italic%20Nerd%20Font%20Complete%20Mono.ttf }
+	status "Installed JetBrains NL Mono Nerd Font for alacritty" "installing JetBrains NL Mono Nerd Font for alacritty"
+}
+# Install fish
+fork {
+	process "Installing fish..."
+	chsh -s /usr/bin/fish
+	status "Installed fish" "installing fish"
+}
+
+# Install starship
+fork {
+	process "Installing starship..."
+	yes y | sudo sh -c "$(curl -fsSL https://starship.rs/install.sh)"
+	status "Installed starship" "installing starship"
+}
+
+# Install pacstall
+fork {
+	process "Installing pacstall..."
+	sudo bash -c "$(curl -fsSL https://git.io/JsADh || wget -q https://git.io/JsADh -O -)"
+	status "Installed pacstall" "installing pacstall"
+
+	# Install neofetch
+	process "Installing neofetch..."
+	sudo pacstall -P -I fastfetch-git > /dev/null
+	status "Installed neofetch" "installing neofetch"
+
+	# Install bemenu
+	process "Installing bemenu..."
+	yes 2 | sudo pacstall -P -I bemenu-git > /dev/null
+	status "Installed bemenu" "installing bemenu"
+}
+fork {
+	# Purge dmenu
+	process "Purging dmenu..."
+	sudo apt purge suckless-tools -y > /dev/null
+	status "Purged dmenu" "purging dmenu"
+}
+
+# Install exa
+fork {
+	process "Installing exa..."
+	mkdir -p exa/
+	cd exa/ {
+		curl -s https://api.github.com/repos/ogham/exa/releases/latest | grep "browser_download_url" | grep "exa-linux-x86_64-v" | cut -d '"' -f 4 | wget -qi -
+		unzip -q exa*
+		sudo mv bin/exa /usr/local/bin
+		sudo mv man/exa.1 /usr/share/man/man1/
+		sudo mv completions/exa.fish /usr/share/fish/vendor_completions.d/
+		sudo mv completions/exa.bash /etc/bash_completion.d/
+	}
+	rm -r exa/
+	status "Installed exa" "installing exa"
+}
+
+# Install clipman
+fork {
+	process "Installing clipman..."
+	sudo cp /media/pop-os/S\ BASAK/clipman /bin/
+	sudo chmod 775 /bin/clipman
+	status "Installed clipman" "installing clipman"
+}
+
+checkpoint "Proceeding with git configuration..."
+# Add SSH and GPG Keys
+fork {
+	process "Adding SSH and GPG keys..."
+	sudo cp -r /media/pop-os/S\ BASAK/.ssh/ ~
+	sudo cp /media/pop-os/S\ BASAK/github.asc ~/github.asc
+	sudo chown "$USER":"$USER" ~/.ssh/id_ed25519*
+	chmod 600 ~/.ssh/id_ed25519
+	chmod 644 ~/.ssh/id_ed25519.pub
+	ssh-agent
+	ssh-add ~/.ssh/id_ed25519
+	gpg --import ~/github.asc
+	status "SSH and GPG keys added" "adding SSH and GPG Keys"
+}
+
+# Configure git
+fork {
+	process "Configuring git..."
+	git config --global user.name "Sourajyoti Basak"
+	git config --global user.email "wiz28@protonmail.com"
+	git config --global user.signingkey BB60A61ECF3DCDDB
+	git config --global commit.gpgsign true
+	# Aliases
+	git config --global alias.logline "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+	# Setup SSH
+	git remote set-url origin git@github.com:wizard-28/dotfiles.git
+	status "Git configured" "configuring git"
+}
+
+
+checkpoint "Proceeding with multimedia installations..."
+# Install Codecs
+process "Installing pipewire..."
+sudo add-apt-repository ppa:pipewire-debian/pipewire-upstream -y > /dev/null
+sudo apt update > /dev/null
+sudo apt install libfdk-aac1 libldacbt-{abr,enc}2 libopenaptx0 -y > /dev/null
+sudo apt install gstreamer1.0-pipewire libpipewire-0.3-{0,dev,modules} libspa-0.2-{bluetooth,dev,jack,modules} pipewire{,-{audio-client-libraries,bin,locales,tests}} -y > /dev/null
+systemctl --user --now disable  pulseaudio.{socket,service} > /dev/null
+systemctl --user mask pulseaudio > /dev/null
+systemctl --user --now enable pipewire{,-pulse}{.socket,.service} pipewire-media-session.service > /dev/null
+status "Pipewire installed" "installing pipewire"
+
+checkpoint "Setup complete. Enjoy your laptop now! "
 
 wait
 
