@@ -1,5 +1,9 @@
 #!/bin/env oil
 
+shopt -u parse_equals
+shopt -u simple_echo
+shopt -u strict_errexit
+
 # Color functions
 proc error(msg) {
 	tput setaf 1
@@ -43,6 +47,27 @@ fork {
 	status "Timezone changed" "changing timezone"
 }
 
+sudo echo '#!/bin/bash
+
+i=0
+tput sc
+while fuser /var/lib/dpkg/lock >/dev/null 2>&1 ; do
+    case $(($i % 4)) in
+        0 ) j="-" ;;
+        1 ) j="\\" ;;
+        2 ) j="|" ;;
+        3 ) j="/" ;;
+    esac
+    tput rc
+    echo -en "\r[$j] Waiting for other software managers to finish..." 
+    sleep 0.5
+    ((i=i+1))
+done 
+
+/usr/bin/apt-get "$@"
+' | sudo tee /usr/local/sbin/apt-get > /dev/null
+sudo chmod +x /usr/local/sbin/apt-get
+
 # Update apt sources
 process "Changing the apt sources to the fastest ones..."
 sudo echo "deb mirror://mirrors.ubuntu.com/mirrors.txt focal main restricted universe multiverse
@@ -55,13 +80,13 @@ status "Sources updated" "updating sources"
 
 # Update sources
 process "Updating apt sources..."
-sudo apt update > /dev/null
+sudo apt-get update > /dev/null
 status "Sources updated" "updating the sources"
 
 # Update apt
 process "Installing apt-fast..."
 #sudo add-apt-repository ppa:apt-fast/stable -y > /dev/null
-sudo apt install apt-fast -y > /dev/null
+sudo apt-get install apt-fast -y > /dev/null
 status "Apt-fast installed" "installing apt-fast"
 
 # Install all softwares
@@ -70,8 +95,32 @@ process "Installing all softwares..."
 #sudo add-apt-repository ppa:nschloe/waybar -y > /dev/null
 #sudo apt-add-repository ppa:fish-shell/release-3 -y > /dev/null
 #sudo add-apt-repository ppa:neovim-ppa/unstable -y > /dev/null
+#sudo add-apt-repository ppa:pipewire-debian/pipewire-upstream -y > /dev/null
 # HACK: work-around for https://github.com/sharkdp/bat/issues/938
-sudo apt-fast install -o Dpkg::Options::="--force-overwrite" apt xutils-dev firefox lua5.3 bat ripgrep fd-find fzf zram-config zram-tools gnome-tweaks gstreamer1.0-plugins-bad light grim slurp playerctl htop wl-clipboard mako-notifier xwayland libgdk-pixbuf2.0-common libgdk-pixbuf2.0-bin gir1.2-gdkpixbuf-2.0 python3-pip sway swayidle waybar fonts-font-awesome shellcheck alacritty fish neovim
+sudo apt-fast install -o Dpkg::Options::="--force-overwrite" apt xutils-dev firefox lua5.3 bat ripgrep fd-find fzf zram-config zram-tools gnome-tweaks gstreamer1.0-plugins-bad light grim slurp playerctl htop wl-clipboard mako-notifier xwayland libgdk-pixbuf2.0-common libgdk-pixbuf2.0-bin gir1.2-gdkpixbuf-2.0 python3-pip sway swayidle waybar fonts-font-awesome shellcheck alacritty fish neovim libfdk-aac1 libldacbt-{abr,enc}2 libopenaptx0 gstreamer1.0-pipewire libpipewire-0.3-{0,dev,modules} libspa-0.2-{bluetooth,dev,jack,modules} pipewire{,-{audio-client-libraries,bin,locales,tests}}
+
+# Install fish
+process "Installing fish..."
+chsh -s /usr/bin/fish
+status "Installed fish" "installing fish"
+
+# Install starship
+process "Installing starship..."
+#yes y | sudo sh -c "$(curl -fsSL https://starship.rs/install.sh)"
+status "Installed starship" "installing starship"
+
+checkpoint "Proceeding with git configuration..."
+# Add SSH and GPG Keys
+process "Adding SSH and GPG keys..."
+sudo cp -r /media/pop-os/S\ BASAK/.ssh/ ~
+sudo cp /media/pop-os/S\ BASAK/github.asc ~/github.asc
+sudo chown "$USER":"$USER" ~/.ssh/id_ed25519*
+chmod 600 ~/.ssh/id_ed25519
+chmod 644 ~/.ssh/id_ed25519.pub
+eval "$(ssh-agent)"
+ssh-add ~/.ssh/id_ed25519
+gpg --import ~/github.asc
+status "SSH and GPG keys added" "adding SSH and GPG Keys"
 
 # Link the dotfiles
 process "Install lndir and install all configuration files"
@@ -92,12 +141,12 @@ fork {
 	checkpoint "Proceeding with bloat purge..."
 	# Purge libreoffice
 	process "Purging libreoffice..."
-	sudo apt purge libreoffice-common -y > /dev/null
+	sudo apt-get libreoffice-common -y > /dev/null
 	status "Purged libreoffice" "purging libreoffice"
 
 	# Autoremove and purge
 	process "Cleaning up..."
-	sudo apt autoremove --purge -y > /dev/null
+	sudo apt-get autoremove --purge -y > /dev/null
 	status "Cleaned up" "cleaning up"
 }
 
@@ -151,19 +200,6 @@ fork {
 	fork { sudo curl -sfLo "/usr/share/fonts/truetype/JetBrains Mono NL Italic Nerd Font Complete Mono.ttf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/JetBrainsMono/NoLigatures/Italic/complete/JetBrains%20Mono%20NL%20Italic%20Nerd%20Font%20Complete%20Mono.ttf }
 	status "Installed JetBrains NL Mono Nerd Font for alacritty" "installing JetBrains NL Mono Nerd Font for alacritty"
 }
-# Install fish
-fork {
-	process "Installing fish..."
-	chsh -s /usr/bin/fish
-	status "Installed fish" "installing fish"
-}
-
-# Install starship
-fork {
-	process "Installing starship..."
-	yes y | sudo sh -c "$(curl -fsSL https://starship.rs/install.sh)"
-	status "Installed starship" "installing starship"
-}
 
 # Install pacstall
 fork {
@@ -171,8 +207,8 @@ fork {
 	sudo bash -c "$(curl -fsSL https://git.io/JsADh || wget -q https://git.io/JsADh -O -)"
 	status "Installed pacstall" "installing pacstall"
 
-	# Install neofetch
-	process "Installing neofetch..."
+	# Install fastfetch
+	process "Installing fastfetch..."
 	sudo pacstall -P -I fastfetch-git > /dev/null
 	status "Installed neofetch" "installing neofetch"
 
@@ -180,11 +216,10 @@ fork {
 	process "Installing bemenu..."
 	yes 2 | sudo pacstall -P -I bemenu-git > /dev/null
 	status "Installed bemenu" "installing bemenu"
-}
-fork {
+
 	# Purge dmenu
 	process "Purging dmenu..."
-	sudo apt purge suckless-tools -y > /dev/null
+	sudo apt-get purge suckless-tools -y > /dev/null
 	status "Purged dmenu" "purging dmenu"
 }
 
@@ -212,20 +247,7 @@ fork {
 	status "Installed clipman" "installing clipman"
 }
 
-checkpoint "Proceeding with git configuration..."
-# Add SSH and GPG Keys
-fork {
-	process "Adding SSH and GPG keys..."
-	sudo cp -r /media/pop-os/S\ BASAK/.ssh/ ~
-	sudo cp /media/pop-os/S\ BASAK/github.asc ~/github.asc
-	sudo chown "$USER":"$USER" ~/.ssh/id_ed25519*
-	chmod 600 ~/.ssh/id_ed25519
-	chmod 644 ~/.ssh/id_ed25519.pub
-	ssh-agent
-	ssh-add ~/.ssh/id_ed25519
-	gpg --import ~/github.asc
-	status "SSH and GPG keys added" "adding SSH and GPG Keys"
-}
+
 
 # Configure git
 fork {
@@ -245,10 +267,6 @@ fork {
 checkpoint "Proceeding with multimedia installations..."
 # Install Codecs
 process "Installing pipewire..."
-sudo add-apt-repository ppa:pipewire-debian/pipewire-upstream -y > /dev/null
-sudo apt update > /dev/null
-sudo apt install libfdk-aac1 libldacbt-{abr,enc}2 libopenaptx0 -y > /dev/null
-sudo apt install gstreamer1.0-pipewire libpipewire-0.3-{0,dev,modules} libspa-0.2-{bluetooth,dev,jack,modules} pipewire{,-{audio-client-libraries,bin,locales,tests}} -y > /dev/null
 systemctl --user --now disable  pulseaudio.{socket,service} > /dev/null
 systemctl --user mask pulseaudio > /dev/null
 systemctl --user --now enable pipewire{,-pulse}{.socket,.service} pipewire-media-session.service > /dev/null
@@ -258,4 +276,4 @@ checkpoint "Setup complete. Enjoy your laptop now! "
 
 wait
 
-# vim:set ft=sh
+# vim:set ft=sh:
