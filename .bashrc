@@ -111,7 +111,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
-neofetch --ascii_colors 4 15  --colors 4 4 4 4 4 15
+fastfetch
 eval "$(starship init bash)"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
