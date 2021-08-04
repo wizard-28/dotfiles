@@ -188,3 +188,8 @@ exec mako
 exec wl-paste -t text --watch clipman store 1>> /home/pop-os/log.clipman 2>&1 &
 exec clipman restore
 exec nm-applet
+
+input type:keyboard {
+    xkb_layout us(cmk_ed_us),us
+    xkb_options grp:rctrl_toggle
+}
