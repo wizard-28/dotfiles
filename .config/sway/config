@@ -190,6 +190,6 @@ exec clipman restore
 exec nm-applet
 
 input type:keyboard {
-    xkb_layout us(cmk_ed_us),us
+    xkb_layout us(tarmak1__e),us
     xkb_options grp:rctrl_toggle
 }
