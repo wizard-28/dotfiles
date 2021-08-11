@@ -163,11 +163,15 @@ bindsym $mod+r mode "resize"
 # Hotkeys
 #
 # Configuration hotkeys
-bindsym $mod+Shift+s exec emacs ~/dotfiles/.config/sway/config
-bindsym $mod+Shift+w exec emacs ~/dotfiles/.config/waybar/config
+bindsym $mod+Shift+s exec $term -e $EDITOR ~/dotfiles/.config/sway/config
+bindsym $mod+Shift+w exec $term -e $EDITOR ~/dotfiles/.config/waybar/config
+
+# Scripts
+bindsym $mod+u exec ~/dotfiles/.config/sway/scripts/emoji/emoji.sh
 
 # Application hotkeys
 bindsym Mod1+b exec firefox
+
 # Status Bar:
 bar {
     swaybar_command waybar
