@@ -3,7 +3,8 @@ ts.setup {
 	ensure_installed = {
 		"bash",
 		"lua",
-		"c"
+		"c",
+		"fish"
 	},
 	highlight = {
 		enable = true,					-- Enable highlighting
