@@ -95,6 +95,13 @@ return require('packer').startup(function(use)
 		end
 	}
 	use {
+		'a-vrma/black-nvim',
+		ft = 'python',
+		config = function()
+			cmd("au FileType python au BufWritePre <buffer> call Black()")
+		end
+	}
+	use {
 		'andymass/vim-matchup',
 		event = 'CursorMoved',
 		setup = function()

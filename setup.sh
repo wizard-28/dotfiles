@@ -163,10 +163,20 @@ success "Fonts installed for waybar" "installing fonts for waybar"
 
 
 checkpoint "Proceeding with programming utility installation..."
+# Install node
+process "Installing node..."
+curl -sL install-node.now.sh/lts | sudo bash
+success "Node installed" "installing node"
+
 # Install shellcheck
 process "Installing shellcheck..."
 sudo apt-get install shellcheck -y > /dev/null
 success "Shellcheck installed" "installing shellcheck"
+
+# Install python utils
+process "Installing python utils..."
+sudo pip install pynvim black > /dev/null
+success "Python utils installed" "installing python utils"
 
 # Install alacritty
 process "Installing alacritty..."
