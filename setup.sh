@@ -175,7 +175,7 @@ success "Shellcheck installed" "installing shellcheck"
 
 # Install python utils
 process "Installing python utils..."
-sudo pip install pynvim black > /dev/null
+sudo pip3 install pynvim black pipenv > /dev/null
 success "Python utils installed" "installing python utils"
 
 # Install alacritty
