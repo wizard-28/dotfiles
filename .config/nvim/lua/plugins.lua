@@ -142,6 +142,7 @@ return require('packer').startup(function(use)
 			}
 		end
 	}
+	use 'samoshkin/vim-mergetool'
 
 	-- LSP
 	use {

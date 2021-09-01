@@ -266,6 +266,9 @@ git config --global user.name "Sourajyoti Basak"
 git config --global user.email "wiz28@protonmail.com"
 git config --global user.signingkey BB60A61ECF3DCDDB
 git config --global commit.gpgsign true
+git config --global merge.conflictstyle diff3
+git config --global merge.tool vim_mergetool
+git config --global mergetool.vim_mergetool.cmd 'nvim -c "MergetoolStart" "$MERGED" "$BASE" "$LOCAL" "$REMOTE"'
 # Aliases
 git config --global alias.logline "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 # Setup SSH
