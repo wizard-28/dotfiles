@@ -57,11 +57,11 @@ max_parallel_downloads=10" | sudo tee -a /etc/dnf/dnf.conf > /dev/null
 
 info "Adding extra repos"
 sudo rpm --import https://keys.openpgp.org/vks/v1/by-fingerprint/034F7776EF5E0C613D2F7934D29FBD5F93C0CFC3
-sudo dnf config-manager --add-repo https://rpm.librewolf.net > /dev/null
-sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-"$(rpm -E %fedora)".noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-"$(rpm -E %fedora)".noarch.rpm -y > /dev/null
+sudo dnf config-manager --add-repo https://rpm.librewolf.net
+sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-"$(rpm -E %fedora)".noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-"$(rpm -E %fedora)".noarch.rpm -y
 
 info "Installing configuration files"
-sudo dnf install --refresh lndir -y > /dev/null
+sudo dnf install --refresh lndir -y
 (
     mkdir -p ~/.doom.d/ ~/.weechat/ ~/.librewolf/
     lndir -silent ~/dotfiles/.config/ ~/.config/
@@ -88,7 +88,7 @@ sudo dnf install --setopt=install_weak_deps=False -y \
     librewolf bemenu git-delta \
     bat exa ripgrep fd-find fzf zoxide \
     libnotify jq light playerctl htop \
-    libseat swayidle wlr-randr azote swaylock clipman grimshot dunst \
+    libseat swaybg swayidle wlr-randr azote swaylock clipman grimshot dunst \
     https://ftp.lysator.liu.se/pub/opensuse/tumbleweed/repo/oss/x86_64/libxcb-errors0-1.0-1.25.x86_64.rpm \
     waybar fontawesome-fonts \
     ShellCheck \
@@ -147,7 +147,7 @@ curl -fsSL https://starship.rs/install.sh | sudo sh
 # Stage 3: Purge bloat
 # =============================================================================
 stage "Purging bloat..."
-sudo dnf remove firefox libreoffice* -y > /dev/null &
+sudo dnf remove firefox libreoffice* -y &
 # =============================================================================
 
 # =============================================================================
@@ -157,8 +157,8 @@ stage "Starting postconfigurations..."
 
 info "Changing default shell"
 (
-    yes "$(cat /media/pop-os/SBASAK/passwd)" | sudo passwd "$(logname)" > /dev/null 2>&1
-    yes "$(cat /media/pop-os/SBASAK/passwd)" | chsh -s /usr/bin/fish > /dev/null 2>&1
+    yes "$(cat ${PERSISTENT_STORAGE_LOCATION}/passwd)" | sudo passwd "$(logname)" > /dev/null 2>&1
+    yes "$(cat ${PERSISTENT_STORAGE_LOCATION}/passwd)" | chsh -s /usr/bin/fish > /dev/null 2>&1
 ) &
 
 info "Setting up ZSWAP"
