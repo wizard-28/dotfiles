@@ -127,7 +127,7 @@ info "Installing CURL applications"
     | jq ".assets[0].browser_download_url" \
     | cut -d '"' -f 2 \
     | wget -qi -
-    tar -xf -- *.tar.gz > /dev/null
+    tar -xf ./*.tar.gz > /dev/null
 
     sudo mv Hyprland /usr/bin/
     sudo mv hyprctl /usr/bin
