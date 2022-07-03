@@ -97,13 +97,6 @@ sudo dnf install --setopt=install_weak_deps=False -y \
     neovim gcc-c++ npm \
     python3-pip
 
-info "Installing GIT applications"
-(
-    git clone --depth 1 https://github.com/foundObjects/zram-swap.git > /dev/null
-    cd zram-swap && sudo ./install.sh > /dev/null
-    cd ../ && rm -rf zram-swap
-) &
-
 info "Installing PIP applications"
 sudo pip3 install \
     pynvim black \
@@ -159,16 +152,6 @@ info "Changing default shell"
 (
     yes "$(cat ${PERSISTENT_STORAGE_LOCATION}/passwd)" | sudo passwd "$(logname)" > /dev/null 2>&1
     yes "$(cat ${PERSISTENT_STORAGE_LOCATION}/passwd)" | chsh -s /usr/bin/fish > /dev/null 2>&1
-) &
-
-info "Setting up ZSWAP"
-(
-    sudo swapoff -a > /dev/null
-    sudo zramctl /dev/zram0 --size 750M > /dev/null 2>&1
-    sudo zramctl /dev/zram1 --size 750M > /dev/null 2>&1
-    sudo zramctl /dev/zram2 --size 750M > /dev/null 2>&1
-    sudo zramctl /dev/zram3 --size 750M > /dev/null 2>&1
-    sudo zramswap start > /dev/null 2>&1
 ) &
 
 info "Setting up git"
