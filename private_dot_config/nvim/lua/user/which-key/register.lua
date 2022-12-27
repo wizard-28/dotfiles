@@ -17,6 +17,16 @@ return {
         p = { "<cmd>Telescope project<cr>", "Open Projects" },
         t = { "<cmd>Telescope colorscheme<cr>", "Switch Themes" },
       },
+      n = {
+        name = "Neotest",
+        n = { function() require("neotest").run.run() end, "Run neartest test" },
+        f = { function() require("neotest").run.run(vim.fn.expand "%") end, "Test current file" },
+        d = { function() require("neotest").run.run { strategy = "dap" } end, "Debug the neartest test" },
+        S = { function() require("neotest").run.stop() end, "Stop the nearest test" },
+        a = { function() require("neotest").run.attach() end, "Attach to the nearest test" },
+        s = { function() require("neotest").summary.toggle() end, "Toggle summary panel" },
+        o = { function() require("neotest").output_panel.toggle() end, "Toggle output panel" },
+      },
     },
     s = {
       name = "Surf",

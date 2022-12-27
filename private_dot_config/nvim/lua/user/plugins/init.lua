@@ -85,6 +85,24 @@ return {
     config = function() require "user.plugins.nvim-various-textobjs" end,
   },
 
+  -- Testing
+  ["nvim-neotest/neotest"] = {
+    module = "neotest",
+    requires = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      {
+        "rouge8/neotest-rust",
+        module = "neotest-rust",
+      },
+      {
+        "nvim-neotest/neotest-python",
+        module = "neotest-python",
+      },
+    },
+    config = function() require "user.plugins.neotest" end,
+  },
+
   -- Markdown preview
   ["toppair/peek.nvim"] = {
     ft = "markdown",
