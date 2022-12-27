@@ -57,7 +57,7 @@ return {
         },
         r = {
           function() require("syntax-tree-surfer").targeted_jump { "for_statement" } end,
-          "Go to If Statements",
+          "Go to For Statements",
         },
         w = {
           function() require("syntax-tree-surfer").targeted_jump { "white_statement" } end,
