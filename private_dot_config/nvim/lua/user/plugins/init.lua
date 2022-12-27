@@ -39,6 +39,10 @@ return {
     after = "telescope.nvim",
     config = function() require "user.plugins.telescope-project" end,
   },
+  ["debugloop/telescope-undo.nvim"] = {
+    after = "telescope.nvim",
+    config = function() require "user.plugins.telescope-undo" end,
+  },
   ["nvim-treesitter/nvim-treesitter-textobjects"] = { after = "nvim-treesitter" },
   -- ["lvimuser/lsp-inlayhints.nvim"] = {
   --   module = "lsp-inlayhints",

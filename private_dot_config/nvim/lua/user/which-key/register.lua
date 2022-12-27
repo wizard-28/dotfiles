@@ -9,6 +9,9 @@ return {
         t = { function() require("neogen").generate { type = "type" } end, "Type" },
         F = { function() require("neogen").generate { type = "file" } end, "File" },
       },
+      f = {
+        u = { "<cmd>Telescope undo<cr>", "Open undo history" },
+      },
       g = {
         g = { "<cmd>Neogit<cr>", "Git status" },
       },
