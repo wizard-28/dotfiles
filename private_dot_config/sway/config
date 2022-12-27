@@ -1,0 +1,268 @@
+# =============================================================================
+#  __      __________   ______
+# /  \    /  \_____  \ /  __  \
+# \   \/\/   //  ____/ >      <
+#  \        //       \/   --   \
+#   \__/\  / \_______ \______  /
+#        \/          \/      \/
+# config --- config file for sway
+# Copyright (c) 2021 Sourajyoti Basak
+# Author: Sourajyoti Basak < wiz28@protonmail.com >
+# URL: https://github.com/wizard-28/dotfiles/
+# License: MIT
+# =============================================================================
+
+# =============================================================================
+# Variables
+# =============================================================================
+set $mod Mod4
+set $term x-terminal-emulator
+set $laptop eDP-1
+set $menu LD_LIBRARY_PATH=/usr/local/lib/ bemenu-run  -H 38 --hb "#D81860FF" --hf "#CACACAFF" | xargs swaymsg exec --
+# =============================================================================
+
+# =============================================================================
+# Audio Configuration
+# =============================================================================
+# Pulse Audio Controls
+bindsym --locked XF86AudioRaiseVolume exec --no-startup-id pactl -- set-sink-volume 0 +5%
+bindsym --locked XF86AudioLowerVolume exec --no-startup-id pactl -- set-sink-volume 0 -5%
+bindsym --locked XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
+
+# Mic Controls
+bindsym --locked Ctrl+6 exec --no-startup-id amixer -c 0 set Capture toggle
+bindsym --locked Ctrl+8 exec --no-startup-id amixer -c 0 set Capture 5%+
+bindsym --locked Ctrl+7 exec --no-startup-id amixer -c 0 set Capture 5%-
+
+# Playerctl controls
+bindsym --locked XF86AudioPlay exec playerctl play-pause
+bindsym --locked XF86AudioNext exec playerctl next
+bindsym --locked XF86AudioPrev exec playerctl previous
+
+# MPD mode
+mode "mpd" {
+	bindsym $mod+i       exec --no-startup-id notify-send -a mpd "Now playing" "$(mpc current -f '[[%artist% - ]%title%]|[%file%]')"
+	bindsym $mod+o       exec --no-startup-id notify-send -a mpd "Now playing" "$(mpc -q prev) $(mpc current -f '[[%artist% - ]%title%]|[%file%]')"
+	bindsym $mod+p       exec --no-startup-id notify-send -a mpd "Now playing" "$(mpc -q next) $(mpc current -f '[[%artist% - ]%title%]|[%file%]')"
+	bindsym space        exec --no-startup-id notify-send -a mpd "Music Player Daemon" "State: $(mpc toggle | grep -oP '(?<=\\[).+?(?=\\])')"
+	bindsym $mod+r       exec --no-startup-id notify-send -a mpd "Music Player Daemon" "Repeat: $(mpc repeat | cut -d":" -f 3 | cut -d" " -f 2 | tail -n 1)"
+	bindsym $mod+z       exec --no-startup-id notify-send -a mpd "Music Player Daemon" "Random: $(mpc random | cut -d":" -f 4 | cut -d" " -f 2 | tail -n 1)"
+	bindsym $mod+y       exec --no-startup-id notify-send -a mpd "Music Player Daemon" "Single: $(mpc single | cut -d":" -f 5 | cut -d" " -f 2 | tail -n 1)"
+	bindsym $mod+Shift+r exec --no-startup-id notify-send -a mpd "Music Player Daemon" "Consume: $(mpc consume | cut -d":" -f 6 | cut -d" " -f 2 | tail -n 1)"
+	bindsym $mod+u       exec --no-startup-id notify-send -a mpd "Music Player Daemon" "Updating database$(mpc -q update)"
+	bindsym $mod+Left    exec --no-startup-id notify-send -a mpd "Music Player Daemon" "Seeked back 10 secs\nPlayed: $(mpc seek -00:00:10 | grep -oP '(?<=\\().+?(?=\\))')"
+	bindsym $mod+Right   exec --no-startup-id notify-send -a mpd "Music Player Daemon" "Seeked forward 10 secs\nPlayed: $(mpc seek +00:00:10 | grep -oP '(?<=\\().+?(?=\\))')"
+	bindsym $mod+Up      exec --no-startup-id notify-send -a mpd "Music Player Daemon" "Seeked forward 1 min\nPlayed: $(mpc seek +00:01:00 | grep -oP '(?<=\\().+?(?=\\))')"
+	bindsym $mod+Down    exec --no-startup-id notify-send -a mpd "Music Player Daemon" "Seeked back 1 min\nPlayed: $(mpc seek -00:01:00 | grep -oP '(?<=\\().+?(?=\\))')"
+	bindsym $mod+minus   exec --no-startup-id notify-send -a mpd "Music Player Daemon" "Volume: $(mpc volume -5 | cut -d":" -f 2 | cut -d" " -f 2 | tail -n 1)"
+	bindsym $mod+equal   exec --no-startup-id notify-send -a mpd "Music Player Daemon" "Volume: $(mpc volume +5 | cut -d":" -f 2 | cut -d" " -f 2 | tail -n 1)"
+
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+	bindsym $mod+m mode "default"
+}
+
+bindsym $mod+m mode "mpd"
+# =============================================================================
+
+# =============================================================================
+# Utility Configuration
+# =============================================================================
+# Screenshot
+bindsym --locked $mod+Shift+Print exec slurp | grim -g - - | curl --form 'file=@-' http://0x0.st | wl-copy && notify-send "screenshot uploaded and url copied to clipboard"
+bindsym Print exec grimshot --notify save screen
+bindsym Ctrl+Print exec grimshot --notify copy screen
+bindsym Shift+Print exec grimshot --notify save area
+bindsym Ctrl+Shift+Print exec grimshot --notify copy area
+
+# Clipboard
+bindsym $mod+H exec LD_LIBRARY_PATH=/usr/local/lib/ clipman pick -t bemenu
+bindsym $mod+Mod1+H exec clipman clear --all
+bindsym Ctrl+$mod+H exec LD_LIBRARY_PATH=/usr/local/lib/ clipman clear -t bemenu
+
+# Brightness
+bindsym --locked XF86MonBrightnessUp exec sudo light -S "$(light -G | awk '{ print int(($1 + .72) * 1.4) }')"
+bindsym --locked XF86MonBrightnessDown exec sudo light -S "$(light -G | awk '{ print int($1 / 1.4) }')"
+# =============================================================================
+
+# =============================================================================
+# Input Configuration
+# =============================================================================
+input "2:7:SynPS/2_Synaptics_TouchPad" {
+	dwt enabled
+		tap enabled
+		middle_emulation enabled
+}
+
+input type:keyboard {
+	xkb_options grp:rctrl_toggle,caps:backspace
+}
+# =============================================================================
+
+# =============================================================================
+# Sway Configuration
+# =============================================================================
+default_border pixel 4
+
+gaps inner 5
+gaps outer 3
+
+smart_borders on
+smart_gaps on
+
+bindsym $mod+Return exec $term
+bindsym $mod+d exec $menu
+
+bindsym $mod+q kill
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+
+bindsym $mod+l exec swaylock
+bindsym $mod+Mod1+l exec systemctl suspend
+
+bindswitch --reload --locked lid:on output $laptop disable
+bindswitch --reload --locked lid:off output $laptop enable
+
+floating_modifier $mod normal
+
+bar {
+	swaybar_command waybar
+}
+# =============================================================================
+
+# =============================================================================
+# Window Management
+# =============================================================================
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+# =============================================================================
+
+# =============================================================================
+# Workspace Management
+# =============================================================================
+bindsym $mod+Tab workspace back_and_forth
+
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+# Bind to numpad keys
+bindsym $mod+KP_1 workspace 1
+bindsym $mod+KP_2 workspace 2
+# NOTE: My KP_3 key doesn't work
+bindsym $mod+KP_Add workspace 3
+bindsym $mod+KP_4 workspace 4
+bindsym $mod+KP_5 workspace 5
+bindsym $mod+KP_6 workspace 6
+bindsym $mod+KP_7 workspace 7
+bindsym $mod+KP_8 workspace 8
+bindsym $mod+KP_9 workspace 9
+bindsym $mod+KP_0 workspace 10
+
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+
+bindsym $mod+Shift+KP_End move container to workspace 1
+bindsym $mod+Shift+KP_Down move container to workspace 2
+bindsym $mod+Shift+KP_Add move container to workspace 3
+bindsym $mod+Shift+KP_Left move container to workspace 4
+bindsym $mod+Shift+KP_Begin move container to workspace 5
+bindsym $mod+Shift+KP_Right move container to workspace 6
+bindsym $mod+Shift+KP_Home move container to workspace 7
+bindsym $mod+Shift+KP_Up move container to workspace 8
+bindsym $mod+Shift+KP_Prior move container to workspace 9
+bindsym $mod+Shift+KP_Insert move container to workspace 10
+# =============================================================================
+
+# =============================================================================
+# Layout Configuration
+# =============================================================================
+bindsym $mod+b splith
+bindsym $mod+v splitv
+
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+bindsym $mod+f fullscreen
+
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle # Swap focus between the tiling area and the floating area
+bindsym $mod+a focus parent # Move focus to the parent container
+
+exec_always --no-startup-id autotiling
+# =============================================================================
+
+# =============================================================================
+# Scratchpad
+# =============================================================================
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+# =============================================================================
+
+# =============================================================================
+# Resizing Configuration
+# =============================================================================
+mode "resize" {
+	bindsym Left resize shrink width 10px
+	bindsym Down resize grow height 10px
+	bindsym Up resize shrink height 10px
+	bindsym Right resize grow width 10px
+
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+# =============================================================================
+
+# =============================================================================
+# Shortcuts
+# =============================================================================
+bindsym $mod+Shift+s exec $term -e $EDITOR ~/dotfiles/.config/sway/config
+bindsym $mod+Shift+w exec $term -e $EDITOR ~/dotfiles/.config/waybar/config
+
+bindsym $mod+u exec ~/dotfiles/.config/sway/scripts/emoji/emoji.sh
+
+bindsym Mod1+b exec librewolf
+# =============================================================================
+
+# =============================================================================
+# Startup Applications
+exec GDK_BACKEND=wayland
+exec CLUTTER_BACKEND=wayland
+exec dunst
+exec mpd
+exec wl-paste -t text --watch clipman store
+exec clipman restore
+exec nm-applet
+exec ~/.azotebg
+exec swayidle -w \
+	     timeout 300 'swaylock' \
+	     timeout 600 'swaymsg "output * dpms off"' \
+	     resume 'swaymsg "output * dpms on"' \
+	     timeout 610 'systemctl suspend' \
+	     before-sleep 'swaylock'
+# =============================================================================

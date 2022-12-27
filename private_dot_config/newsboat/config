@@ -1,0 +1,56 @@
+# =============================================================================
+#  __      __________   ______
+# /  \    /  \_____  \ /  __  \
+# \   \/\/   //  ____/ >      <
+#  \        //       \/   --   \
+#   \__/\  / \_______ \______  /
+#        \/          \/      \/
+# config --- config for newsboat
+# Copyright (c) 2021-present Sourajyoti Basak
+# Author: Sourajyoti Basak < wiz28@protonmail.com >
+# URL: https://github.com/wizard-28/dotfiles/
+# License: MIT
+# =============================================================================
+
+# Auto load feeds at startup
+auto-reload yes
+
+# Load feeds in 4 different threads
+reload-threads 4
+
+# Time elapsed between each auto-reload
+reload-time 15
+
+# Notify unread feeds
+notify-always yes
+
+# Notifications
+notify-program "fgrep -q '0 unread' <<< "$1" || notify-send --urgency=LOW "$1""
+
+# Sort feeds by title
+feed-sort-order title
+
+# Not show read feeds
+show-read-feeds no
+
+# Not show read articles
+show-read-articles no
+
+# Molokai theme
+
+# colors
+color background          white   default
+color listnormal          white   default
+color listnormal_unread   magenta default bold
+color listfocus           color14 color208 bold
+color listfocus_unread    color14 color208 bold
+color info                green   color0
+color article             white   default
+
+# highlights
+highlight article "^(Feed|Link):.*$" color208 default bold
+highlight article "^(Title|Date|Author):.*$" red default bold
+highlight article "https?://[^ ]+" color208 default underline
+highlight article "\\[[0-9]+\\]" magenta default bold
+highlight article "\\[image\\ [0-9]+\\]" magenta default bold
+highlight feedlist "^─.*$" color61 color235 bold

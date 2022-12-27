@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+pkill swaybg
+swaybg -o 'eDP-1' -i "/usr/share/backgrounds/fedora-workstation/cherryblossom_dark.jpg" -m fill &

@@ -1,0 +1,345 @@
+#+title: Doom Emacs Config
+#+description: Config file for DOOM Emacs
+#+author: Sourajyoti Basak
+#+email: wiz28@protonmail.com
+#+property: header-args :tangle config.el
+
+* Table of Contents :toc:
+- [[#setup][Setup]]
+- [[#general-settings][General Settings]]
+  - [[#credentials][Credentials]]
+  - [[#fonts][Fonts]]
+  - [[#theme][Theme]]
+  - [[#dashboard][Dashboard]]
+  - [[#line-numbers][Line numbers]]
+- [[#package-settings][Package Settings]]
+  - [[#doom-modeline][Doom Modeline]]
+  - [[#lsp-mode][LSP Mode]]
+  - [[#org-mode][Org Mode]]
+  - [[#just-mode][Just Mode]]
+  - [[#projectile][Projectile]]
+  - [[#elcord][Elcord]]
+  - [[#evil-snipe][Evil Snipe]]
+  - [[#tree-sitter][Tree-sitter]]
+  - [[#topsy][Topsy]]
+  - [[#spell-fu][Spell Fu]]
+  - [[#rainbow-mode][Rainbow Mode]]
+  - [[#yuck-mode][Yuck Mode]]
+  - [[#meson-mode][Meson Mode]]
+
+* Setup
+
+Set file-local variables for config files.
+
+#+begin_src emacs-lisp
+;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
+#+end_src
+
+#+begin_src emacs-lisp :tangle packages.el
+;; -*- no-byte-compile: t; -*-
+;;; $DOOMDIR/packages.el
+#+end_src
+
+* General Settings
+
+** Credentials
+
+Set my username and email address to help various utilities identify me.
+
+#+begin_src emacs-lisp
+(setq user-full-name "Sourajyoti Basak"
+      user-mail-address "wiz28@protonmail.com")
+#+end_src
+
+** Fonts
+
+JetBrains Mono is the best programming font. Fight me!
+
+#+begin_src emacs-lisp
+(setq doom-font (font-spec :family "JetBrainsMono Nerd Font Mono" :size 15)
+      doom-variable-pitch-font (font-spec :family "Ubuntu" :size 15)
+      doom-big-font (font-spec :family "JetBrainsMono Nerd Font Mono" :size 22))
+#+end_src
+
+*** Ligatures
+
+Turn off certain extra ligature symbols that I don't like.
+
+#+begin_src emacs-lisp
+(plist-put! +ligatures-extra-symbols
+  :and           nil
+  :or            nil
+  :for           nil
+  :some          nil
+  :return        nil
+  :yield         nil
+  :not           nil
+  :true          nil
+  :false         nil
+  :int           nil
+  :float         nil
+  :str           nil
+  :bool          nil
+  :list          nil
+  :tuple         nil
+)
+#+end_src
+
+** Theme
+
+I prefer [[https://github.com/marko-cerovac/material.nvim][Material Theme's Deep Ocean variant]], but it's not ported to
+emacs yet. So for now the `palenight` variant will have to do.
+
+#+begin_src emacs-lisp
+(setq doom-theme 'doom-palenight)
+#+end_src
+
+** Dashboard
+
+Set my profile picture as the banner.
+
+[[./splash.png]]
+
+#+begin_src emacs-lisp
+(setq fancy-splash-image (concat (getenv "DOOMDIR") "splash.png"))
+#+end_src
+
+** Line numbers
+
+Relative line numbers are the best!
+
+#+begin_src emacs-lisp
+(setq display-line-numbers-type 'relative)
+#+end_src
+
+* Package Settings
+
+** Doom Modeline
+
+A fancy and fast mode-line inspired by minimalism design.
+
+*** Display major mode icons
+
+#+begin_src emacs-lisp
+(setq doom-modeline-major-mode-icon t)
+#+end_src
+
+** LSP Mode
+
+#+begin_src emacs-lisp
+(after! lsp-mode
+  (setq lsp-rust-analyzer-server-display-inlay-hints t))
+#+end_src
+
+*** DAP Mode
+
+#+begin_src emacs-lisp
+(after! dap-mode
+  (require 'dap-gdb-lldb)
+  (dap-register-debug-template "Rust::GDB Run Configuration"
+                               (list :type "gdb"
+                                     :request "launch"
+                                     :name "GDB::Run"
+                                     :gdbpath "rust-gdb"
+                                     :target nil
+                                     :dap-compilation "cargo build"
+                                     :dap-compilation-dir "${workspaceFolder}"
+                                     :cwd "${workspaceFolder}")))
+#+end_src
+
+** Org Mode
+
+A GNU Emacs major mode for keeping notes, authoring documents, computational
+notebooks, literate programming, maintaining to-do lists, planning projects, and
+more — in a fast and effective plain text system.
+
+*** Default directory
+
+Set the default org directory.
+
+#+begin_src emacs-lisp
+(setq org-directory "~/org/")
+#+end_src
+
+*** Ricing
+
+General tweaks for a better looking org-mode.
+
+#+begin_src emacs-lisp
+(setq org-hide-emphasis-markers t
+      org-startup-with-inline-images t
+      org-image-actual-width '(300))
+#+end_src
+
+**** Font
+
+Set appropriate colors and fonts. Copied from [[https://gitlab.com/dwt1/dotfiles/-/blob/master/.config/doom/config.org#fonts][DistroTube's DOOM Emacs config.]]
+
+#+begin_src emacs-lisp
+(after! org
+  (dolist
+      (face
+       '((org-level-1 1.7 "#82aaff" ultra-bold)
+         (org-level-2 1.6 "#c792ea" extra-bold)
+         (org-level-3 1.5 "#c3e88d" bold)
+         (org-level-4 1.4 "#ffcb6b" semi-bold)
+         (org-level-5 1.3 "#a3f7ff" normal)
+         (org-level-6 1.2 "#e1acff" normal)
+         (org-level-7 1.1 "#f07178" normal)
+         (org-level-8 1.0 "#ddffa7" normal)))
+    (set-face-attribute (nth 0 face) nil :font doom-variable-pitch-font :weight (nth 3 face) :height (nth 1 face) :foreground (nth 2 face)))
+  (set-face-attribute 'org-table nil :font doom-font :weight 'normal :height 1.0 :foreground "#bfafdf"))
+#+end_src
+
+*** Org-sticky-header
+
+#+begin_src emacs-lisp :tangle packages.el
+(package! org-sticky-header)
+#+end_src
+
+#+begin_src emacs-lisp
+(use-package! org-sticky-header
+  :hook (org-mode . org-sticky-header-mode))
+#+end_src
+
+
+*** Org-auto-tangle
+
+An Emacs package to automatically tangle org-mode files on save!
+
+#+begin_src emacs-lisp :tangle packages.el
+(package! org-auto-tangle)
+#+end_src
+
+#+begin_src emacs-lisp
+(use-package! org-auto-tangle
+  :hook (org-mode . org-auto-tangle-mode)
+  :config (setq org-auto-tangle-default t))
+#+end_src
+
+** Just Mode
+
+Adds Emacs integration for [[https://github.com/casey/just][casey/just]] - Just a command runner.
+
+#+begin_src emacs-lisp :tangle packages.el
+(package! just-mode)
+#+end_src
+
+*** Justl
+
+Major mode for driving just files.
+
+#+begin_src emacs-lisp :tangle packages.el
+(package! justl)
+#+end_src
+
+** Projectile
+
+Project navigation and management library for Emacs.
+
+*** Project Search Path
+
+Set the project search path to my coding directory.
+
+#+begin_src emacs-lisp
+(setq projectile-project-search-path '("~/code/"))
+#+end_src
+
+** Elcord
+
+Discord Rich Presence / Gamebridge support for Emacs!
+
+#+begin_src emacs-lisp :tangle packages.el
+(package! elcord)
+#+end_src
+
+#+begin_src emacs-lisp
+(use-package! elcord
+  :config (elcord-mode))
+#+end_src
+
+** Evil Snipe
+
+2-char searching ala vim-sneak & vim-seek, for evil-mode.
+
+*** Snipe scope
+
+Dictates the scope of the searches. Set it to the whole *visible* buffer.
+
+#+begin_src emacs-lisp
+(use-package! evil-snipe
+  :config (setq evil-snipe-scope 'visible))
+#+end_src
+
+** Tree-sitter
+
+Treesitter bindings for Emacs.
+
+#+begin_src emacs-lisp
+(global-tree-sitter-mode)
+(add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
+#+end_src
+
+** Topsy
+
+#+begin_src emacs-lisp :tangle packages.el
+(package! topsy)
+#+end_src
+
+#+begin_src emacs-lisp
+(use-package! topsy :hook (prog-mode . topsy-mode))
+#+end_src
+
+** Spell Fu
+
+Fast and light spelling highlighter.
+
+*** Make Spell Fu work with tree-sitter.
+
+Spell Fu doesn't work in tandem with tree-sitter yet. This fixes that.
+
+#+begin_src emacs-lisp
+;; HACK: https://github.com/emacs-tree-sitter/elisp-tree-sitter/issues/64
+(setq-default spell-fu-faces-include
+              '(tree-sitter-hl-face:comment
+                tree-sitter-hl-face:doc
+                tree-sitter-hl-face:string
+                font-lock-comment-face
+                font-lock-doc-face
+                font-lock-string-face))
+#+end_src
+
+** Rainbow Mode
+
+Rainbox mode displays the actual color for any hex value color.  It’s such a
+nice feature that I wanted it turned on all the time, regardless of what mode I
+am in.  The following creates a global minor mode for rainbow-mode and enables
+it (exception: org-agenda-mode since rainbow-mode destroys all highlighting in
+org-agenda).
+
+#+begin_src emacs-lisp
+(define-globalized-minor-mode global-rainbow-mode rainbow-mode
+  (lambda ()
+    (when (not (memq major-mode
+                     (list 'org-agenda-mode)))
+      (rainbow-mode 1))))
+
+(global-rainbow-mode 1)
+#+end_src
+
+** Yuck Mode
+
+Major mode for editing Yuck files.
+
+#+begin_src emacs-lisp :tangle packages.el
+(package! yuck-mode
+  :recipe (:host github :repo "mmcjimsey26/yuck-mode" :files ("yuck-mode.el")))
+#+end_src
+
+** Meson Mode
+
+Major mode for the meson build system.
+
+#+begin_src emacs-lisp :tangle packages.el
+(package! meson-mode)
+#+end_src

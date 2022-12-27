@@ -1,0 +1,33 @@
+# =============================================================================
+#  __      __________   ______
+# /  \    /  \_____  \ /  __  \
+# \   \/\/   //  ____/ >      <
+#  \        //       \/   --   \
+#   \__/\  / \_______ \______  /
+#        \/          \/      \/
+# config --- config for mako
+# Copyright (c) 2021 Sourajyoti Basak
+# Author: Sourajyoti Basak < wiz28@protonmail.com >
+# URL: https://github.com/wizard-28/dotfiles/
+# License: MIT
+# =============================================================================
+
+font=JetBrainsMonoNL Nerd Font Mono 11
+width=320
+padding=8
+margin=8
+border-size=2
+border-color=#333333
+default-timeout=5000
+
+background-color=#666666
+text-color=#FFFFFF
+
+[urgency=low]
+background-color=#333333
+text-color=#AAAAAA
+
+[urgency=high]
+background-color=#E41C28
+default-timeout=0
+ignore-timeout=1

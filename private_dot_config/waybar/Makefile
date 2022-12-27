@@ -1,0 +1,2 @@
+transpile:
+	./transpiler.py
