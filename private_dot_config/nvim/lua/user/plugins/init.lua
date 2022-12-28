@@ -57,10 +57,6 @@ return {
     after = "nvim-dap",
     config = function() require "user.plugins.nvim-dap-virtual-text" end,
   },
-  ["ziontee113/syntax-tree-surfer"] = {
-    module = "syntax-tree-surfer",
-    config = function() require "user.plugins.syntax-tree-surfer" end,
-  },
   ["https://git.sr.ht/~whynothugo/lsp_lines.nvim"] = {
     after = "nvim-lspconfig",
     config = function() require "user.plugins.lsp_lines" end,
@@ -87,6 +83,11 @@ return {
     opt = true,
     setup = function() table.insert(astronvim.file_plugins, "nvim-various-textobjs") end,
     config = function() require "user.plugins.nvim-various-textobjs" end,
+  },
+
+  ["ggandor/leap.nvim"] = {
+    config = function() require "user.plugins.leap" end,
+    keys = { "s", "S" },
   },
 
   -- Testing
