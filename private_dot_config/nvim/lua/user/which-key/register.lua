@@ -11,6 +11,15 @@ return {
       },
       f = {
         u = { "<cmd>Telescope undo<cr>", "Open undo history" },
+        g = {
+          function()
+            require("telescope.builtin").find_files {
+              prompt_title = "Neovim Config",
+              cwd = "~/.config/nvim/lua/user/",
+            }
+          end,
+          "Find neovim config",
+        },
       },
       g = {
         g = { "<cmd>Neogit<cr>", "Git status" },
