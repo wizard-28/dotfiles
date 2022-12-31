@@ -31,6 +31,10 @@ return {
     opt = true,
     setup = function() table.insert(astronvim.file_plugins, "nvim-surround") end,
   },
+  ["kosayoda/nvim-lightbulb"] = {
+    after = "nvim-lspconfig",
+    config = function() require("nvim-lightbulb").setup { autocmd = { enabled = true } } end,
+  },
   ["nvim-telescope/telescope-file-browser.nvim"] = {
     after = "telescope.nvim",
     config = function() require "user.plugins.telescope-file-browser" end,
