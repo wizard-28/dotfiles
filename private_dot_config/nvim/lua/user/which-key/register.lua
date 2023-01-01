@@ -1,3 +1,29 @@
+vim.g.maplocalleader = ","
+local wk = require "which-key"
+
+vim.cmd "autocmd FileType * lua SetLocalKeybinds()"
+function SetLocalKeybinds()
+  local file_type = vim.api.nvim_buf_get_option(0, "filetype")
+  local opts = { prefix = "<localleader>", buffer = 0 }
+
+  if file_type == "rust" then
+    wk.register({
+      ["r"] = {
+        name = "Rust Tools",
+        r = { function() require("rust-tools").runnables.runnables() end, "Runnables" },
+        e = { function() require("rust-tools").expand_macro.expand_macro() end, "Expand Macro" },
+        u = { function() require("rust-tools").move_item.move_item(true) end, "Move item up" },
+        d = { function() require("rust-tools").move_item.move_item(false) end, "Move item down" },
+        c = { function() require("rust-tools").open_cargo_toml.open_cargo_toml() end, "Open Cargo.toml" },
+        p = { function() require("rust-tools").parent_module.parent_module() end, "Goto Parent Module" },
+        j = { function() require("rust-tools").join_lines.join_lines() end, "Join Lines" },
+        s = { function() require("rust-tools").ssr.ssr() end, "Structural Search Replace" },
+        C = { function() require("rust-tools").crate_graph.view_crate_graph() end, "View Crate Graph" },
+      },
+    }, opts)
+  end
+end
+
 return {
   n = {
     ["<leader>"] = {
