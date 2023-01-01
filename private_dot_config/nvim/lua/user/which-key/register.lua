@@ -5,6 +5,8 @@ vim.cmd "autocmd FileType * lua SetLocalKeybinds()"
 function SetLocalKeybinds()
   local file_type = vim.api.nvim_buf_get_option(0, "filetype")
   local opts = { prefix = "<localleader>", buffer = 0 }
+  local virtual_opts = opts
+  virtual_opts.mode = "v"
 
   if file_type == "rust" then
     wk.register({
@@ -21,6 +23,31 @@ function SetLocalKeybinds()
         C = { function() require("rust-tools").crate_graph.view_crate_graph() end, "View Crate Graph" },
       },
     }, opts)
+  elseif file_type == "toml" then
+    wk.register({
+      ["c"] = {
+        name = "Crates",
+        v = { function() require("crates").show_versions_popup() end, "Show versions popup" },
+        f = { function() require("crates").show_features_popup() end, "Show features popup" },
+        d = { function() require("crates").show_dependencies_popup() end, "Show dependencies popup" },
+        u = { function() require("crates").update_crate() end, "Update crate" },
+        a = { function() require("crates").update_all_crates() end, "Update all crates" },
+        U = { function() require("crates").upgrade_crate() end, "Upgrade crate" },
+        A = { function() require("crates").upgrade_all_crates() end, "Upgrade all crates" },
+        h = { function() require("crates").open_homepage() end, "Open homepage" },
+        r = { function() require("crates").open_repository() end, "Open repository" },
+        D = { function() require("crates").open_documentation() end, "Open documentation" },
+        c = { function() require("crates").open_crates_io() end, "Open crates.io" },
+      },
+    }, opts)
+
+    wk.register({
+      ["c"] = {
+        name = "Crates",
+        u = { function() require("crates").update_crates() end, "Update crates" },
+        U = { function() require("crates").upgrade_crates() end, "Upgrade crates" },
+      },
+    }, virtual_opts)
   end
 end
 
