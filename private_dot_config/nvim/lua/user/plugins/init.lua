@@ -94,6 +94,13 @@ return {
     keys = { "s", "S" },
   },
 
+  ["nvim-neorg/neorg"] = {
+    ft = "norg",
+    cmd = "Neorg",
+    run = ":Neorg sync-parsers",
+    config = function() require "user.plugins.neorg" end,
+  },
+
   -- Testing
   ["nvim-neotest/neotest"] = {
     module = "neotest",
