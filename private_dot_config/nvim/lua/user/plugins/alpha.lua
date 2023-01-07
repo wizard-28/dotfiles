@@ -1,5 +1,5 @@
 local plugins_count = vim.fn.len(vim.fn.globpath(vim.fn.stdpath "data" .. "/site/pack/packer/start", "*", 0, 1))
-    + vim.fn.len(vim.fn.globpath(vim.fn.stdpath "data" .. "/site/pack/packer/opt", "*", 0, 1))
+  + vim.fn.len(vim.fn.globpath(vim.fn.stdpath "data" .. "/site/pack/packer/opt", "*", 0, 1))
 local plugins_loaded = vim.fn.len(vim.fn.globpath(vim.fn.stdpath "data" .. "/site/pack/packer/start", "*", 0, 1))
 return {
   layout = {
@@ -36,6 +36,13 @@ return {
       opts = { spacing = 1 },
     },
     { type = "padding", val = 5 },
+    {
+      type = "text",
+      val = {
+        " AstroNvim " .. astronvim.updater.version(true),
+      },
+      opts = { position = "center", hl = "DashboardFooter" },
+    },
     {
       type = "text",
       val = {
