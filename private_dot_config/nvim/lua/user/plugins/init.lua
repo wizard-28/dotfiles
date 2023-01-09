@@ -65,6 +65,10 @@ return {
     after = "nvim-lspconfig",
     config = function() require "user.plugins.lsp_lines" end,
   },
+  ["folke/trouble.nvim"] = {
+    after = "nvim-lspconfig",
+    config = function() require("trouble").setup {} end,
+  },
   ["jghauser/mkdir.nvim"] = {},
   ["TimUntersberger/neogit"] = {
     requires = "nvim-lua/plenary.nvim",
