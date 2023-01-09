@@ -92,6 +92,16 @@ return {
         s = { function() require("neotest").summary.toggle() end, "Toggle summary panel" },
         o = { function() require("neotest").output_panel.toggle() end, "Toggle output panel" },
       },
+      x = {
+        name = "Trouble",
+        x = { "<cmd>TroubleToggle<cr>", "Toggle Trouble" },
+        w = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Toggle Workspace Diagnostics" },
+        d = { "<cmd>TroubleToggle document_diagnostics<cr>", "Toggle Document Diagnostics" },
+        l = { "<cmd>TroubleToggle loclist<cr>", "Toggle Location List" },
+        q = { "<cmd>TroubleToggle quickfix<cr>", "Toggle Quickfix" },
+      },
     },
+    ["]d"] = { require("trouble").next { skip_groups = true, jump = true } },
+    ["[d"] = { require("trouble").previous { skip_groups = true, jump = true } },
   },
 }
