@@ -1,4 +1,5 @@
 return {
+  ["catppuccin/nvim"] = { as = "catppuccin" },
   ["andymass/vim-matchup"] = { after = "nvim-treesitter" },
   ["danymat/neogen"] = {
     requires = "nvim-treesitter/nvim-treesitter",
@@ -145,7 +146,7 @@ return {
   },
 
   ["Exafunction/codeium.vim"] = {
-    -- after = "nvim-cmp",
+    after = "nvim-cmp",
     config = function() require "user.plugins.codeium" end,
   },
 }

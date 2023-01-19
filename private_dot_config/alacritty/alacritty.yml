@@ -1,29 +1,31 @@
-colors:
-  # Default colors
-  primary:
-    background: "#0f111a"
-    foreground: "#bbc2cf"
-
-  # Normal colors
-  normal:
-    black:   "#000000"
-    red:     "#dc6068"
-    green:   "#abcf76"
-    yellow:  "#e6b455"
-    blue:    "#6e98eb"
-    magenta: "#b480d6"
-    cyan:    "#71c6e7"
-    white:   "#eeffff"
-
-  bright:
-    black: "#464b5d"
-    red: "#f07178"
-    green: "#c3e88d"
-    yellow: "#ffcb6b"
-    blue: "#82aaff"
-    magenta: "#c792ea"
-    cyan: "#89ddff"
-    white: "#eeffff"
+import:
+  - ~/.config/alacritty/catppuccin/catppuccin-mocha.yml
+# colors:
+#   # Default colors
+#   primary:
+#     background: "#0f111a"
+#     foreground: "#bbc2cf"
+#
+#   # Normal colors
+#   normal:
+#     black:   "#000000"
+#     red:     "#dc6068"
+#     green:   "#abcf76"
+#     yellow:  "#e6b455"
+#     blue:    "#6e98eb"
+#     magenta: "#b480d6"
+#     cyan:    "#71c6e7"
+#     white:   "#eeffff"
+#
+#   bright:
+#     black: "#464b5d"
+#     red: "#f07178"
+#     green: "#c3e88d"
+#     yellow: "#ffcb6b"
+#     blue: "#82aaff"
+#     magenta: "#c792ea"
+#     cyan: "#89ddff"
+#     white: "#eeffff"
 
 font:
   normal:
@@ -45,7 +47,6 @@ font:
     y: 0
 
 window:
-  opacity: 0.7
   padding:
     x: 2
     y: 2
