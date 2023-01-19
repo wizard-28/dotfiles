@@ -143,4 +143,9 @@ return {
       astronvim.add_user_cmp_source "crates"
     end,
   },
+
+  ["Exafunction/codeium.vim"] = {
+    -- after = "nvim-cmp",
+    config = function() require "user.plugins.codeium" end,
+  },
 }

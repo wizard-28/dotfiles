@@ -52,6 +52,9 @@ function SetLocalKeybinds()
 end
 
 return {
+  i = {
+    ["<A-z>"] = { function() vim.fn["codeium#Accept"]() end, "Trigger codeium" },
+  },
   n = {
     ["<leader>"] = {
       a = {
