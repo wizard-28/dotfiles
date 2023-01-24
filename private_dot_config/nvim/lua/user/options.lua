@@ -7,6 +7,6 @@ return {
     foldexpr = "nvim_treesitter#foldexpr()", -- set Treesitter based folding
     foldmethod = "expr",
     swapfile = false,
-    guifont = "JetBrainsMonoNL Nerd Font:h13",
+    guifont = "JetBrainsMono Nerd Font:h13",
   },
 }
