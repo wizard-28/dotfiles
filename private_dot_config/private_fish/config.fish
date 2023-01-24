@@ -62,3 +62,5 @@ set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; se
 set -gx PNPM_HOME "/home/wizard/.local/share/pnpm"
 set -gx PATH "$PNPM_HOME" $PATH
 # pnpm end
+
+fish_add_path /home/wizard/.spicetify
