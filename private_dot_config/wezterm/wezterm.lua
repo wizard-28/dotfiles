@@ -2,6 +2,7 @@ local wezterm = require("wezterm")
 local action = wezterm.action
 
 return {
+  font = wezterm.font("JetBrainsMono Nerd Font"),
   color_scheme = "Catppuccin Mocha",
   enable_tab_bar = false,
   window_decorations = "RESIZE",
