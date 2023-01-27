@@ -146,7 +146,18 @@ return {
   },
 
   ["Exafunction/codeium.vim"] = {
+    disable = true,
     after = "nvim-cmp",
     config = function() require "user.plugins.codeium" end,
+  },
+  ["folke/neodev.nvim"] = {
+    config = function()
+      require("neodev").setup {
+        override = function(root_dir, library)
+          library.enabled = true
+          library.plugins = true
+        end,
+      }
+    end,
   },
 }
