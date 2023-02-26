@@ -20,7 +20,6 @@ if status --is-interactive
     alias l="exa --icons -F"
     alias la="exa --icons -aF"
     alias ll="exa --icons -Flah"
-    alias bat="batcat"
 
     function fish_user_key_bindings
         bind --mode insert \co dev

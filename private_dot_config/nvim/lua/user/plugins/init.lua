@@ -87,25 +87,21 @@ return {
     opt = true,
     setup = function() table.insert(astronvim.file_plugins, "editorconfig.nvim") end,
   },
-
   ["chrisgrieser/nvim-various-textobjs"] = {
     opt = true,
     setup = function() table.insert(astronvim.file_plugins, "nvim-various-textobjs") end,
     config = function() require "user.plugins.nvim-various-textobjs" end,
   },
-
   ["ggandor/leap.nvim"] = {
     config = function() require "user.plugins.leap" end,
     keys = { "s", "S" },
   },
-
   ["nvim-neorg/neorg"] = {
     ft = "norg",
     cmd = "Neorg",
     run = ":Neorg sync-parsers",
     config = function() require "user.plugins.neorg" end,
   },
-
   -- Testing
   ["nvim-neotest/neotest"] = {
     module = "neotest",
@@ -123,13 +119,18 @@ return {
     },
     config = function() require "user.plugins.neotest" end,
   },
-
   -- Markdown preview
   ["toppair/peek.nvim"] = {
     ft = "markdown",
     run = "deno task --quiet build:fast",
   },
-
+  -- Haskell programming
+  ["mrcjkb/haskell-tools.nvim"] = {
+    after = { "mason-lspconfig.nvim" },
+    ft = { "haskell" },
+    branch = "1.x.x",
+    config = function() require("haskell-tools").setup(require "user.plugins.haskell-tools") end,
+  },
   -- Rust programming
   ["simrat39/rust-tools.nvim"] = {
     after = { "mason-lspconfig.nvim" },
@@ -144,20 +145,22 @@ return {
       astronvim.add_user_cmp_source "crates"
     end,
   },
-
-  ["Exafunction/codeium.vim"] = {
-    disable = true,
+  ["pest-parser/pest.vim"] = {},
+  ["jcdickinson/codeium.nvim"] = {
     after = "nvim-cmp",
-    config = function() require "user.plugins.codeium" end,
-  },
-  ["folke/neodev.nvim"] = {
     config = function()
-      require("neodev").setup {
-        override = function(root_dir, library)
-          library.enabled = true
-          library.plugins = true
-        end,
-      }
+      require("codeium").setup {}
+      astronvim.add_user_cmp_source "codeium"
     end,
   },
+  -- ["folke/neodev.nvim"] = {
+  --   config = function()
+  --     require("neodev").setup {
+  --       override = function(root_dir, library)
+  --         library.enabled = true
+  --         library.plugins = true
+  --       end,
+  --     }
+  --   end,
+  -- },
 }
