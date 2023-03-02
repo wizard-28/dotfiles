@@ -27,6 +27,7 @@ if status --is-interactive
 
     fish_vi_cursor
     export PATH="/home/pop-os/.local/bin:$PATH"
+    export RUSTC_WRAPPER=sccache
 
     function gsync
         git reset --hard HEAD~1
@@ -63,3 +64,5 @@ set -gx PATH "$PNPM_HOME" $PATH
 # pnpm end
 
 fish_add_path /home/wizard/.spicetify
+fish_add_path /home/wizard/.local/share/cabal/bin
+fish_add_path /home/wizard/.local/share/nvim/mason/bin/

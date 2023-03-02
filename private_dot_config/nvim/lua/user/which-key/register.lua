@@ -1,11 +1,25 @@
 vim.g.maplocalleader = ","
 local wk = require "which-key"
 
+function table.deepcopy(orig)
+  local copy
+  if type(orig) == "table" then
+    copy = {}
+    for k, v in pairs(orig) do
+      copy[k] = table.deepcopy(v)
+    end
+  else
+    copy = orig
+  end
+  return copy
+end
+
 vim.cmd "autocmd FileType * lua SetLocalKeybinds()"
 function SetLocalKeybinds()
   local file_type = vim.api.nvim_buf_get_option(0, "filetype")
   local opts = { prefix = "<localleader>", buffer = 0 }
-  local virtual_opts = opts
+
+  local virtual_opts = table.deepcopy(opts)
   virtual_opts.mode = "v"
 
   if file_type == "rust" then
@@ -48,6 +62,20 @@ function SetLocalKeybinds()
         U = { function() require("crates").upgrade_crates() end, "Upgrade crates" },
       },
     }, virtual_opts)
+  elseif file_type == "haskell" then
+    wk.register({
+      e = { function() require("haskell-tools").lsp.buf_eval_all() end, "Evaluate everything" },
+      s = { function() require("haskell-tools").hoogle.hoogle_signature() end, "Hoogle signature" },
+      ["r"] = {
+        name = "Repl",
+        r = { function() require("haskell-tools").repl.toggle() end, "Toggle repl in current package" },
+        b = {
+          function() require("haskell-tools").toggle(vim.api.nvim_buf_get_name(0)) end,
+          "Toggle repl in current buffer",
+        },
+        q = { function() require("haskell-tools").repl.quit() end, "Quit repl" },
+      },
+    }, opts)
   end
 end
 
