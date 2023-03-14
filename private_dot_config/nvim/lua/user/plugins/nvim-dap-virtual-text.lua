@@ -1,1 +1,4 @@
-require("nvim-dap-virtual-text").setup()
+return {
+  "theHamsta/nvim-dap-virtual-text",
+  config = true,
+}
