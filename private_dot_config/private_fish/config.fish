@@ -21,6 +21,8 @@ if status --is-interactive
     alias la="exa --icons -aF"
     alias ll="exa --icons -Flah"
 
+    alias tree="et"
+
     function fish_user_key_bindings
         bind --mode insert \co dev
     end
