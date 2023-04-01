@@ -1,7 +1,4 @@
 return {
-  g = {
-    heirline_bufferline = true,
-  },
   opt = {
     foldenable = false,
     foldexpr = "nvim_treesitter#foldexpr()", -- set Treesitter based folding
