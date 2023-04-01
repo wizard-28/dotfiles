@@ -66,3 +66,7 @@ set -gx PATH "$PNPM_HOME" $PATH
 fish_add_path /home/wizard/.spicetify
 fish_add_path /home/wizard/.local/share/cabal/bin
 fish_add_path /home/wizard/.local/share/nvim/mason/bin/
+
+# Wasmer
+export WASMER_DIR="/home/wizard/.wasmer"
+[ -s "$WASMER_DIR/wasmer.sh" ] && source "$WASMER_DIR/wasmer.sh"
