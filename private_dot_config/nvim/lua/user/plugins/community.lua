@@ -1,4 +1,4 @@
 return {
   "AstroNvim/astrocommunity",
-  -- { import = "astrocommunity.utility.noice-nvim.noice-nvim" },
+  { import = "astrocommunity.utility.noice-nvim.noice-nvim" },
 }

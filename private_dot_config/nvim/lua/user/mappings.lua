@@ -90,25 +90,13 @@ return {
         t = { function() require("neogen").generate { type = "type" } end, "Type" },
         F = { function() require("neogen").generate { type = "file" } end, "File" },
       },
-      f = {
-        u = { "<cmd>Telescope undo<cr>", "Open undo history" },
-        g = {
-          function()
-            require("telescope.builtin").find_files {
-              prompt_title = "Neovim Config",
-              cwd = "~/.config/nvim/lua/user/",
-            }
-          end,
-          "Find neovim config",
-        },
-      },
       g = {
         g = { "<cmd>Neogit<cr>", "Git status" },
       },
-      s = {
+      f = {
         e = { "<cmd>Telescope file_browser<cr>", "Open File Explorer" },
         p = { "<cmd>Telescope project<cr>", "Open Projects" },
-        t = { "<cmd>Telescope colorscheme<cr>", "Switch Themes" },
+        u = { "<cmd>Telescope undo<cr>", "Open undo history" },
       },
       n = {
         name = "Neotest",
