@@ -1,0 +1,7 @@
+{
+	packages: [
+		{source: 'https://github.com/jan9103/packer.nu'}
+		{source: '~/.config/nushell/local-packages/nu_scripts/'}
+	]
+}
+# vim: ft=nu
