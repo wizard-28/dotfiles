@@ -120,3 +120,4 @@ eval "$(starship init bash)"
 
 
 source /home/wizard/.bash_completions/pacup.sh
+
