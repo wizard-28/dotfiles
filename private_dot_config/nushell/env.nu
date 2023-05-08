@@ -55,6 +55,7 @@ let-env CABAL_DIR = ($env.XDG_DATA_HOME | path join "cabal")
 let-env CARGO_HOME = ($env.XDG_DATA_HOME | path join "cargo")
 
 let-env GHCUP_USE_XDG_DIRS = true
+let-env STACK_XDG = 1
 
 let-env GNUPGHOME = ($env.XDG_DATA_HOME | path join "gnupg")
 
@@ -64,12 +65,15 @@ let-env LESSHISTFILE = ($env.XDG_STATE_HOME | path join "less" "history")
 let-env NPM_CONFIG_USERCONFIG = ($env.XDG_CONFIG_HOME | path join "npm" "npmrc")
 
 let-env PYTHONSTARTUP = "/etc/python3/pythonrc"
+let-env MYPY_CACHE_DIR = ($env.XDG_CACHE_HOME | path join "mypy")
 
 let-env RUSTUP_HOME = ($env.XDG_DATA_HOME | path join "rustup")
 
 let-env BAT_THEME = "Catppuccin-mocha"
 
 let-env DOOMDIR = ($env.DOTFILES_DIR | path join "config" "doom")
+
+let-env XCOMPOSEFILE = ($env.XDG_CONFIG_HOME | path join "X11" "xcompose")
 
 # To add entries to PATH (on Windows you might use Path), you can use the following pattern:
 # let-env PATH = ($env.PATH | split row (char esep) | prepend '/some/path')
