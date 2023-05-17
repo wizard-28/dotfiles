@@ -75,6 +75,10 @@ let-env DOOMDIR = ($env.DOTFILES_DIR | path join "config" "doom")
 
 let-env XCOMPOSEFILE = ($env.XDG_CONFIG_HOME | path join "X11" "xcompose")
 
+let-env WASMER_DIR = ($env.XDG_DATA_HOME | path join "wasmer")
+let-env WASMER_CACHE_DIR = ($env.XDG_CACHE_HOME | path join "wasmer")
+
+
 # To add entries to PATH (on Windows you might use Path), you can use the following pattern:
 # let-env PATH = ($env.PATH | split row (char esep) | prepend '/some/path')
 let-env PATH = (
@@ -87,6 +91,8 @@ let-env PATH = (
     | prepend ($env.HOME | path join $env.XDG_DATA_HOME "nvim" "mason" "bin")
     | prepend ($env.HOME | path join "bin")
     | prepend ($env.CARGO_HOME | path join "bin")
+    | prepend ($env.WASMER_DIR | path join "bin")
+    | prepend ($env.WASMER_DIR | path join "globals" "wapm_packages" ".bin")
     | reverse | uniq | reverse
 )
 

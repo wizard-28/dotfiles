@@ -456,6 +456,10 @@ let-env config = {
 source ~/.cache/starship/init.nu
 source ~/.zoxide.nu
 
+def rpaste [file_path: string] {
+  curl -F $"file=@($file_path)" https://rustypaste.shuttleapp.rs
+}
+
 ### packer.nu ###
 # load packer api
 overlay use ~/.local/share/nushell/packer/start/packer.nu/api_layer/packer_api.nu
