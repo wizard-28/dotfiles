@@ -1,0 +1,93 @@
+(defcfg
+  process-unmapped-keys yes
+)
+
+(defsrc
+  grv  1     2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q     w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a     s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z     x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet  lalt           spc            ralt rctl
+)
+
+(deflayer canary
+  _    _     _    _    _    _    _    \    7    8    9    0    =    @td
+  _    w     l    y    p    k    [    z    x    o    u    '    -    ;
+  @ext c     r    s    t    b    ]    f    n    e    i    a    _
+  _    j     v    d    g    q    /    m    h    ,    .    _
+  @lcl @lmt  @lal           _              @sym _
+)
+
+(deflayer qwerty
+  _    _     _    _    _    _    _    _    _    _    _    _    _    @can
+  _    q     w    e    r    t    y    u    i    o    p    _    _    _
+  bspc a     s    d    f    g    h    j    k    l    ;    _    _
+  _    z     x    c    v    b    n    m    _    _    _    _
+  _    _     _              _              _    _
+)
+
+(deflayer extend
+  _    _     _    _    _    _    _    _    _    _    _    _    _    _
+  _    esc   @bk  @fw  _    _    _    _    home up   end  _    _    _
+  _    @all  _    @wd  _    _    _    _    lft  down rght caps _
+  _    @udo  @cut @cpy @pst _    _    _    _    _    _    _
+  _    _     _              lrld           _    _
+)
+
+;; TODO: Add * symbol to the layer.
+(deflayer symbols
+  _    _     _    _    _    _    _    _    _    _    _    _    _    _
+  _    S--   S-,  S-.  S-'  .    _    S-7  @nsp [    ]    S-5  _    _
+  _    S-1   -    +    =    S-3  _    S-\  S-;  S-9  S-0  S-/  ;
+  _    S-6   /    S-8  \    _    _    S-`  S-4  S-{  S-}  S-2
+  _    _     _              _              _    _
+)
+
+(deflayer IPA
+  _    _     _    _    _    _    _    _    _    _    _    _    _    @can
+  _    _     _    _    _    _    _    _    _    o    _    _    _    _
+  _    @ə    _    _    _    _    _    _    _    _    _    _    _
+  _    _     _    _    _    _    _    _    _    _    _    _
+  _    _     _              _              _    _
+)
+
+(defalias
+  ;; Retain qwerty shortcuts
+  lcl (multi lctl (layer-toggle qwerty))
+  lal (multi lalt (layer-toggle qwerty))
+  lmt (multi lmet (layer-toggle qwerty))
+
+  ;; Extend
+  bk bck
+  fw fwd
+  wd C-bspc
+  all C-a
+  udo C-z
+  cut C-x
+  cpy C-c
+  pst C-v
+
+
+  ə (unicode ə)
+
+  ;; HACK: Doesn't work properly otherwise.
+  : (unicode :)
+  nsp (macro @: 7 @:)
+
+  ;; layer switching
+  ;; Acts like a `bspc` if tapped or pressed for more than 1000 ms, otherwise activates extend.
+  ext (tap-hold 200 200 bspc (layer-toggle extend))
+  sym (layer-toggle symbols)
+  qwe (layer-switch qwerty)
+  can (layer-switch canary)
+  ipa (layer-switch IPA)
+  td (tap-dance 200 (@ipa @qwe))
+)
+
+(deflayer template
+  _    _     _    _    _    _    _    _    _    _    _    _    _    _
+  _    _     _    _    _    _    _    _    _    _    _    _    _    _
+  _    _     _    _    _    _    _    _    _    _    _    _    _
+  _    _     _    _    _    _    _    _    _    _    _    _
+  _    _     _              _              _    _
+)
