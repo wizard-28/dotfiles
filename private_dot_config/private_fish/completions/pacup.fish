@@ -1,0 +1,1 @@
+complete --command pacup --no-files --arguments "(env _PACUP_COMPLETE=complete_fish _TYPER_COMPLETE_FISH_ACTION=get-args _TYPER_COMPLETE_ARGS=(commandline -cp) pacup)" --condition "env _PACUP_COMPLETE=complete_fish _TYPER_COMPLETE_FISH_ACTION=is-args _TYPER_COMPLETE_ARGS=(commandline -cp) pacup"
