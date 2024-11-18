@@ -24,9 +24,6 @@ setopt hist_find_no_dups
 # Use modern completion system
 autoload -Uz compinit
 compinit
-autoload bashcompinit
-bashcompinit
-source /usr/share/bash-completion/completions/pacstall
 
 zstyle ':completion:*' auto-description 'specify: %d'
 zstyle ':completion:*' completer _expand _complete _correct _approximate
@@ -98,3 +95,5 @@ alias gclfn='git clone --recursive --shallow-submodules --filter=blob:none --als
 eval "$(fzf --zsh)"
 eval "$(zoxide init zsh)"
 
+
+export PATH=$PATH:/home/wizard-28/.spicetify

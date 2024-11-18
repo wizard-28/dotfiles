@@ -19,10 +19,7 @@
     navigate = true
 
 [merge]
-	conflictstyle = diff3
-	tool = vim_mergetool
-[mergetool "vim_mergetool"]
-	cmd = nvim -c \"MergetoolStart\" \"$MERGED\" \"$BASE\" \"$LOCAL\" \"$REMOTE\"
+	conflictstyle = zdiff3
 
 [diff]
     colorMoved = default
