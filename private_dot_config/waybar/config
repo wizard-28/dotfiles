@@ -1,159 +1,36 @@
 {
-    "height": 35,
-    "margin-top": 5,
+    "layer": "top",
+    "margin-top": 14,
+    "margin-bottom": 0,
+    "margin-left": 14,
+    "margin-right": 14,
+    "spacing": 0,
+    "include": [
+        "~/.config/waybar/modules.json"
+    ],
     "modules-left": [
-        "sway/workspaces"
+        "custom/appmenu",
+        "group/links",
+        "group/settings",
+        "group/quicklinks",
+        "hyprland/window",
+        "custom/empty"
+    ],
+    "modules-center": [
+        "hyprland/workspaces"
     ],
     "modules-right": [
-        "idle_inhibitor",
+        "custom/updates",
         "pulseaudio",
-        "cpu",
-        "memory",
-        "temperature",
         "backlight",
+        "bluetooth",
         "battery",
         "network",
+        "group/hardware",
+        "group/tools",
         "tray",
+        "custom/exit",
+        "custom/ml4w-welcome",
         "clock"
-    ],
-    "sway/workspaces": {
-        "disable-scroll": true,
-        "all-outputs": true,
-        "format": "{name}: {icon}",
-        "format-icons": {
-            "1": "\uf120",
-            "2": "\uf269",
-            "3": "\uf121",
-            "4": "\uf1bc",
-            "5": "\uf075",
-            "urgent": "\uf06a",
-            "focused": "\uf192",
-            "default": "\uf111"
-        },
-        "persistent_workspaces": {
-            "1": [],
-            "2": [],
-            "3": [],
-            "4": [],
-            "5": []
-        }
-    },
-    "idle_inhibitor": {
-        "format": "{icon}",
-        "format-icons": {
-            "activated": "\uf06e",
-            "deactivated": "\uf070"
-        }
-    },
-    "tray": {
-        "icon-size": 20,
-        "spacing": 10
-    },
-    "clock": {
-        "format": "{:%I:%M}",
-        "format-alt": "{:%Y-%m-%d}",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
-    },
-    "cpu": {
-        "format": "{usage}% \uf2db",
-        "tooltip": false
-    },
-    "memory": {
-        "format": "{}% \uf0c9"
-    },
-    "temperature": {
-        "critical-threshold": 80,
-        "format": "{temperatureC}\u00b0C {icon}",
-        "format-icons": [
-            "\uf76b",
-            "\uf2c9",
-            "\uf769"
-        ]
-    },
-    "backlight": {
-        "format": "{percent}% {icon}",
-        "format-icons": [
-            "\uf185",
-            "\uf111"
-        ]
-    },
-    "battery": {
-        "format": "{capacity}% {icon}",
-        "format-charging": "{capacity}% \uf5e7",
-        "format-plugged": "{capacity}% \uf1e6",
-        "format-alt": "{time} {icon}",
-        "format-icons": [
-            "\uf244",
-            "\uf243",
-            "\uf242",
-            "\uf241",
-            "\uf240"
-        ],
-        "states": {
-            "warning": 30,
-            "critical": 15
-        }
-    },
-    "battery#bat2": {
-        "bat": "BAT2"
-    },
-    "network": {
-        "format-wifi": "{essid} ({signalStrength}%) \uf1eb",
-        "format-ethernet": "Connected \uf0c1 ",
-        "tooltip-format": "{ifname} via {gwaddr} \uf796",
-        "format-linked": "{ifname} (No IP) \uf796",
-        "format-disconnected": "Disconnected \u26a0",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}",
-        "on-click-right": "bash ~/.config/rofi/wifi_menu/rofi_wifi_menu"
-    },
-    "pulseaudio": {
-        "format": "{volume}% {icon} {format_source}",
-        "format-bluetooth": "{volume}% {icon}\uf294",
-        "format-bluetooth-muted": "{icon}\uf294 {format_source}",
-        "format-muted": "{format_source}",
-        "format-source": "{volume}% \uf130",
-        "format-source-muted": "\uf131",
-        "on-click": "pavucontrol",
-        "format-icons": {
-            "headphone": "\uf025",
-            "hands-free": "\uf590",
-            "headset": "\uf590",
-            "phone": "\uf095",
-            "portable": "\uf095",
-            "car": "\uf1b9",
-            "default": [
-                "\uf026",
-                "\uf027",
-                "\uf028"
-            ]
-        }
-    },
-    "custom/media": {
-        "format": "{icon} {}",
-        "return-type": "json",
-        "max-length": 20,
-        "escape": true,
-        "exec": "$HOME/.config/system_scripts/mediaplayer.py 2> /dev/null",
-        "on-click": "playerctl play-pause",
-        "format-icons": {
-            "spotify": "\uf1bc ",
-            "default": "\uf885 "
-        }
-    },
-    "custom/launcher": {
-        "format": "\uf2d6",
-        "on-click": "rofi -show drun -theme ~/.config/rofi/wayfire/config2.rasi",
-        "on-click-right": "killall rofi"
-    },
-    "custom/layout": {
-        "format": "\uf53d ",
-        "on-click": "bash ~/.config/system_scripts/layout.sh"
-    },
-    "custom/updater": {
-        "format": "\uf8d3  {} Updates",
-        "exec": "checkupdates | wc -l",
-        "exec-if": "[[ $(checkupdates | wc -l) != 0 ]]",
-        "interval": 15,
-        "on-click": "alacritty -e yay -Syu"
-    }
+    ]
 }
