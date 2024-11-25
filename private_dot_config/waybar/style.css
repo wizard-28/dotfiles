@@ -27,7 +27,7 @@ window#waybar {
 
 #workspaces {
   background: #0c0e0f;
-  margin: 5px 5px;
+  margin: 5px;
   padding: 8px 5px;
   border-radius: 16px;
   border: solid 0px #cdd6f4;
@@ -68,8 +68,8 @@ window#waybar {
 #custom-randwall,
 #custom-launcher {
   background: transparent;
-  padding: 5px 5px 5px 5px;
-  margin: 5px 5px 5px 5px;
+  padding: 5px;
+  margin: 5px;
   border-radius: 8px;
   border: solid 0px #f4d9e1;
 }
@@ -91,7 +91,7 @@ window#waybar {
 
 #tray {
   background: #0c0e0f;
-  margin: 5px 5px 5px 5px;
+  margin: 5px;
   border-radius: 16px;
   padding: 0px 5px;
   /*border-right: solid 1px #282738;*/
@@ -122,17 +122,17 @@ window#waybar {
 #battery.warning:not(.charging) {
   background-color: #f7768e;
   color: #24283b;
-  border-radius: 5px 5px 5px 5px;
+  border-radius: 5px;
 }
 
 #backlight {
   background-color: #24283b;
   color: #db4b4b;
-  border-radius: 0px 0px 0px 0px;
+  border-radius: 0px;
   margin: 5px;
   margin-left: 0px;
   margin-right: 0px;
-  padding: 0px 0px;
+  padding: 0px;
 }
 
 #network {
@@ -163,8 +163,8 @@ window#waybar {
   color: #cdd6f4;
   background-color: #0c0e0f;
   border-radius: 0px 24px 0px 0px;
-  margin: 0px 0px 0px 0px;
-  padding: 0 13px 0 13px;
+  margin: 0px;
+  padding: 0 13px;
   /*border-right: solid 1px #282738;*/
   font-size: 28px;
 }
@@ -227,7 +227,7 @@ window#waybar {
   margin: 5px;
   margin-left: 5px;
   margin-right: 5px;
-  padding: 0px 10px 0px 10px;
+  padding: 0px 10px;
   font-weight: bold;
 }
 
@@ -238,7 +238,7 @@ window#waybar {
   margin: 5px;
   margin-left: 5px;
   margin-right: 5px;
-  padding: 0px 10px 0px 10px;
+  padding: 0px 10px;
   font-weight: bold;
 }
 
@@ -249,13 +249,13 @@ window#waybar {
   margin: 5px;
   margin-left: 5px;
   margin-right: 5px;
-  padding: 0px 10px 0px 10px;
+  padding: 0px 10px;
   font-weight: bold;
 }
 
 #tray {
   margin-top: 0.5em;
-  padding: 0px 9px 0px 9px;
+  padding: 0px 9px;
 }
 
 #custom-hyprpicker {
