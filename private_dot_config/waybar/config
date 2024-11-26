@@ -1,36 +1,175 @@
 {
+    "position": "top",
     "layer": "top",
-    "margin-top": 14,
+    "height": 16,
+    "margin-top": 0,
     "margin-bottom": 0,
-    "margin-left": 14,
-    "margin-right": 14,
-    "spacing": 0,
-    "include": [
-        "~/.config/waybar/modules.json"
-    ],
+    "margin-left": 0,
+    "margin-right": 0,
     "modules-left": [
-        "custom/appmenu",
-        "group/links",
-        "group/settings",
-        "group/quicklinks",
-        "hyprland/window",
-        "custom/empty"
+        "custom/launcher",
+        "custom/notifications",
+        "custom/playerctl",
+        "custom/playerlabel"
     ],
     "modules-center": [
         "hyprland/workspaces"
     ],
     "modules-right": [
-        "custom/updates",
-        "pulseaudio",
-        "backlight",
-        "bluetooth",
-        "battery",
-        "network",
-        "group/hardware",
-        "group/tools",
         "tray",
-        "custom/exit",
-        "custom/ml4w-welcome",
-        "clock"
-    ]
+        "pulseaudio",
+        "clock",
+        "cpu",
+        "memory",
+        "network",
+        "battery"
+    ],
+    "clock": {
+        "format": "<span font='16' rise='-500'>\uf017 </span><span font='11' rise='2000'> {:%I:%M:%S}</span>",
+        "interval": 1,
+        "tooltip": "true",
+        "format-alt": "<span font='16' rise='-500'>\uf073</span><span font='11' rise='2000'> {:%d/%m}</span>",
+        "on-click-right": "bash ~/.config/eww/scripts/launcher toggle_menu calendar"
+    },
+    "custom/notifications": {
+        "format": "<span font='16' rise='-500'> \udb80\udc9a </span>",
+        "on-click": "bash ~/.config/eww/scripts/launcher toggle_menu quicksettings"
+    },
+    "hyprland/workspaces": {
+        "active-only": false,
+        "all-outputs": true,
+        "disable-scroll": false,
+        "on-scroll-up": "hyprctl dispatch workspace e-1",
+        "on-scroll-down": "hyprctl dispatch workspace e+1",
+        "format": "{icon}",
+        "on-click": "activate",
+        "format-icons": {
+            "urgent": "",
+            "active": "",
+            "default": "",
+            "sort-by-number": true
+        }
+    },
+    "custom/playerctl": {
+        "format": "{icon}",
+        "return-type": "json",
+        "max-length": 64,
+        "exec": "playerctl -a metadata --format '{\"text\": \"{{artist}} - {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
+        "on-click": "playerctl play-pause",
+        "format-icons": {
+            "Playing": "<span foreground='#6791eb' font='16' rise='-500'>\udb80\udfe5 </span>",
+            "Paused": "<span foreground='#cdd6f4' font='16' rise='-500'>\udb81\udc0c </span>"
+        }
+    },
+    "custom/playerlabel": {
+        "format": "<span>{}</span>",
+        "return-type": "json",
+        "max-length": 48,
+        "exec": "playerctl -a metadata --format '{\"text\": \"{{artist}} - {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
+        "on-click": "playerctl play-pause",
+        "format-icons": {
+            "Playing": "<span foreground='#6791eb' font='16' rise='-500'>\udb80\udfe5 </span>",
+            "Paused": "<span foreground='#cdd6f4' font='16'rise='-500'>\udb81\udc0c </span>"
+        }
+    },
+    "battery": {
+        "format": "{icon}  {capacity}%",
+        "format-charging": "{capacity}% \uf5e7",
+        "format-plugged": "{capacity}% \uf1e6",
+        "format-alt": "{icon} {time}",
+        "format-icons": [
+            "\uf244",
+            "\uf243",
+            "\uf242",
+            "\uf241",
+            "\uf240"
+        ],
+        "states": {
+            "good": 95,
+            "warning": 30,
+            "critical": 15
+        }
+    },
+    "memory": {
+        "format": "\udb80\udf5b {}%",
+        "format-alt": "\udb80\udf5b {used}/{total} GiB",
+        "interval": 5
+    },
+    "cpu": {
+        "format": "\udb83\udee0 {usage}%",
+        "format-alt": "\udb83\udee0 {avg_frequency} GHz",
+        "interval": 5
+    },
+    "disk": {
+        "format": "\udb80\udeca {}%",
+        "format-alt": "\udb80\udeca {used}/{total} GiB",
+        "interval": 5,
+        "path": "/"
+    },
+    "network": {
+        "format-wifi": "\udb82\udd28",
+        "format-ethernet": "\uf6ff {ifname}: Aesthetic",
+        "format-linked": "\uf6ff {ifname} (No IP)",
+        "format-disconnected": "\udb82\udd2d",
+        "format-alt": "\uf6ff {ifname}: {ipaddr}/{cidr}",
+        "tooltip-format": "{essid}",
+        "on-click-right": "nm-connection-editor"
+    },
+    "tray": {
+        "icon-size": 16,
+        "spacing": 5
+    },
+    "backlight": {
+        "format": "{icon} {percent}%",
+        "format-icons": [
+            "\ue38d",
+            "\ue3d3",
+            "\ue3d1",
+            "\ue3cf",
+            "\ue3ce",
+            "\ue3cd",
+            "\ue3ca",
+            "\ue3c8",
+            "\ue39b"
+        ]
+    },
+    "pulseaudio": {
+        "format": "<span font='14' rise='800'>{icon}</span><span font='11' rise='2200'> {volume}%</span>",
+        "format-muted": "<span font='14' rise='800'>\udb81\udf5f </span><span font='11' rise='2200'>Mute</span>",
+        "on-click": "bash ~/.config/scripts/volume mute",
+        "on-scroll-up": "bash ~/.config/scripts/volume up",
+        "on-scroll-down": "bash ~/.config/scripts/volume down",
+        "scroll-step": 5,
+        "on-click-right": "pavucontrol",
+        "format-icons": {
+            "default": [
+                "\udb81\udd7f",
+                "\udb81\udd80",
+                "\udb81\udd7e"
+            ]
+        }
+    },
+    "custom/randwall": {
+        "format": "\udb80\udfd8",
+        "on-click": "bash $HOME/.config/hypr/randwall.sh",
+        "on-click-right": "bash $HOME/.config/hypr/wall.sh"
+    },
+    "custom/launcher": {
+        "format": "<span font='18' rise='-1000'>\uf322</span>",
+        "on-click": "bash ~/.config/eww/scripts/launcher toggle_menu powermenu"
+    },
+    "custom/wf-recorder": {
+        "format": "{}",
+        "interval": "once",
+        "exec": "echo '\uf28d'",
+        "tooltip": "false",
+        "exec-if": "pgrep 'wf-recorder'",
+        "on-click": "exec ./scripts/wlrecord.sh",
+        "signal": 8
+    },
+    "custom/hyprpicker": {
+        "format": "\udb80\ude0b",
+        "on-click": "hyprpicker -a -f hex",
+        "on-click-right": "hyprpicker -a -f rgb"
+    }
 }
