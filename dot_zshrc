@@ -1,9 +1,6 @@
 # Set up the prompt
 eval "$(starship init zsh)"
 
-export https_proxy="http://172.16.1.1:56349"
-export http_proxy="http://172.16.1.1:56349"
-
 setopt histignorealldups sharehistory
 
 # Use emacs keybindings even if our EDITOR is set to vi
@@ -97,3 +94,4 @@ eval "$(zoxide init zsh)"
 
 
 export PATH=$PATH:/home/wizard-28/.spicetify
+export PATH=$PATH:/home/wizard-28/.local/bin

@@ -10,6 +10,7 @@ modules-left = [
   "custom/notifications",
   "custom/playerctl",
   "custom/playerlabel",
+  "custom/cava",
 ]
 modules-center = ["hyprland/workspaces"]
 modules-right = [
@@ -149,3 +150,5 @@ signal = 8
 format = "󰈋"
 on-click = "hyprpicker -a -f hex"
 on-click-right = "hyprpicker -a -f rgb"
+
+hide-empty = true

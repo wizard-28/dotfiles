@@ -10,7 +10,8 @@
         "custom/launcher",
         "custom/notifications",
         "custom/playerctl",
-        "custom/playerlabel"
+        "custom/playerlabel",
+        "custom/cava"
     ],
     "modules-center": [
         "hyprland/workspaces"
@@ -170,6 +171,7 @@
     "custom/hyprpicker": {
         "format": "\udb80\ude0b",
         "on-click": "hyprpicker -a -f hex",
-        "on-click-right": "hyprpicker -a -f rgb"
+        "on-click-right": "hyprpicker -a -f rgb",
+        "hide-empty": true
     }
 }
