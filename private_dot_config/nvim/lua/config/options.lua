@@ -5,6 +5,8 @@
 vim.g.maplocalleader = ","
 -- vim.g.lazyvim_python_lsp = "basedpyright"
 if vim.g.neovide then
-  vim.o.guifont = "JetBrainsMono Nerd Font:h11"
+  vim.o.guifont = "JetBrainsMono Nerd Font:h13"
   vim.opt.linespace = 1
+  vim.g.neovide_opacity = 0.8
+  vim.g.neovide_normal_opacity = 0.8
 end

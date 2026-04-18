@@ -3,11 +3,10 @@ local act = w.action
 
 return {
 	font = w.font("JetBrainsMono Nerd Font"),
-	-- window_background_opacity = 0.8,
+	window_background_opacity = 1.0,
 	color_scheme = "Catppuccin Mocha",
 	hide_tab_bar_if_only_one_tab = true,
 	window_decorations = "RESIZE",
-	unicode_version = 15,
 	mouse_bindings = {
 		{
 			event = { Down = { streak = 3, button = "Left" } },

@@ -1,110 +1,117 @@
+-- return {
+--   "nickkadutskyi/jb.nvim",
+--   lazy = false,
+--   priority = 1000,
+--   opts = {},
+--   config = function()
+--     -- require("jb").setup({transparent = true})
+--     vim.cmd("colorscheme jb")
+--
+--     ---------------------------------------------------------
+--     --  Tree-sitter dominant highlighting  +  JB.nvim style --
+--     ---------------------------------------------------------
+--
+--     -- Make semantic tokens inherit Tree-sitter's color scheme
+--     local function link(from, to)
+--       vim.api.nvim_set_hl(0, from, { link = to })
+--     end
+--
+--     -- Operators → look like keywords (Tree-sitter style)
+--     link("@lsp.type.operator", "@keyword")
+--     link("@lsp.type.operator.cpp", "@keyword.operator")
+--
+--     -- Variables → follow Tree-sitter's variables
+--     link("@lsp.type.variable", "@variable")
+--     link("@lsp.type.parameter", "@variable.parameter")
+--     link("@lsp.type.property", "@variable.member")
+--
+--     -- Functions → match Tree-sitter
+--     link("@lsp.type.function", "@function")
+--     link("@lsp.type.method", "@function.method")
+--
+--     -- Types → match Tree-sitter type groups
+--     link("@lsp.type.class", "@type")
+--     link("@lsp.type.struct", "@type")
+--     link("@lsp.type.enum", "@type")
+--     link("@lsp.type.type", "@type")
+--
+--     -- Built-in types → Tree-sitter builtin style
+--     link("@lsp.type.builtinType", "@type.builtin")
+--
+--     -- Macros → Tree-sitter's constant style
+--     link("@lsp.type.macro", "@constant.macro")
+--
+--     -- Strings and numbers (clangd usually doesn’t override)
+--     link("@lsp.type.string", "@string")
+--     link("@lsp.type.number", "@number")
+--
+--     -- Comments (clangd may send tokens for docs)
+--     link("@lsp.type.comment", "@comment")
+--
+--     -- Namespace → keep using Tree-sitter namespace color
+--     link("@lsp.type.namespace", "@namespace")
+--
+--     -- Disable weird clangd-only groups (better to ignore)
+--     vim.api.nvim_set_hl(0, "@lsp.typemod", {})
+--     vim.api.nvim_set_hl(0, "@lsp.modifier", {})
+--   end,
+-- }
+--
 return {
-  -- add catppuccin
+  -- {
+  --   "LazyVim/LazyVim",
+  --   opts = {
+  --     colorscheme = "catppuccin",
+  --   },
+  -- },
   {
-    "catppuccin/nvim",
-    lazy = true,
-    name = "catppuccin",
-    opts = {
-      flavour = "mocha",
-      integrations = {
-        alpha = true,
-        flash = true,
-        gitsigns = true,
-        illuminate = true,
-        indent_blankline = { enabled = true },
-        lsp_trouble = true,
-        mason = true,
-        mini = true,
-        native_lsp = {
-          enabled = true,
-          underlines = {
-            errors = { "undercurl" },
-            hints = { "undercurl" },
-            warnings = { "undercurl" },
-            information = { "undercurl" },
-          },
-        },
-        navic = { enabled = true, custom_bg = "lualine" },
-        neotest = true,
-        noice = true,
-        notify = true,
-        neotree = true,
-        semantic_tokens = true,
-        telescope = true,
-        treesitter = true,
-        which_key = true,
-      },
-
-      -- Replicate `atom_colored` completion menu from NVChad
-      custom_highlights = function(colors)
-        local base16 = {
-          base00 = "#1E1D2D",
-          base01 = "#282737",
-          base02 = "#2f2e3e",
-          base03 = "#383747",
-          base04 = "#414050",
-          base05 = "#bfc6d4",
-          base06 = "#ccd3e1",
-          base07 = "#D9E0EE",
-          base08 = "#F38BA8",
-          base09 = "#F8BD96",
-          base0A = "#FAE3B0",
-          base0B = "#ABE9B3",
-          base0C = "#89DCEB",
-          base0D = "#89B4FA",
-          base0E = "#CBA6F7",
-          base0F = "#F38BA8",
-        }
-
-        return {
-          CmpItemAbbr = { fg = colors.white },
-          CmpItemAbbrMatch = { fg = colors.blue, bold = true },
-          CmpDoc = { bg = colors.darker_black },
-          CmpDocBorder = { fg = colors.darker_black, bg = colors.darker_black },
-          CmpPmenu = { bg = colors.black },
-          CmpSel = { link = "PmenuSel", bold = true },
-
-          CmpItemKindConstant = { bg = base16.base09, fg = colors.crust },
-          CmpItemKindFunction = { bg = base16.base0D, fg = colors.crust },
-          CmpItemKindIdentifier = { bg = base16.base08, fg = colors.crust },
-          CmpItemKindField = { bg = base16.base08, fg = colors.crust },
-          CmpItemKindVariable = { bg = base16.base0E, fg = colors.crust },
-          CmpItemKindSnippet = { bg = colors.red, fg = colors.crust },
-          CmpItemKindText = { bg = base16.base0B, fg = colors.crust },
-          CmpItemKindStructure = { bg = base16.base0E, fg = colors.crust },
-          CmpItemKindType = { bg = base16.base0A, fg = colors.crust },
-          CmpItemKindKeyword = { bg = base16.base07, fg = colors.crust },
-          CmpItemKindMethod = { bg = base16.base0D, fg = colors.crust },
-          CmpItemKindConstructor = { bg = colors.blue, fg = colors.crust },
-          CmpItemKindFolder = { bg = base16.base07, fg = colors.crust },
-          CmpItemKindModule = { bg = base16.base0A, fg = colors.crust },
-          CmpItemKindProperty = { bg = base16.base08, fg = colors.crust },
-          CmpItemKindEnum = { bg = colors.blue, fg = colors.crust },
-          CmpItemKindUnit = { bg = base16.base0E, fg = colors.crust },
-          CmpItemKindClass = { bg = colors.teal, fg = colors.crust },
-          CmpItemKindFile = { bg = base16.base07, fg = colors.crust },
-          CmpItemKindInterface = { bg = colors.green, fg = colors.crust },
-          CmpItemKindColor = { bg = colors.white, fg = colors.crust },
-          CmpItemKindReference = { bg = base16.base05, fg = colors.crust },
-          CmpItemKindEnumMember = { bg = colors.purple, fg = colors.crust },
-          CmpItemKindStruct = { bg = base16.base0E, fg = colors.crust },
-          CmpItemKindValue = { bg = colors.cyan, fg = colors.crust },
-          CmpItemKindEvent = { bg = colors.yellow, fg = colors.crust },
-          CmpItemKindOperator = { bg = base16.base05, fg = colors.crust },
-          CmpItemKindTypeParameter = { bg = base16.base08, fg = colors.crust },
-          CmpItemKindCopilot = { bg = colors.green, fg = colors.crust },
-          CmpItemKindCodeium = { bg = colors.vibrant_green, fg = colors.crust },
-          CmpItemKindTabNine = { bg = colors.baby_pink, fg = colors.crust },
-        }
-      end,
-    },
-  },
-
-  -- Configure LazyVim to load catppuccin
-  {
-    "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "catppuccin",
-    },
+    "ember-theme/nvim",
+    name = "ember",
+    priority = 1000,
+    config = function()
+      require("ember").setup({
+        variant = "ember", -- "ember" | "ember-soft" | "ember-light"
+      })
+      vim.cmd("colorscheme ember")
+    end,
   },
 }
+
+-- {
+--   "loctvl842/monokai-pro.nvim",
+--   lazy = true,
+--   config = function()
+--     require("monokai-pro").setup({
+--       overrideScheme = function(cs, p, config, hp)
+--         local cs_override = {}
+--
+--         -- editor background override
+--         cs_override.editor = {
+--           background = "#0F1015",
+--         }
+--
+--         -- helpers
+--         local color_helper = require("monokai-pro.color_helper")
+--         local common_fg = color_helper.lighten(cs.sideBar.foreground, 30)
+--
+--         -- custom groups
+--         cs_override.SnacksPicker = {
+--           bg = cs_override.editor.background,
+--           fg = common_fg,
+--         }
+--         cs_override.SnacksPickerBorder = {
+--           bg = cs_override.editor.background,
+--           fg = cs.tab.unfocusedActiveBorder,
+--         }
+--         cs_override.SnacksPickerTree = {
+--           fg = cs.editorLineNumber.foreground,
+--         }
+--         cs_override.NonText = {
+--           fg = cs.base.dimmed3,
+--         }
+--         cs_override.SnacksPickerDirectory = { fg = cs.editorLineNumber.foreground }
+--
+--         return cs_override
+--       end,
+--     })
+--   end,

@@ -17,8 +17,10 @@ setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
 
+set -o vi
 
 # Use modern completion system
+fpath=(~/.local/share/zsh/completions $fpath)
 autoload -Uz compinit
 compinit
 
@@ -66,7 +68,7 @@ zinit light-mode for \
 ### End of Zinit's installer chunk
 
 zinit ice depth=1
-zinit light zsh-users/zsh-syntax-highlighting
+zinit light  zdharma-continuum/fast-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-history-substring-search
@@ -87,6 +89,12 @@ alias ll='exa --icons --all --long --header'
 alias rm='trash'
 alias gclf='git clone --recursive --shallow-submodules --filter=blob:none --also-filter-submodules --depth 1'
 alias gclfn='git clone --recursive --shallow-submodules --filter=blob:none --also-filter-submodules --depth 1 --no-single-branch'
+alias nv='neovide --fork '
+alias btop="LC_ALL=UTF8 btop"
+alias code="codium"
+alias ..='cd ..'
+alias ...='cd ../..'
+alias gamemango="flatpak run --command=mangohud com.usebottles.bottles"
 
 # Shell integration
 eval "$(fzf --zsh)"
@@ -95,3 +103,53 @@ eval "$(zoxide init zsh)"
 
 export PATH=$PATH:/home/wizard-28/.spicetify
 export PATH=$PATH:/home/wizard-28/.local/bin
+export PATH=$PATH:/home/wizard-28/.cargo/bin
+export PATH=$PATH:/home/wizard-28/go/bin
+export XCOMPOSEFILE=/usr/share/X11/locale/en_US.UTF-8/Compose
+
+export ANDROID_HOME="/home/wizard-28/Android/Sdk/"
+export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin/
+export PATH=$PATH:$ANDROID_HOME/platform-tools/
+export PATH=$PATH:$ANDROID_HOME/tools/bin/
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/tools/
+export PATH="$PATH":"$HOME/.pub-cache/bin"
+export CHROME_EXECUTABLE=google-chrome-stable
+export IDEA_JDK=/usr/lib/jvm/java-21-jetbrains
+
+export QML_IMPORT_PATH=.:/usr/lib/qt6/qml
+
+
+export FZF_DEFAULT_OPTS=" \
+--preview 'bat --color=always --style=numbers --line-range=:500 {}'
+--color=bg+:#313244,bg:#1E1E2E,spinner:#F5E0DC,hl:#F38BA8 \
+--color=fg:#CDD6F4,header:#F38BA8,info:#CBA6F7,pointer:#F5E0DC \
+--color=marker:#B4BEFE,fg+:#CDD6F4,prompt:#CBA6F7,hl+:#F38BA8 \
+--color=selected-bg:#45475A \
+--color=border:#6C7086,label:#CDD6F4"
+
+## [Completion]
+## Completion scripts setup. Remove the following line to uninstall
+[[ -f /home/wizard-28/.dart-cli-completion/zsh-config.zsh ]] && . /home/wizard-28/.dart-cli-completion/zsh-config.zsh || true
+## [/Completion]
+
+[[ -t 0 ]] && fastfetch
+
+# pnpm
+export PNPM_HOME="/home/wizard-28/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+
+# Bat settings
+export MANPAGER="bat -plman"
+alias -g -- -h='-h 2>&1 | bat --language=help --style=plain'
+alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'

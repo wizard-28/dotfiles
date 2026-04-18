@@ -28,3 +28,17 @@
 	logline = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 [github]
 	user = wizard-28
+[http]
+	version = HTTP/1.1
+	postBuffer = 524288000
+	maxRequestBuffer = 524288000
+[https]
+	proxy = socks5://172.16.1.1:56349
+[init]
+	defaultBranch = master
+[rebase]
+	updateRefs = true
+[fetch]
+	prune = true
+[pull]
+	rebase = true
