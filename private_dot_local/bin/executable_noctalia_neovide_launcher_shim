@@ -1,0 +1,6 @@
+#!/bin/bash
+
+session="$2"
+escaped="${session//%/\\%}"
+
+exec neovide -- -S "$escaped"

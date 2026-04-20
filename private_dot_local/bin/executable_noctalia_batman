@@ -1,0 +1,12 @@
+#!/bin/bash
+
+case "$(cat /sys/class/power_supply/BAT0/status)" in
+"Charging" | "Not charging")
+  sudo batmanager -p 2
+  qs -c noctalia-shell ipc call powerProfile set performance
+  ;;
+*)
+  sudo batmanager -p 3
+  qs -c noctalia-shell ipc call powerProfile set powersaver
+  ;;
+esac

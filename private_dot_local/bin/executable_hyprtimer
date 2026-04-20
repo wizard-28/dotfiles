@@ -1,0 +1,24 @@
+#!/bin/bash
+
+prev=""
+
+socat -U - UNIX-CONNECT:"${XDG_RUNTIME_DIR}/hypr/${HYPRLAND_INSTANCE_SIGNATURE}/.socket2.sock" | while read -r line; do
+  if [[ "$line" == workspace* ]]; then
+    # Extract workspace name/id
+    ws=$(echo "$line" | awk -F',' '{print $2}')
+
+    if [[ "$ws" != "1" && "$prev" == "1" ]]; then
+      # Left workspace 1
+      qs -c noctalia-shell ipc call plugin:timer pause
+      notify-send "Timer paused!"
+    fi
+
+    if [[ "$ws" == "1" && "$prev" != "1" ]]; then
+      # Returned to workspace 1
+      qs -c noctalia-shell ipc call plugin:timer start
+      notify-send "Timer started"
+    fi
+
+    prev="$ws"
+  fi
+done
