@@ -1,0 +1,53 @@
+[Desktop Entry]
+Type=Service
+ServiceTypes=KonqPopupMenu/Plugin
+MimeType=audio/*;
+Actions=ConvertToMP3;ConvertToAAC;ConvertToOGG;ConvertToWMA;ConvertToFLAC;ConvertToM4A;ConvertToALAC;ConvertToWAV;ConvertToAIFF;
+X-KDE-Submenu=Convert Audio
+Icon=audio-x-generic
+X-KDE-StartupNotify=false
+
+[Desktop Action ConvertToMP3]
+Name=Convert to MP3
+Exec=~/.local/bin/ffmpegconvert.sh %U mp3 audio
+Icon=audio-mpeg
+
+[Desktop Action ConvertToAAC]
+Name=Convert to AAC
+Exec=~/.local/bin/ffmpegconvert.sh %U aac audio
+Icon=audio-aac
+
+[Desktop Action ConvertToOGG]
+Name=Convert to OGG
+Exec=~/.local/bin/ffmpegconvert.sh %U ogg audio
+Icon=audio-x-vorbis+ogg
+
+[Desktop Action ConvertToWMA]
+Name=Convert to WMA
+Exec=~/.local/bin/ffmpegconvert.sh %U wma audio
+Icon=audio-x-ms-wma
+
+[Desktop Action ConvertToFLAC]
+Name=Convert to FLAC
+Exec=~/.local/bin/ffmpegconvert.sh %U flac audio
+Icon=audio-x-flac
+
+[Desktop Action ConvertToM4A]
+Name=Convert to M4A
+Exec=~/.local/bin/ffmpegconvert.sh %U m4a audio
+Icon=audio-m4a
+
+[Desktop Action ConvertToALAC]
+Name=Convert to M4A (ALAC)
+Exec=~/.local/bin/ffmpegconvert.sh %U alac audio
+Icon=audio-alac
+
+[Desktop Action ConvertToWAV]
+Name=Convert to WAV
+Exec=~/.local/bin/ffmpegconvert.sh %U wav audio
+Icon=audio-x-wav
+
+[Desktop Action ConvertToAIFF]
+Name=Convert to AIFF
+Exec=~/.local/bin/ffmpegconvert.sh %U aiff audio
+Icon=audio-x-aiff

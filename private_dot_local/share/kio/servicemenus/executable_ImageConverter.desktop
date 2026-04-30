@@ -1,0 +1,53 @@
+[Desktop Entry]
+Type=Service
+ServiceTypes=KonqPopupMenu/Plugin
+MimeType=image/jpeg;image/png;image/gif;image/bmp;image/tiff;image/webp;image/svg+xml;image/x-eps;image/x-dcraw;image/vnd.microsoft.icon;
+Actions=ConvertToJPG;ConvertToPNG;ConvertToGIF;ConvertToBMP;ConvertToTIFF;ConvertToWEBP;ConvertToEPS;ConvertToRAW;ConvertToICO;
+X-KDE-Submenu=Convert Image
+Icon=image
+X-KDE-StartupNotify=false
+
+[Desktop Action ConvertToJPG]
+Name=Convert to JPG
+Icon=image-jpeg
+Exec=~/.local/bin/ffmpegconvert.sh %U jpg image
+
+[Desktop Action ConvertToPNG]
+Name=Convert to PNG
+Icon=image-png
+Exec=~/.local/bin/ffmpegconvert.sh %U png image
+
+[Desktop Action ConvertToGIF]
+Name=Convert to GIF
+Icon=image-gif
+Exec=~/.local/bin/ffmpegconvert.sh %U gif image
+
+[Desktop Action ConvertToBMP]
+Name=Convert to BMP
+Icon=image-bmp
+Exec=~/.local/bin/ffmpegconvert.sh %U bmp image
+
+[Desktop Action ConvertToTIFF]
+Name=Convert to TIFF
+Icon=image-tiff
+Exec=~/.local/bin/ffmpegconvert.sh %U tiff image
+
+[Desktop Action ConvertToWEBP]
+Name=Convert to WEBP
+Icon=image-webp
+Exec=~/.local/bin/ffmpegconvert.sh %U webp image
+
+[Desktop Action ConvertToEPS]
+Name=Convert to EPS
+Icon=image-x-eps
+Exec=~/.local/bin/ffmpegconvert.sh %U eps image
+
+[Desktop Action ConvertToRAW]
+Name=Convert to RAW
+Icon=image-x-dcraw
+Exec=~/.local/bin/ffmpegconvert.sh %U raw image
+
+[Desktop Action ConvertToICO]
+Name=Convert to ICO
+Icon=image/vnd.microsoft.icon
+Exec=~/.local/bin/ffmpegconvert.sh %U ico image
