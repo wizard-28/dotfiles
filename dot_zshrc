@@ -1,155 +1,80 @@
-# Set up the prompt
-eval "$(starship init zsh)"
 
-setopt histignorealldups sharehistory
+# -----------------------------
+# History (zsh)
+# -----------------------------
+HISTFILE=$HOME/.zsh_history
+HISTSIZE=100000
+SAVEHIST=100000
 
-# Use emacs keybindings even if our EDITOR is set to vi
-bindkey -e
+setopt APPEND_HISTORY
+setopt INC_APPEND_HISTORY
+setopt SHARE_HISTORY
+setopt HIST_IGNORE_SPACE
+setopt HIST_IGNORE_DUPS
+setopt HIST_SAVE_NO_DUPS
 
-# Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
-HISTSIZE=5000
-SAVEHIST=$HISTSIZE
-HISTFILE=~/.zsh_history
-HISTDUP=erase
-setopt appendhistory
-setopt hist_ignore_space
-setopt hist_save_no_dups
-setopt hist_ignore_dups
-setopt hist_find_no_dups
+# -----------------------------
+# less colors
+# -----------------------------
+export LESS_TERMCAP_md="$(tput bold 2>/dev/null; tput setaf 2 2>/dev/null)"
+export LESS_TERMCAP_me="$(tput sgr0 2>/dev/null)"
 
-set -o vi
+# -----------------------------
+# Aliases
+# -----------------------------
+alias make="make -j$(nproc)"
+alias ninja="ninja -j$(nproc)"
+alias n="ninja"
+alias c="clear"
 
-# Use modern completion system
-fpath=(~/.local/share/zsh/completions $fpath)
+alias rmpkg="sudo pacman -Rsn"
+alias cleanch="sudo pacman -Scc"
+alias fixpacman="sudo rm /var/lib/pacman/db.lck"
+alias update="sudo pacman -Syu"
+
+alias apt="man pacman"
+alias apt-get="man pacman"
+alias please="sudo"
+
+alias tb="nc termbin.com 9999"
+alias cleanup="sudo pacman -Rsn $(pacman -Qtdq)"
+alias jctl="journalctl -p 3 -xb"
+alias rip="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -200 | nl"
+
+alias ff="fastfetch"
+alias rm="trash"
+alias grep="rg"
+alias cat="bat"
+
+# Completion
 autoload -Uz compinit
 compinit
 
-zstyle ':completion:*' auto-description 'specify: %d'
-zstyle ':completion:*' completer _expand _complete _correct _approximate
-zstyle ':completion:*' group-name ''
-zstyle ':completion:*' menu select=2
-eval "$(dircolors -b)"
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-zstyle ':completion:*' list-colors ''
-zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
-zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=* l:|=*'
-zstyle ':completion:*' menu select=long
-zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
-zstyle ':completion:*' use-compctl false
-zstyle ':completion:*' verbose true
+# -----------------------------
+# Plugins (Antidote)
+# -----------------------------
+source /usr/share/zsh-antidote/antidote.zsh
+antidote load ${ZDOTDIR:-$HOME}/.config/zsh/.zsh_plugins.txt
+source /usr/share/doc/pkgfile/command-not-found.zsh
 
-zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
-zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
-zstyle ':completion:*' menu no
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa --icons $realpath'
+# -----------------------------
+# fzf integration (includes Ctrl-R history search)
+# -----------------------------
+export FZF_BASE=/usr/share/fzf
+source <(fzf --zsh)
 
+# -----------------------------
+# PATH
+# -----------------------------
+export PATH="$HOME/.local/bin:$PATH"
 
-### Added by Zinit's installer
-if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
-    print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
-    command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
-    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
-        print -P "%F{33} %F{34}Installation successful.%f%b" || \
-        print -P "%F{160} The clone has failed.%f%b"
-fi
+# -----------------------------
+# Editors
+# -----------------------------
+export EDITOR=/usr/bin/nvim
+export VISUAL=/usr/bin/nvim
+export SUDO_EDITOR=/usr/bin/nvim
+export SYSTEMD_EDITOR=/usr/bin/nvim
 
-source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
-
-# Load a few important annexes, without Turbo
-# (this is currently required for annexes)
-zinit light-mode for \
-    zdharma-continuum/zinit-annex-as-monitor \
-    zdharma-continuum/zinit-annex-bin-gem-node \
-    zdharma-continuum/zinit-annex-patch-dl \
-    zdharma-continuum/zinit-annex-rust
-
-### End of Zinit's installer chunk
-
-zinit ice depth=1
-zinit light  zdharma-continuum/fast-syntax-highlighting
-zinit light zsh-users/zsh-completions
-zinit light zsh-users/zsh-autosuggestions
-zinit light zsh-users/zsh-history-substring-search
-zinit light Aloxaf/fzf-tab
-zinit light MichaelAquilina/zsh-you-should-use
-zinit light MichaelAquilina/zsh-auto-notify
-
-zinit snippet OMZP::git
-zinit snippet OMZP::command-not-found
-zinit snippet OMZP::sudo
-
-zinit cdreplay -q
-
-alias ff='fastfetch'
-alias ls='exa --icons'
-alias la='exa --icons --all --header'
-alias ll='exa --icons --all --long --header'
-alias rm='trash'
-alias gclf='git clone --recursive --shallow-submodules --filter=blob:none --also-filter-submodules --depth 1'
-alias gclfn='git clone --recursive --shallow-submodules --filter=blob:none --also-filter-submodules --depth 1 --no-single-branch'
-alias nv='neovide --fork '
-alias btop="LC_ALL=UTF8 btop"
-alias code="codium"
-alias ..='cd ..'
-alias ...='cd ../..'
-alias gamemango="flatpak run --command=mangohud com.usebottles.bottles"
-
-# Shell integration
-eval "$(fzf --zsh)"
 eval "$(zoxide init zsh)"
-
-
-export PATH=$PATH:/home/wizard-28/.spicetify
-export PATH=$PATH:/home/wizard-28/.local/bin
-export PATH=$PATH:/home/wizard-28/.cargo/bin
-export PATH=$PATH:/home/wizard-28/go/bin
-export XCOMPOSEFILE=/usr/share/X11/locale/en_US.UTF-8/Compose
-
-export ANDROID_HOME="/home/wizard-28/Android/Sdk/"
-export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin/
-export PATH=$PATH:$ANDROID_HOME/platform-tools/
-export PATH=$PATH:$ANDROID_HOME/tools/bin/
-export PATH=$PATH:$ANDROID_HOME/emulator
-export PATH=$PATH:$ANDROID_HOME/tools/
-export PATH="$PATH":"$HOME/.pub-cache/bin"
-export CHROME_EXECUTABLE=google-chrome-stable
-export IDEA_JDK=/usr/lib/jvm/java-21-jetbrains
-
-export QML_IMPORT_PATH=.:/usr/lib/qt6/qml
-
-
-export FZF_DEFAULT_OPTS=" \
---preview 'bat --color=always --style=numbers --line-range=:500 {}'
---color=bg+:#313244,bg:#1E1E2E,spinner:#F5E0DC,hl:#F38BA8 \
---color=fg:#CDD6F4,header:#F38BA8,info:#CBA6F7,pointer:#F5E0DC \
---color=marker:#B4BEFE,fg+:#CDD6F4,prompt:#CBA6F7,hl+:#F38BA8 \
---color=selected-bg:#45475A \
---color=border:#6C7086,label:#CDD6F4"
-
-## [Completion]
-## Completion scripts setup. Remove the following line to uninstall
-[[ -f /home/wizard-28/.dart-cli-completion/zsh-config.zsh ]] && . /home/wizard-28/.dart-cli-completion/zsh-config.zsh || true
-## [/Completion]
-
-[[ -t 0 ]] && fastfetch
-
-# pnpm
-export PNPM_HOME="/home/wizard-28/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
-
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-
-
-# Bat settings
-export MANPAGER="bat -plman"
-alias -g -- -h='-h 2>&1 | bat --language=help --style=plain'
-alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
+eval "$(starship init zsh)"

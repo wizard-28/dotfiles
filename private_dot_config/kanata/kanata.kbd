@@ -49,7 +49,7 @@
 
 (deflayer symbols
   _    _     _    _    _    _    _    _    _    _    _    _    _    _
-  _    _     _    _    _    _    _    _    _    _    _    _    _    _
+  _    _     _    _    @₹    _    _    _    _    _    _    _    _    _
   _    S--   S-,  S-.  S-'  .    _    S-7  @nsp [    ]    S-5  _    _
   _    S-1   -    +    =    S-3  _    S-\  S-;  S-9  S-0  S-/  ;
   _    S-6   /    S-8  \    _    _    S-`  S-4  S-{  S-}  S-2
@@ -76,7 +76,9 @@
 
   ;; HACK: Doesn't work properly otherwise.
   : (unicode :)
+  ₹ (unicode ₹)
   nsp (macro @: 7 @:)
+
 
   ;; layer switching
   ;; Acts like a `bspc` if tapped or pressed for more than 1000 ms, otherwise activates extend.
